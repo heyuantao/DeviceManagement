@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+debug: on
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/devmgmt?useunicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    use-column-label: true
+  mapper-locations: mapper/*.xml
+
+
+
+
+logging:
+  level:
+    com.coding: info
+    com.coding.mapper: debug
