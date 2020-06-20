@@ -11,7 +11,7 @@ spring:
   thymeleaf:
     encoding: UTF-8
     cache: false
-    mode: HTML5
+    mode: HTML
 
 mapper:
   mappers:
@@ -29,5 +29,5 @@ mybatis:
 
 logging:
   level:
-    com.coding: info
+    com.coding: debug
     com.coding.mapper: debug
