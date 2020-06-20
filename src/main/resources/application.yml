@@ -29,5 +29,5 @@ mybatis:
 
 logging:
   level:
-    com.coding: debug
+    com.coding: info
     com.coding.mapper: debug

@@ -15,6 +15,12 @@ public class UserPepositoryImpl implements UserRepository {
     private static AtomicLong counter = new AtomicLong();
     private final ConcurrentMap<Long,User> userMap = new ConcurrentHashMap<>();
 
+    public UserPepositoryImpl(){
+        User user = new User();
+        user.setEmail("abc@com.cn");
+        user.setName("Way Lau");
+        this.saveOrUpdate(user);
+    }
 
     @Override
     public User saveOrUpdate(User user) {
