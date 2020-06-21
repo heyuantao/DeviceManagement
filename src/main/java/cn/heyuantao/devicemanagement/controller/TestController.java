@@ -1,6 +1,5 @@
 package cn.heyuantao.devicemanagement.controller;
 
-import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;

@@ -12,9 +12,6 @@ spring:
     encoding: UTF-8
     cache: false
     mode: HTML
-  h2:
-    console:
-      enabled: true
   jpa:
     show-sql: true
     hibernate:
