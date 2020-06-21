@@ -12,6 +12,13 @@ spring:
     encoding: UTF-8
     cache: false
     mode: HTML
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
 
 mapper:
   mappers:
@@ -23,8 +30,6 @@ mybatis:
     use-generated-keys: true
     use-column-label: true
   mapper-locations: mapper/*.xml
-
-
 
 
 logging:
