@@ -1,59 +1,49 @@
 package cn.heyuantao.devicemanagement.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 @Entity
 @XmlRootElement
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "姓名不能为空")
+    @Size(min=2,max=20)
+    @Column(nullable = false,length = 20)
     private String name;
-    @Column(nullable = false)
+
+    @NotEmpty(message = "邮箱不能为空")
+    @Size(max=50)
+    @Email(message = "邮箱格式不正确")
+    @Column(nullable = false,length = 50,unique = true)
     private String email;
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
+    @NotEmpty(message = "账号不能为空")
+    @Size(min=3,max=20)
+    @Column(nullable = false,length = 20,unique = true)
+    private String username;
 
-    public User() {
-    }
+    @NotEmpty(message = "密码不能为空")
+    @Size(max=100)
+    @Column(length = 100)
+    private String password;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+    @Column(length = 200)
+    private String avatar;
 }
