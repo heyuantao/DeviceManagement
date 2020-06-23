@@ -14,15 +14,19 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-    @Bean
-    public IniRealm getIniReam(){
+    //@Bean
+    /*public IniRealm getIniReam(){
         return new IniRealm("classpath:shiro.ini");
+    }*/
+    @Bean(name = "CustomRealm")
+    public CustomRealm getRealm(){
+        return new CustomRealm();
     }
 
     @Bean(name = "securityManager")
-    public DefaultWebSecurityManager getDefaultWebSecurityManager(IniRealm iniRealm){
+    public DefaultWebSecurityManager getDefaultWebSecurityManager(CustomRealm customRealm){      //IniRealm iniRealm
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(iniRealm);
+        securityManager.setRealm(customRealm);         //iniRealm
         return securityManager;
     }
 
