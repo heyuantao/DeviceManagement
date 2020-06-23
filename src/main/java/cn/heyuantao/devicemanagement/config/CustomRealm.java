@@ -23,7 +23,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String username = (String) authenticationToken.getPrincipal();
-        String password = (String) authenticationToken.getCredentials();
+        String password =  new String((char[])authenticationToken.getCredentials());
         if(username.equals("hyt")&&password.equals("123")){
             return new SimpleAuthenticationInfo(username, password, getName());
         }else{
