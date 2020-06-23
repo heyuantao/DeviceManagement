@@ -33,6 +33,7 @@ public class ShiroConfig {
 
         Map<String,String> filterMap = new HashMap<>();
         filterMap.put("/","anon");
+        filterMap.put("/dologin","anon");
         filterMap.put("/login.html","anon");
         filterMap.put("/register.html","anon");
         filterMap.put("/static/**","anon");
