@@ -1,7 +1,9 @@
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.service.UserServiceImpl;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
@@ -35,7 +37,17 @@ public class PageController {
     }
 
     @RequestMapping("/index.html")
-    public String index(){
+    public String index(Model model){
+        Subject subject = userService.getSubject();
+        System.out.println("----Current User-------");
+        System.out.println(subject.getPrincipal());
         return "index";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(){
+        userService.logout();
+        System.out.println("-------用户注销----------");
+        return "login";
     }
 }

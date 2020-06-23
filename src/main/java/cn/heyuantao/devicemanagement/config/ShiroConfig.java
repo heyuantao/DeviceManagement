@@ -19,14 +19,14 @@ public class ShiroConfig {
         return new IniRealm("classpath:shiro.ini");
     }
 
-    @Bean
+    @Bean(name = "securityManager")
     public DefaultWebSecurityManager getDefaultWebSecurityManager(IniRealm iniRealm){
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(iniRealm);
         return securityManager;
     }
 
-    @Bean
+    @Bean(name = "shiroFilter")
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager){
         ShiroFilterFactoryBean filter = new ShiroFilterFactoryBean();
         filter.setSecurityManager(securityManager);
@@ -37,6 +37,7 @@ public class ShiroConfig {
         filterMap.put("/login.html","anon");
         filterMap.put("/register.html","anon");
         filterMap.put("/static/**","anon");
+        filterMap.put("/index.html","anon");
         filterMap.put("/**","authc");
 
 
