@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Accounts:</h1>
+    <h2 th:text="${info}"></h2>
+    <table>
+        <tr>
+            <th>no</th>
+            <th>username</th>
+            <th>password</th>
+            <th>type</th>
+            <th>phone</th>
+        </tr>
+        <tr>
+            <tr th:each="list,stat : ${accounts}">
+                <td th:text="${stat.count}"></td>
+                <td th:text="${list.username}"></td>
+                <td th:text="${list.password}"></td>
+                <td th:text="${list.type}"></td>
+                <td th:text="${list.phone}"></td>
+            </tr>
+        </tr>
+    </table>
+</body>
+</html>

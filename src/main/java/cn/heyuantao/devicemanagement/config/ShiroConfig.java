@@ -36,13 +36,16 @@ public class ShiroConfig {
         filter.setSecurityManager(securityManager);
 
         Map<String,String> filterMap = new HashMap<>();
+        /*
         filterMap.put("/","anon");
         filterMap.put("/dologin","anon");
         filterMap.put("/login.html","anon");
         filterMap.put("/register.html","anon");
         filterMap.put("/static/**","anon");
         filterMap.put("/index.html","anon");
-        filterMap.put("/**","authc");
+
+         */
+        filterMap.put("/**","anon");
 
 
         filter.setFilterChainDefinitionMap(filterMap);
