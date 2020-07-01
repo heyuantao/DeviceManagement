@@ -27,11 +27,11 @@ public class UserController {
 
     @GetMapping("{id}")
     public ModelAndView view(@PathVariable("id") Long id, Model model){
-        Optional<User> user_result = userRepository.findById(id);
-        if(!user_result.isPresent()){
+        Optional<User> useResult = userRepository.findById(id);
+        if(!useResult.isPresent()){
             System.out.println("Not Exist");
         }
-        model.addAttribute("user",user_result.get());
+        model.addAttribute("user",useResult.get());
         model.addAttribute("title","查看用户");
         return new ModelAndView("users/view","userModel",model);
     }
@@ -60,11 +60,11 @@ public class UserController {
 
     @GetMapping(value="modify/{id}")
     public ModelAndView modifyForm(@PathVariable("id") Long id, Model model){
-        Optional<User> user_result = userRepository.findById(id);
-        if(!user_result.isPresent()){
+        Optional<User> userResult = userRepository.findById(id);
+        if(!userResult.isPresent()){
             System.out.println("Error happen !");
         }
-        model.addAttribute("user",user_result.get());
+        model.addAttribute("user",userResult.get());
         model.addAttribute("title","修改用户");
         return new ModelAndView("users/form","userModel",model);
     }

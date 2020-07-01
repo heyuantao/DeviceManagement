@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.Mapper;
+package cn.heyuantao.devicemanagement.mapper;
 
 import cn.heyuantao.devicemanagement.domain.User;
 import tk.mybatis.mapper.common.Mapper;

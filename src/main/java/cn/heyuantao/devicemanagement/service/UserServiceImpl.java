@@ -1,9 +1,8 @@
 package cn.heyuantao.devicemanagement.service;
 
-import cn.heyuantao.devicemanagement.Mapper.UserMapper;
+import cn.heyuantao.devicemanagement.mapper.UserMapper;
 import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.repository.UserRepository;
-import org.apache.catalina.security.SecurityUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
