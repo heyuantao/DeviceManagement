@@ -1,18 +1,12 @@
 package cn.heyuantao.devicemanagement.controller;
 
-import cn.heyuantao.devicemanagement.service.impl.UserServiceImpl;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
-
 @Controller
 public class PageController {
 
-    @Resource
-    private UserServiceImpl userService;
 
     @RequestMapping("/dologin")
     public String dologin(String username,String password){
