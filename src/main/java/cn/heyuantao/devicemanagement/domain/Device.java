@@ -14,7 +14,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
 public class Device {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

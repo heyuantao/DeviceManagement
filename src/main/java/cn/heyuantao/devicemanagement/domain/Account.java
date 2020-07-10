@@ -18,6 +18,4 @@ public class Account implements Serializable {
     private String type;
     private String phone;
     private Date birthday;
-
-
 }
