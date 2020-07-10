@@ -52,3 +52,6 @@ CREATE TABLE device (
     #ON DELETE CASCADE ON UPDATE CASCADE
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
+INSERT INTO `user` (name, password, email, superuser) values ('abc','123','abc@example.com',1);
+INSERT INTO `user` (name, password, email, superuser) values ('efg','123','efg@example.com',1);
+INSERT INTO `user` (name, password, email, superuser) values ('hij','123','hij@example.com',0);
