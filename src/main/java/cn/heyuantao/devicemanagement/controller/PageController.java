@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.controller;
 
-import cn.heyuantao.devicemanagement.service.UserServiceImpl;
+import cn.heyuantao.devicemanagement.service.impl.UserServiceImpl;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,6 @@ public class PageController {
     @RequestMapping("/dologin")
     public String dologin(String username,String password){
         try {
-            userService.checkLogin(username,password);
             System.out.println("---------登录成功-----------");
             return "index";
         } catch (Exception e) {
@@ -38,15 +37,11 @@ public class PageController {
 
     @RequestMapping("/index.html")
     public String index(Model model){
-        Subject subject = userService.getSubject();
-        System.out.println("----Current User-------");
-        System.out.println(subject.getPrincipal());
         return "index";
     }
 
     @RequestMapping("/logout")
     public String logout(){
-        userService.logout();
         System.out.println("-------用户注销----------");
         return "login";
     }
