@@ -36,4 +36,15 @@ class UserServiceImplTest {
         }
         System.out.println("Finished !");
     }
+
+    @Test
+    void createUsers() {
+        User oneUser= new User();
+        oneUser.setName("zua");
+        oneUser.setPassword("zua");
+        oneUser.setEmail("zua@example.com");
+        oneUser.setSuperuser(true);
+        User createdUser = userService.addUser(oneUser);
+        System.out.println(createdUser);
+    }
 }
