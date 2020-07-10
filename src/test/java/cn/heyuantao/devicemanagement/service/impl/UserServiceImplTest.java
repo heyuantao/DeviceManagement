@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -16,11 +18,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@MybatisTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest
+//@MybatisTest
+//@AutoConfigureTestDatabase
+//@ContextConfiguration("classpath:/applicationContext.xml")
 class UserServiceImplTest {
 
-    @Autowired
+    @Resource
     UserService userService;
 
     @Test
@@ -30,5 +34,6 @@ class UserServiceImplTest {
         for(User oneUser:userList){
             System.out.println(oneUser);
         }
+        System.out.println("Finished !");
     }
 }
