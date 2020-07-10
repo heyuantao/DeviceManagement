@@ -19,9 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@MybatisTest
-//@AutoConfigureTestDatabase
-//@ContextConfiguration("classpath:/applicationContext.xml")
 class UserServiceImplTest {
 
     @Resource
@@ -48,3 +45,9 @@ class UserServiceImplTest {
         System.out.println(createdUser);
     }
 }
+
+
+
+//@MybatisTest
+//@AutoConfigureTestDatabase
+//@ContextConfiguration("classpath:/applicationContext.xml")
