@@ -21,4 +21,10 @@ public class OwnerServiceImpl implements OwnerService {
     public List<Owner> getOwners() {
         return ownerMapper.selectAll();
     }
+
+    @Override
+    public Owner addOwner(Owner oneOwner) {
+        ownerMapper.insert(oneOwner);
+        return oneOwner;
+    }
 }

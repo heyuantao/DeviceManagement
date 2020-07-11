@@ -9,4 +9,5 @@ import java.util.List;
  */
 public interface OwnerService {
     List<Owner> getOwners();
+    Owner addOwner(Owner oneOwner);
 }

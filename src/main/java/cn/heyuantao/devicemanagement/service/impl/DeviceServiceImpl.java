@@ -18,4 +18,10 @@ public class DeviceServiceImpl implements DeviceService {
         System.out.println("Device information !");
         return deviceMapper.getDevicesInformation();
     }
+
+    @Override
+    public Device addDevice(Device device) {
+        deviceMapper.insert(device);
+        return device;
+    }
 }
