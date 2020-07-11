@@ -13,8 +13,8 @@
         <result property="name" column="name"/>
         <result property="vendor" column="vendor"/>
         <result property="sn" column="sn"/>
-        <result property="assetNo" column="assetNo"/>
-        <result property="inDate" column="inDate"/>
+        <result property="assetNo" column="asset_no"/>
+        <result property="inDate" column="in_date"/>
         <result property="updated" column="updated"/>
         <association property="location" column="location_id" javaType="Location" select="getDeviceLocation"/>
         <association property="type" column="type_id" javaType="Type" select="getDeviceType"/>
@@ -30,4 +30,5 @@
     <select id="getDeviceOwner" resultType="Owner">
         select * from owner where id=#{id}
     </select>
+    
 </mapper>
