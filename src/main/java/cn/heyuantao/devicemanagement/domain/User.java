@@ -11,6 +11,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import javax.persistence.Id;
 
+/**
+ * @author he_yu
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

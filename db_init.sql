@@ -23,8 +23,8 @@ CREATE TABLE `location` (
     `describe`    TEXT COMMENT '位置描述'
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
-INSERT INTO `location` (name, `describe`) values ('08A501','实验中心准备室');
-INSERT INTO `location` (name, `describe`) values ('08A502','计算机组成原理实验室');
+INSERT INTO `location` (name, description) values ('08A501','实验中心准备室');
+INSERT INTO `location` (name, description) values ('08A502','计算机组成原理实验室');
 
 #设备的类型
 CREATE TABLE `type` (
@@ -34,8 +34,8 @@ CREATE TABLE `type` (
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
-INSERT INTO `type` (name, `describe`) values ('微型计算机','台式电脑');
-INSERT INTO `type` (name, `describe`) values ('无人机','微型遥控无人机');
+INSERT INTO `type` (name, description) values ('微型计算机','台式电脑');
+INSERT INTO `type` (name, description) values ('无人机','微型遥控无人机');
 
 #设备保管人
 CREATE TABLE `owner` (
@@ -45,8 +45,8 @@ CREATE TABLE `owner` (
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
-INSERT INTO `owner` (name, `describe`) values ('张三','');
-INSERT INTO `owner` (name, `describe`) values ('李四','');
+INSERT INTO `owner` (name, description) values ('张三','');
+INSERT INTO `owner` (name, description) values ('李四','');
 
 #具体的设备
 CREATE TABLE device (

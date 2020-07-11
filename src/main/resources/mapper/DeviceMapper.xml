@@ -30,5 +30,5 @@
     <select id="getDeviceOwner" resultType="Owner">
         select * from owner where id=#{id}
     </select>
-    
+
 </mapper>

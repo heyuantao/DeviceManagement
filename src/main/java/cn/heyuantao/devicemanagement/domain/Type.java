@@ -9,8 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ * @author he_yu
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,5 +22,5 @@ public class Type implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private String describe;
+    private String description;
 }

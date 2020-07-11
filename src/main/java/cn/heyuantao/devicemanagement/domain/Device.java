@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import java.util.Date;
 
 
+/**
+ * @author he_yu
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
