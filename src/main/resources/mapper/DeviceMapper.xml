@@ -4,8 +4,30 @@
 
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.DeviceMapper">
 
-    <select id="getDevicesInformation" resultType="cn.heyuantao.devicemanagement.domain.Device">
-        select * from devicemanagement.device
+    <select id="getDevicesInformation" parameterType="map" resultMap="DeviceInformationMap">
+        select * from device
     </select>
 
+    <resultMap id="DeviceInformationMap" type="Device">
+        <result property="id"   column="id"/>
+        <result property="name" column="name"/>
+        <result property="vendor" column="vendor"/>
+        <result property="sn" column="sn"/>
+        <result property="assetNo" column="assetNo"/>
+        <result property="inDate" column="inDate"/>
+        <result property="updated" column="updated"/>
+        <association property="location" column="location_id" javaType="Location" select="getDeviceLocation"/>
+        <association property="type" column="type_id" javaType="Type" select="getDeviceType"/>
+        <association property="owner" column="owner_id" javaType="Owner" select="getDeviceOwner"/>
+    </resultMap>
+
+    <select id="getDeviceLocation" resultType="Location">
+        select * from location where id=#{id}
+    </select>
+    <select id="getDeviceType" resultType="Type">
+        select * from type where id=#{id}
+    </select>
+    <select id="getDeviceOwner" resultType="Owner">
+        select * from owner where id=#{id}
+    </select>
 </mapper>

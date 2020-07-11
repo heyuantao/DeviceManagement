@@ -22,8 +22,8 @@ mybatis:
     map-underscore-to-camel-case: true
     use-generated-keys: true
     use-column-label: true
-
   mapper-locations: mapper/*.xml
+  type-aliases-package: cn.heyuantao.devicemanagement.domain
 
 
 logging:
