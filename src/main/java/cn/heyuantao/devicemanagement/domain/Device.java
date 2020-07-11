@@ -25,6 +25,7 @@ public class Device {
     private String sn;
     private String assetNo;
     private Date inDate;
+    private Date updated;
 
     private Location location;
     private Type type;
