@@ -32,7 +32,8 @@ public class OwnerController {
     }
 
     @DeleteMapping("{id}")
-    public Owner delete(@PathVariable("id") Integer id){
-        return ownerService.deleteById(id);
+    public String delete(@PathVariable("id") Integer id){
+        ownerService.deleteById(id);
+        return "";
     }
 }
