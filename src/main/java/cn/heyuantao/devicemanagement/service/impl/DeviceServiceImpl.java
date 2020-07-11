@@ -15,6 +15,6 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public List<Device> getDevices() {
-        return deviceMapper.selectAll();
+        return deviceMapper.getDevicesInformation();
     }
 }
