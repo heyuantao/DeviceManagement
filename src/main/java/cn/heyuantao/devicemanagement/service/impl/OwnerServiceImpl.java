@@ -27,4 +27,20 @@ public class OwnerServiceImpl implements OwnerService {
         ownerMapper.insert(oneOwner);
         return oneOwner;
     }
+
+    @Override
+    public Owner getOwnerById(Integer id){
+        return ownerMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Owner updateOwner(Owner owner) {
+        int id = ownerMapper.updateByPrimaryKey(owner);
+        return ownerMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void deleteById(Integer id) {
+        ownerMapper.deleteByPrimaryKey(id);
+    }
 }

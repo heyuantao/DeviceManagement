@@ -16,11 +16,12 @@ public class TypeServiceImpl implements TypeService {
 
     @Override
     public List<Type> getTypes() {
-        return null;
+        return typeMapper.selectAll();
     }
 
     @Override
     public Type addType(Type oneType) {
-        return null;
+        typeMapper.insert(oneType);
+        return oneType;
     }
 }

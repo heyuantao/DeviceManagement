@@ -27,4 +27,14 @@ class OwnerServiceImplTest {
             System.out.println(oneOwner);
         }
     }
+
+    @Test
+    void addOwner() {
+        Owner oneOwner = new Owner();
+        oneOwner.setName("王五");
+        oneOwner.setDepartment("软件工程系");
+        oneOwner.setDescription("这是一个测试用户");
+        Owner newOwner = ownerService.addOwner(oneOwner);
+        System.out.println(newOwner);
+    }
 }
