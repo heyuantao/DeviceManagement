@@ -11,13 +11,11 @@ import java.util.Map;
  */
 public interface OwnerService {
     List<Owner> getOwners();
-    List<Owner> getOwners(Map map);
+    List<Owner> getOwnersByParams(Map map);
     Owner addOwner(Owner oneOwner);
 
     //Owner updateOwner(Owner owner);
     Owner getOwnerById(Integer id);
     Owner updateOwnerById(Integer id, Owner oneOwner);
     void deleteById(Integer id);
-
-
 }

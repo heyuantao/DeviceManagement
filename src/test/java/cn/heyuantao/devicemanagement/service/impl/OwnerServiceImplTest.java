@@ -5,14 +5,14 @@ import cn.heyuantao.devicemanagement.service.OwnerService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import javax.persistence.Transient;
 import javax.transaction.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,5 +40,17 @@ class OwnerServiceImplTest {
         oneOwner.setDescription("这是一个测试用户");
         Owner newOwner = ownerService.addOwner(oneOwner);
         System.out.println(newOwner);
+    }
+
+    @Test
+    void testGetOwners() {
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("name","abc");
+        params.put("department","软件工程系");
+        List<Owner> ownerList = ownerService.getOwnersByParams(params);
+        for(Owner owner:ownerList){
+            System.out.println(owner);
+        }
+
     }
 }

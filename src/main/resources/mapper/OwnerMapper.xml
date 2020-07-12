@@ -4,11 +4,11 @@
 
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.OwnerMapper">
 
-    <select id="selectByParams" parameterType="map" resultType="Owner">
+    <select id="selectByParams" parameterType="java.util.HashMap" resultType="Owner">
         select * from owner
         <where>
-            <foreach collection="map">
-                
+            <foreach item="item" collection="params.entrySet()" open=""  separator=" and "  close="">
+                #{item.key}=#{item.value}
             </foreach>
         </where>
     </select>

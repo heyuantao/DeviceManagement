@@ -31,11 +31,7 @@ public class OwnerController {
     public ResponseEntity<List<?>> list(@RequestParam Map map){
         System.out.println(map);
 
-/*        List<OwnerResponseDTO> responseDTOS= ownerService.getOwners().stream().map((item)-> {
-            return new OwnerResponseDTO(item);
-        }).collect(Collectors.toList());*/
-
-        List<OwnerResponseDTO> responseDTOS= ownerService.getOwners(map).stream().map((item)-> {
+        List<OwnerResponseDTO> responseDTOS= ownerService.getOwnersByParams(map).stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
