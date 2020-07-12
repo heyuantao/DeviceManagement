@@ -3,11 +3,15 @@ package cn.heyuantao.devicemanagement.controller;
 import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.service.OwnerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collector;
@@ -18,6 +22,9 @@ import java.util.stream.Collectors;
 public class OwnerController {
     @Resource
     OwnerService ownerService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping
     public ResponseEntity<List<?>> list(){
