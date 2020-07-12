@@ -3,24 +3,18 @@ package cn.heyuantao.devicemanagement.controller;
 import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.dto.OwnerRequestDTO;
 import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
-import cn.heyuantao.devicemanagement.exception.ErrorDetails;
-import cn.heyuantao.devicemanagement.exception.RequestValidateException;
+import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -43,10 +37,9 @@ public class OwnerController {
     @PostMapping
     public ResponseEntity<?> add(@Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            throw new RequestValidateException(bindingResult);
+            throw new RequestParamValidateException(bindingResult);
         }
-        Owner newOwner = ownerRequestDTO.convertToOwner();
-        Owner addOwner = ownerService.addOwner(newOwner);
+        Owner addOwner = ownerService.addOwner(ownerRequestDTO.convertToOwner());
         return new ResponseEntity(new OwnerResponseDTO(addOwner),HttpStatus.ACCEPTED);
     }
 
