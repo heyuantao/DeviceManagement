@@ -16,18 +16,15 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 public class OwnerRequestDTO implements Serializable {
-    @JsonProperty("owner_name")
     @NotEmpty(message = "用户名不能为空")
     @Length(max = 10, message = "用户名字过长")
     private String name;
 
-    @JsonProperty("owner_department")
     @NotEmpty(message = "组织信息不能为空")
     @Length(max = 10, message = "组织信息过长")
     private String department;
 
-    @JsonProperty("owner_description")
-    @Length(max = 10, message = "备注信息过长")
+    @Length(max = 20, message = "备注信息过长")
     private String description;
 
     public Owner convertToDO(){

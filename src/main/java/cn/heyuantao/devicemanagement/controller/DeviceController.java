@@ -10,6 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("devices")
+@RequestMapping("/api/v1/devices")
 public class DeviceController {
 }
