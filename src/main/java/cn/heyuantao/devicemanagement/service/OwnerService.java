@@ -10,7 +10,9 @@ import java.util.List;
 public interface OwnerService {
     List<Owner> getOwners();
     Owner addOwner(Owner oneOwner);
+
+    //Owner updateOwner(Owner owner);
     Owner getOwnerById(Integer id);
-    Owner updateOwner(Owner owner);
+    Owner updateOwnerById(Integer id, Owner oneOwner);
     void deleteById(Integer id);
 }

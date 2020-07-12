@@ -16,6 +16,7 @@ import java.util.List;
  */
 @Service
 public class OwnerServiceImpl implements OwnerService {
+
     @Resource
     OwnerMapper ownerMapper;
 
@@ -48,28 +49,28 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner updateOwner(Owner oneOwner) {
+    public Owner updateOwnerById(Integer id, Owner oneOwner) {
+        /*确保该编号存在,否则会抛出异常*/
+        this.getOwnerById(id);
+
         Example example = new Example(Owner.class);
         Example.Criteria criteria = example.createCriteria();
+        criteria.andNotEqualTo("id",id);
         criteria.andEqualTo("name",oneOwner.getName());
-        criteria.andNotEqualTo("id",oneOwner.getId());
-        List<Owner> userList=ownerMapper.selectByExample(example);
-        if(userList.size()>0) {
-            throw new ServiceParamValidateException("数据库中已经存在名为" +oneOwner.getName()+"的用户！");
+        List<Owner> ownerList=ownerMapper.selectByExample(example);
+        if(ownerList.size()>=1){
+            throw new ServiceParamValidateException("存在重名的数据");
         }
-        int id = ownerMapper.updateByPrimaryKey(oneOwner);
-        return ownerMapper.selectByPrimaryKey(id);
+
+        oneOwner.setId(id);
+        ownerMapper.updateByPrimaryKey(oneOwner);
+        return oneOwner;
+        //return this.getOwnerById(id);
     }
 
     @Override
     public void deleteById(Integer id) {
-        Example example = new Example(Owner.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("id",id);
-        List<Owner> userList=ownerMapper.selectByExample(example);
-        if(userList.size()==0) {
-            throw new ServiceParamValidateException("该数据不存在");
-        }
+        this.getOwnerById(id);
         ownerMapper.deleteByPrimaryKey(id);
     }
 }

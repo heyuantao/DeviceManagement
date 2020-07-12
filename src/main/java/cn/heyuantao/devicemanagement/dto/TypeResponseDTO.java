@@ -1,14 +1,13 @@
 package cn.heyuantao.devicemanagement.dto;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.domain.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 
 /**
@@ -17,14 +16,12 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OwnerResponseDTO implements Serializable {
+public class TypeResponseDTO implements Serializable {
     private Integer id;
     private String name;
     private String description;
-    private String other;
 
-    public OwnerResponseDTO(Owner oneOwner){
-        BeanUtils.copyProperties(oneOwner,this);
+    public TypeResponseDTO(Type oneType){
+        BeanUtils.copyProperties(oneType,this);
     }
-
 }

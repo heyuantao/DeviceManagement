@@ -22,6 +22,7 @@ mybatis:
     map-underscore-to-camel-case: true
     use-generated-keys: true
     use-column-label: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #显示mybatis的SQL语句
   mapper-locations: mapper/*.xml
   type-aliases-package: cn.heyuantao.devicemanagement.domain
 
