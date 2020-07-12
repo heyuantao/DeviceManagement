@@ -30,13 +30,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RequestParamValidateException.class)
     public ResponseEntity<?> handleRequestParamValidateException(RequestParamValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("数据校验错误", exception.getMessage());
-        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     // 全局异常处理，处理服务层面的数据异常
     @ExceptionHandler(ServiceParamValidateException.class)
     public ResponseEntity<?> handleServiceValidateException(ServiceParamValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("数据校验错误", exception.getMessage());
-        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

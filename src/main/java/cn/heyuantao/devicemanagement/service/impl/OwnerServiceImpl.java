@@ -30,7 +30,7 @@ public class OwnerServiceImpl implements OwnerService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("name",oneOwner.getName());
         List<Owner> userList=ownerMapper.selectByExample(example);
-        if(userList.size()>1){
+        if(userList.size()>=1){
             throw new ServiceParamValidateException("数据库中已经存在名为" +oneOwner.getName()+"的用户！");
         }
         ownerMapper.insert(oneOwner);
@@ -65,7 +65,7 @@ public class OwnerServiceImpl implements OwnerService {
     public void deleteById(Integer id) {
         Example example = new Example(Owner.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andNotEqualTo("id",id);
+        criteria.andEqualTo("id",id);
         List<Owner> userList=ownerMapper.selectByExample(example);
         if(userList.size()==0) {
             throw new ServiceParamValidateException("该数据不存在");
