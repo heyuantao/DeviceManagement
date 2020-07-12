@@ -45,10 +45,9 @@ public class OwnerController {
         if(bindingResult.hasErrors()){
             throw new RequestValidateException(bindingResult);
         }
-        return new ResponseEntity(ownerRequestDTO,HttpStatus.ACCEPTED);
-/*        Owner oneOwner = new Owner();
-        Owner addOwner = ownerService.addOwner(oneOwner);
-        return oneOwner;*/
+        Owner newOwner = ownerRequestDTO.convertToOwner();
+        Owner addOwner = ownerService.addOwner(newOwner);
+        return new ResponseEntity(new OwnerResponseDTO(addOwner),HttpStatus.ACCEPTED);
     }
 
     @GetMapping("{id}")

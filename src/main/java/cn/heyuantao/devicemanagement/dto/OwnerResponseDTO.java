@@ -18,6 +18,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnerResponseDTO implements Serializable {
+    @JsonProperty("owner_id")
+    private Integer id;
     @JsonProperty("owner_name")
     private String name;
     @JsonProperty("owner_description")
@@ -34,13 +36,4 @@ public class OwnerResponseDTO implements Serializable {
         }
     }
 
-/*    public OwnerResponseDTO(Owner oneOwner, HttpServletRequest request){
-        System.out.println(request);
-        BeanUtils.copyProperties(oneOwner,this);
-        if(oneOwner.getId()==1){
-            this.setOther("该用户为管理员");
-        }else{
-            this.setOther("该用户为普通用户");
-        }
-    }*/
 }

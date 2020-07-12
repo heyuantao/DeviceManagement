@@ -20,13 +20,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }
 
-    // global exception
+    // 全局异常处理，处理未知的错误
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(ResourceNotFoundException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("Global exception happen !", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // 全局异常处理，处理接口验证的错误
     @ExceptionHandler(RequestValidateException.class)
     public ResponseEntity<?> handleRequestValidateException(RequestValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("Validate exception happen !", exception.getMessage());
