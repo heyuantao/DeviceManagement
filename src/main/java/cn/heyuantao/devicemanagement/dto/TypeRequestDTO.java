@@ -3,6 +3,9 @@ package cn.heyuantao.devicemanagement.dto;
 import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.domain.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
@@ -12,7 +15,9 @@ import java.io.Serializable;
 /**
  * @author he_yu
  */
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TypeRequestDTO implements Serializable {
     @NotEmpty(message = "类型不能为空")
     @Length(max = 10, message = "类型名字过长")

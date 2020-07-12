@@ -4,6 +4,7 @@ import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.TypeMapper;
 import cn.heyuantao.devicemanagement.service.TypeService;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -12,6 +13,8 @@ import java.util.List;
 /**
  * @author he_yu
  */
+
+@Service
 public class TypeServiceImpl implements TypeService {
     @Resource
     TypeMapper typeMapper;
