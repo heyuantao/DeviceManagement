@@ -15,12 +15,14 @@ public class GlobalExceptionHandler {
     // custom exception
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request){
-        return new ResponseEntity("Resource not Found !", HttpStatus.NOT_FOUND);
+        ErrorDetails errorDetails = new ErrorDetails("Resource not Found !",exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     // global exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(ResourceNotFoundException exception, WebRequest request){
-        return new ResponseEntity("Global exception happen !", HttpStatus.INTERNAL_SERVER_ERROR);
+        ErrorDetails errorDetails = new ErrorDetails("Global exception happen !", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
