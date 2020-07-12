@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
 /**
@@ -25,4 +26,12 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails("Global exception happen !", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(RequestValidateException.class)
+    public ResponseEntity<?> handleRequestValidateException(RequestValidateException exception, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails("Validate exception happen !", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 }
