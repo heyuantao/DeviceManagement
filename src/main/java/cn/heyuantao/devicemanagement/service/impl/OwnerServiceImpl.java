@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
 import cn.heyuantao.devicemanagement.mapper.OwnerMapper;
 import cn.heyuantao.devicemanagement.mapper.UserMapper;
@@ -35,6 +36,7 @@ public class OwnerServiceImpl implements OwnerService {
         if(oneOwner==null){
             throw new ResourceNotFoundException("该设备所有者不存在 !");
         }
+
         return oneOwner;
     }
 
