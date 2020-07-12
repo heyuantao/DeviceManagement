@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -27,10 +28,17 @@ public class OwnerController {
     private HttpServletRequest request;
 
     @GetMapping
-    public ResponseEntity<List<?>> list(){
-        List<OwnerResponseDTO> responseDTOS= ownerService.getOwners().stream().map((item)-> {
+    public ResponseEntity<List<?>> list(@RequestParam Map map){
+        System.out.println(map);
+
+/*        List<OwnerResponseDTO> responseDTOS= ownerService.getOwners().stream().map((item)-> {
+            return new OwnerResponseDTO(item);
+        }).collect(Collectors.toList());*/
+
+        List<OwnerResponseDTO> responseDTOS= ownerService.getOwners(map).stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
+
         return new ResponseEntity(responseDTOS,HttpStatus.ACCEPTED);
     }
 

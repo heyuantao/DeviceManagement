@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ class UserServiceImplTest {
     }
 
     @Test
+    @Transactional
     void createUsers() {
         User oneUser= new User();
         oneUser.setName("zua");

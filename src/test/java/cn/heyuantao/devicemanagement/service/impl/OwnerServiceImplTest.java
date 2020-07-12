@@ -5,9 +5,12 @@ import cn.heyuantao.devicemanagement.service.OwnerService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 
 import java.util.List;
 
@@ -29,6 +32,7 @@ class OwnerServiceImplTest {
     }
 
     @Test
+    @Transactional
     void addOwner() {
         Owner oneOwner = new Owner();
         oneOwner.setName("王五");

@@ -4,11 +4,13 @@ import cn.heyuantao.devicemanagement.domain.Location;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.LocationMapper;
 import cn.heyuantao.devicemanagement.service.LocationService;
+import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class LocationServiceImpl implements LocationService {
     @Resource
     LocationMapper locationMapper;

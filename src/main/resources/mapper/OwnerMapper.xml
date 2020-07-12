@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.heyuantao.devicemanagement.mapper.OwnerMapper">
+
+    <select id="selectByParams" parameterType="map" resultType="Owner">
+        select * from owner
+        <where>
+            <foreach collection="map">
+                
+            </foreach>
+        </where>
+    </select>
+
+
+</mapper>

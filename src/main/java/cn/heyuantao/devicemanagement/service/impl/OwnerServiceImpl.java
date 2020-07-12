@@ -10,6 +10,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author he_yu
@@ -23,6 +24,11 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public List<Owner> getOwners() {
         return ownerMapper.selectAll();
+    }
+
+    @Override
+    public List<Owner> getOwners(Map map) {
+        return ownerMapper.selectByParams(map);
     }
 
     @Override
