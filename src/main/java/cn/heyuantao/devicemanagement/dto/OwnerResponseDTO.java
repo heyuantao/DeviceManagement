@@ -20,8 +20,9 @@ import java.io.Serializable;
 public class OwnerResponseDTO implements Serializable {
     private Integer id;
     private String name;
+    private String department;
     private String description;
-    private String other;
+
 
     public OwnerResponseDTO(Owner oneOwner){
         BeanUtils.copyProperties(oneOwner,this);

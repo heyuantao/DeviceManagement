@@ -7,20 +7,12 @@
     <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.Owner">
         select * from owner
         <where>
-            <!--
-            <foreach item="item" collection="params.entrySet()" open=""  separator=" and "  close="">
-                #{item.key}=#{item.value}
+            <foreach collection="searchMap" index="key" item="value" open=""  separator=" and "  close="" >
+                name like #{value}
             </foreach>
-            -->
-            <!--
-            <foreach collection="select"  item="item" open=""  separator=" and "  close="">
-                #{item.key}=#{item.value}
-            </foreach>
-            -->
-            <foreach collection="select" index="key" item="value" open=""  separator=" and "  close="" >
+            <foreach collection="selectMap" index="key" item="value" open=""  separator=" and "  close="" >
                 ${key}=#{value}
             </foreach>
-
         </where>
     </select>
 

@@ -5,6 +5,7 @@ import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.OwnerMapper;
 import cn.heyuantao.devicemanagement.service.OwnerService;
+import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 

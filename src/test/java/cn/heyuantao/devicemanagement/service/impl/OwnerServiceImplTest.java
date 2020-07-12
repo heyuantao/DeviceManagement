@@ -45,10 +45,10 @@ class OwnerServiceImplTest {
     @Test
     void testGetOwners() {
         Map<String,Object> params = new HashMap<String,Object>();
-        Map<String,Object> select = new HashMap<String,Object>();
-        select.put("name","hyt");
-        select.put("department","网络工程系");
-        params.put("select",select);
+        Map<String,Object> selectMap = new HashMap<String,Object>();
+        selectMap.put("name","hyt");
+        selectMap.put("department","网络工程系");
+        params.put("selectMap",selectMap);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
         for(Owner owner:ownerList){
             System.out.println(owner);
