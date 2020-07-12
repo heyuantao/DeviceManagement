@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface OwnerService {
     List<Owner> getOwners();
-    List<Owner> getOwnersByParams(Map map);
+    List<Owner> getOwnersByParams(Map<String,Object> mapp);
     Owner addOwner(Owner oneOwner);
 
     //Owner updateOwner(Owner owner);

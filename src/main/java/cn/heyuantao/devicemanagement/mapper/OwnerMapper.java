@@ -11,5 +11,5 @@ import java.util.Map;
  */
 @org.apache.ibatis.annotations.Mapper
 public interface OwnerMapper extends Mapper<Owner> {
-    List<Owner> selectByParams(Map map);
+    List<Owner> selectByParams(Map<String,Object> map);
 }

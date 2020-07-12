@@ -27,7 +27,7 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public List<Owner> getOwnersByParams(Map map) {
+    public List<Owner> getOwnersByParams(Map<String,Object> map) {
         return ownerMapper.selectByParams(map);
     }
 

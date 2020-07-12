@@ -4,7 +4,7 @@
 
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.OwnerMapper">
 
-    <select id="selectByParams" parameterType="java.util.Map" resultType="Owner">
+    <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.Owner">
         select * from owner
         <where>
             <!--
@@ -12,9 +12,15 @@
                 #{item.key}=#{item.value}
             </foreach>
             -->
-            <foreach collection="params.entrySet()"  item="item" open=""  separator=" and "  close="">
+            <!--
+            <foreach collection="select"  item="item" open=""  separator=" and "  close="">
                 #{item.key}=#{item.value}
             </foreach>
+            -->
+            <foreach collection="select" index="key" item="value" open=""  separator=" and "  close="" >
+                ${key}=#{value}
+            </foreach>
+
         </where>
     </select>
 

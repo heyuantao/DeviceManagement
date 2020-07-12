@@ -30,8 +30,8 @@ public class OwnerController {
     @GetMapping
     public ResponseEntity<List<?>> list(@RequestParam Map map){
         System.out.println(map);
-
-        List<OwnerResponseDTO> responseDTOS= ownerService.getOwnersByParams(map).stream().map((item)-> {
+        List<Owner> ownerList = ownerService.getOwnersByParams(map);
+        List<OwnerResponseDTO> responseDTOS= ownerList.stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
