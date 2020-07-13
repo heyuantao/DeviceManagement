@@ -1,19 +1,14 @@
 package cn.heyuantao.devicemanagement.controller;
 
-import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.domain.Type;
-import cn.heyuantao.devicemanagement.dto.OwnerRequestDTO;
-import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.dto.TypeRequestDTO;
 import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.TypeService;
 import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import net.bytebuddy.description.type.TypeList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +17,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
@@ -47,9 +41,9 @@ public class TypeController {
         List<Type> typeList = typeService.getTypesByParams(params);
         PageInfo<Type> pageInfo = new PageInfo<Type>(typeList);
 
-        List<TypeResponseDTO> responseDTOS= typeList.stream().map((item)-> {return new TypeResponseDTO(item);}).collect(Collectors.toList());
-        CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOS,pageInfo);
-        return new ResponseEntity(customItemPagination.get_paginated_data(),HttpStatus.ACCEPTED);
+        List<TypeResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new TypeResponseDTO(item);}).collect(Collectors.toList());
+        CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
+        return new ResponseEntity(customItemPagination.getPaginatedData(),HttpStatus.ACCEPTED);
     }
 
     @PostMapping

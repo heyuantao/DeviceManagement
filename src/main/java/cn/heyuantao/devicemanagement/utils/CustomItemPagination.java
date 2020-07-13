@@ -20,7 +20,7 @@ public class CustomItemPagination {
         this.returnMap.put("pages",pageInfo.getPages());
 
     }
-    public Map<String,Object> get_paginated_data(){
+    public Map<String,Object> getPaginatedData(){
         return this.returnMap;
     }
 }
