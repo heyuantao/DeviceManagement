@@ -42,15 +42,19 @@ public class OwnerController {
 
         PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
+        PageInfo<Owner> pageInfo = new PageInfo<Owner>(ownerList);
 
         List<OwnerResponseDTO> responseDTOS= ownerList.stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
-        PageInfo<OwnerResponseDTO> pageInfo = new PageInfo<OwnerResponseDTO>(responseDTOS);
-        System.out.println(pageInfo);
-        return new ResponseEntity(pageInfo,HttpStatus.ACCEPTED);
-        //return new ResponseEntity(responseDTOS,HttpStatus.ACCEPTED);
+        Map<String,Object> returnMap = new HashMap<String, Object>();
+        returnMap.put("list",responseDTOS);
+        returnMap.put("pageSize",pageInfo.getPageSize());
+        returnMap.put("pageNum",pageInfo.getPageNum());
+        returnMap.put("pages",pageInfo.getPages());
+
+        return new ResponseEntity(returnMap,HttpStatus.ACCEPTED);
     }
 
     @PostMapping
