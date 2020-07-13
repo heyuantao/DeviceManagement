@@ -7,14 +7,29 @@
     <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.Owner">
         select * from owner
         <where>
-            <foreach collection="searchMap" index="key" item="value" open=""  separator=" and "  close="" >
-                name like #{value}
-            </foreach>
-            <foreach collection="selectMap" index="key" item="value" open=""  separator=" and "  close="" >
-                ${key}=#{value}
-            </foreach>
+            <if test="selectMap!=null">
+                <if test="selectMap.name!=null  and selectMap.name!=''">
+                    and name = #{selectMap.name}
+                </if>
+                <if test="selectMap.department!=null  and selectMap.department!=''">
+                    and department = #{selectMap.department}
+                </if>
+            </if>
+            <if test="searchMap!=null">
+                <bind name="searchValue" value="'%'+searchMap.search+'%'"/>
+                <if test="searchMap.search!=null  and searchMap.search!=''">
+                    and name like #{searchValue}
+                </if>
+            </if>
         </where>
     </select>
 
-
+    <!--
+    <foreach collection="searchMap" index="key" item="value" open=""  separator=" and "  close="" >
+        name like #{value}
+    </foreach>
+    <foreach collection="selectMap" index="key" item="value" open=""  separator=" and "  close="" >
+        ${key}=#{value}
+    </foreach>
+    -->
 </mapper>

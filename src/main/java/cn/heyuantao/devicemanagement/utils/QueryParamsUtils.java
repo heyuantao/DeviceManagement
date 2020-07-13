@@ -23,7 +23,8 @@ public class QueryParamsUtils {
                 selectMap.put(entry.getKey(),entry.getValue());
             }
             if(entry.getKey().equals("search")){
-                searchMap.put("%"+entry.getKey(),entry.getValue()+"%");
+                //searchMap.put("%"+entry.getKey(),entry.getValue()+"%");
+                searchMap.put(entry.getKey(),entry.getValue());
             }
         }
 

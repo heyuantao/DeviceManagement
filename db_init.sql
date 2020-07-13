@@ -72,6 +72,6 @@ CREATE TABLE device (
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 INSERT INTO `device` (`name`,`vendor`,`sn`,`asset_no`,`in_date`,`updated`,`location_id`,`type_id`,`owner_id`)
-values ('Inspire 2','大疆','324324234234234','zua223232323','2019-11-23','2020-03-23',1,1,1);
+values ('Inspire 2','大疆','324324234234234','zua223232323','2019-11-23','2020-03-23',1,2,1);
 INSERT INTO `device` (`name`,`vendor`,`sn`,`asset_no`,`in_date`,`updated`,`location_id`,`type_id`,`owner_id`)
-values ('X3850 X5','联想','232324234234234','zua223232323','2019-11-23','2020-03-23',1,2,1);
+values ('X3850 X5','联想','232324234234234','zua223232323','2019-11-23','2020-03-23',1,1,1);
