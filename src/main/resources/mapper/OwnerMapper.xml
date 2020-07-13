@@ -24,12 +24,14 @@
         </where>
     </select>
 
-    <!--
+<!--
+
     <foreach collection="searchMap" index="key" item="value" open=""  separator=" and "  close="" >
         name like #{value}
     </foreach>
     <foreach collection="selectMap" index="key" item="value" open=""  separator=" and "  close="" >
         ${key}=#{value}
     </foreach>
-    -->
+-->
+
 </mapper>
