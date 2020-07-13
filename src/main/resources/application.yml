@@ -39,3 +39,4 @@ pagehelper:
   support-methods-arguments: true
   row-bounds-with-count: true
   params: count=countSql
+  page-size-zero: true
