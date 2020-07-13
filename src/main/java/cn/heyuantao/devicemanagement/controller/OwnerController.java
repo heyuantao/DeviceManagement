@@ -6,6 +6,8 @@ import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.OwnerService;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,6 @@ public class OwnerController {
         List<OwnerResponseDTO> responseDTOS= ownerList.stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
-
         return new ResponseEntity(responseDTOS,HttpStatus.ACCEPTED);
     }
 

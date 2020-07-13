@@ -31,3 +31,10 @@ logging:
   level:
     com.coding: info
     com.coding.mapper: debug
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  row-bounds-with-count: count=countSql
