@@ -7,6 +7,7 @@ import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.OwnerService;
 import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,12 @@ public class OwnerController {
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
         PageInfo<Owner> pageInfo = new PageInfo<Owner>(ownerList);
 
-        List<OwnerResponseDTO> responseDTOS= ownerList.stream().map((item)-> {
+        List<OwnerResponseDTO> responseDTOS= pageInfo.getList().stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
-
         CustomItemPagination customItemPagination=new CustomItemPagination(responseDTOS,pageInfo);
+
         return new ResponseEntity(customItemPagination.get_paginated_data(),HttpStatus.ACCEPTED);
     }
 

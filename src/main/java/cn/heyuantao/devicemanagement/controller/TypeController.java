@@ -10,6 +10,7 @@ import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.TypeService;
 import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.bytebuddy.description.type.TypeList;
