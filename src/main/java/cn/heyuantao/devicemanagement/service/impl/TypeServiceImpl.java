@@ -9,6 +9,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author he_yu
@@ -22,6 +23,11 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public List<Type> getTypes() {
         return typeMapper.selectAll();
+    }
+
+    @Override
+    public List<Type> getTypesByParams(Map<String, Object> params) {
+        return typeMapper.selectByParams(params);
     }
 
     @Override
