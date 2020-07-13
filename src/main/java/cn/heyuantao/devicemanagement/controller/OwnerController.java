@@ -5,6 +5,7 @@ import cn.heyuantao.devicemanagement.dto.OwnerRequestDTO;
 import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.OwnerService;
+import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -35,7 +36,7 @@ public class OwnerController {
     @GetMapping
     public ResponseEntity<List<?>> list(@RequestParam Map map,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
-                                        @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize
+                                        @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
 
         Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
@@ -48,13 +49,9 @@ public class OwnerController {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
-        Map<String,Object> returnMap = new HashMap<String, Object>();
-        returnMap.put("list",responseDTOS);
-        returnMap.put("pageSize",pageInfo.getPageSize());
-        returnMap.put("pageNum",pageInfo.getPageNum());
-        returnMap.put("pages",pageInfo.getPages());
 
-        return new ResponseEntity(returnMap,HttpStatus.ACCEPTED);
+        CustomItemPagination customItemPagination=new CustomItemPagination(responseDTOS,pageInfo);
+        return new ResponseEntity(customItemPagination.get_paginated_data(),HttpStatus.ACCEPTED);
     }
 
     @PostMapping
