@@ -33,14 +33,24 @@ public class OwnerController {
     private HttpServletRequest request;
 
     @GetMapping
-    public ResponseEntity<List<?>> list(@RequestParam Map map){
+    public ResponseEntity<List<?>> list(@RequestParam Map map,
+                                        @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                        @RequestParam(value="pageSize",defaultValue = "10") Integer pageSize
+                                        ){
+
         Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
-        System.out.println(params);
+
+        PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
+
         List<OwnerResponseDTO> responseDTOS= ownerList.stream().map((item)-> {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
-        return new ResponseEntity(responseDTOS,HttpStatus.ACCEPTED);
+
+        PageInfo<OwnerResponseDTO> pageInfo = new PageInfo<OwnerResponseDTO>(responseDTOS);
+        System.out.println(pageInfo);
+        return new ResponseEntity(pageInfo,HttpStatus.ACCEPTED);
+        //return new ResponseEntity(responseDTOS,HttpStatus.ACCEPTED);
     }
 
     @PostMapping

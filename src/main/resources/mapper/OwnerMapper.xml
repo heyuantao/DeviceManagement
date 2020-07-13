@@ -15,7 +15,7 @@
                     and department = #{selectMap.department}
                 </if>
             </if>
-            <if test="searchMap!=null">
+            <if test="searchMap!=null and searchMap.search!=null">
                 <bind name="searchValue" value="'%'+searchMap.search+'%'"/>
                 <if test="searchMap.search!=null  and searchMap.search!=''">
                     and name like #{searchValue}

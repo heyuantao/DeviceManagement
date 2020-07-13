@@ -35,6 +35,7 @@ logging:
 
 pagehelper:
   helper-dialect: mysql
-  reasonable: true
+  reasonable: false
   support-methods-arguments: true
-  row-bounds-with-count: count=countSql
+  row-bounds-with-count: true
+  params: count=countSql
