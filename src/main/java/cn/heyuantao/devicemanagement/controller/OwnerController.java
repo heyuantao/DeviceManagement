@@ -39,17 +39,19 @@ public class OwnerController {
     @ApiOperation(value = "List the owner !")
     @GetMapping
     public ResponseEntity<List<?>> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
-                                        @ApiParam(name = "搜索信息", required = false) @RequestParam(required = false) Map<String,String> map,
+                                        //@ApiParam(name = "搜索信息", required = false) @RequestParam(required = false) Map<String,String> map,
+                                        @RequestParam(value="name",defaultValue = "") String name,
+                                        @RequestParam(value="department",defaultValue = "") String department,
+                                        @RequestParam(value="search",defaultValue = "") String search,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
 
-        Map rawParams = request.getParameterMap();
-        Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
-/*        System.out.println("#############");
-        System.out.println(rawParams);
-        System.out.println(params);
-        System.out.println("#############");*/
+
+
+        Map<String,Object> params = QueryParamsUtils.formatRequestParamsFromRequestServlet(request);
+        //Map<String,Object> params = QueryParamsUtils.formatRequestParams(rawPrams);
+
         PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
         PageInfo<Owner> pageInfo = new PageInfo<Owner>(ownerList);

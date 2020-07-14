@@ -32,11 +32,11 @@ public class TypeController {
     private HttpServletRequest request;
 
     @GetMapping
-    public ResponseEntity<List<?>> list(@RequestParam Map map,
+    public ResponseEntity<List<?>> list(//@RequestParam Map map,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
-        Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
+        Map<String,Object> params = QueryParamsUtils.formatRequestParamsFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
         List<Type> typeList = typeService.getTypesByParams(params);
         PageInfo<Type> pageInfo = new PageInfo<Type>(typeList);

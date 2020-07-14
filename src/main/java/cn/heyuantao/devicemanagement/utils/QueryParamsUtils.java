@@ -25,12 +25,12 @@ import java.util.Map;
  */
 
 public class QueryParamsUtils {
-    public static Map<String,Object> formatRequestParams(Map<String,String> originMap){
+    private static Map<String,Object> chaneMapFormat(Map<String,Object> originMap){
         Map<String,Object> finalMap = new HashMap<String,Object>();
 
         Map<String,Object> filterMap = new HashMap<String,Object>();
         Map<String,Object> searchMap = new HashMap<String,Object>();
-        for(Map.Entry<String,String> entry: originMap.entrySet()){
+        for(Map.Entry<String,Object> entry: originMap.entrySet()){
 
             if(!entry.getKey().equals("search")){
                 filterMap.put(entry.getKey(),entry.getValue());
@@ -49,9 +49,9 @@ public class QueryParamsUtils {
         return finalMap;
     }
 
-    public static Map<String,String> formatRequestParamsFromRequestServlet(ServletRequest request){
+    public static Map<String, Object> formatRequestParamsFromRequestServlet(ServletRequest request){
         Map<String,String[]> rawParams = request.getParameterMap();
-        Map<String,String> finalParams = new HashMap<>();
+        Map<String,Object> finalParams = new HashMap<>();
         for(Iterator<String> iter = rawParams.keySet().iterator(); iter.hasNext();){
             String name = (String) iter.next();
             String[] values = (String[]) rawParams.get(name);
@@ -61,6 +61,6 @@ public class QueryParamsUtils {
             }
             finalParams.put(name, valueStr);
         }
-        return finalParams;
+        return chaneMapFormat(finalParams);
     }
 }
