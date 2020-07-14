@@ -9,6 +9,7 @@ import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
 import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/owner/")
+@RequestMapping("/api/v1/owner")
 public class OwnerController {
     @Resource
     OwnerService ownerService;
@@ -31,14 +33,21 @@ public class OwnerController {
     @Autowired
     private HttpServletRequest request;
 
+
+    @ApiOperation(value = "List the owner !")
     @GetMapping
-    public ResponseEntity<List<?>> list(@RequestParam Map map,
+    public ResponseEntity<List<?>> list(@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
+                                        @RequestParam(value="search",defaultValue = "") String  search,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
 
+        //Map rawParams = (Map<String,String>)request.getParameterMap();
         Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
-
+/*        System.out.println("#############");
+        System.out.println(rawParams);
+        System.out.println(params);
+        System.out.println("#############");*/
         PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
         PageInfo<Owner> pageInfo = new PageInfo<Owner>(ownerList);
@@ -53,7 +62,7 @@ public class OwnerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
+    public ResponseEntity<?> create(@Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
@@ -78,7 +87,7 @@ public class OwnerController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String destroy(@PathVariable("id") Integer id){
         ownerService.deleteById(id);
         return "";
     }
