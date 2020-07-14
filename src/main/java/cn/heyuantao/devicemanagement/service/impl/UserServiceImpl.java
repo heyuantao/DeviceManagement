@@ -68,17 +68,29 @@ public class UserServiceImpl implements UserService {
     public User updateById(Integer id, User userData) {
         User user = getUsersById(id);
 
-        Weekend<User> weekend =new Weekend<>(User.class);
-        WeekendCriteria<User,Object> weekendCriteria= weekend.weekendCriteria();
-        weekendCriteria.orEqualTo(User::getName,userData.getName()).orEqualTo(User::getEmail,userData.getEmail());
 
+/*        Example example= new Example(User.class);
+        Example.Criteria criteria1 = example.createCriteria();
+        criteria1.orEqualTo("name",user.getName());
+        criteria1.orEqualTo("email",user.getEmail());
+
+        Example.Criteria criteria2 = example.createCriteria();
+        criteria2.andNotEqualTo("id",id);
+        example.and(criteria2);*/
         Example example= new Example(User.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andNotEqualTo("id",id);
-        weekend.and(criteria);
-        
+        criteria.andEqualTo("name",userData.getName());
         if(userMapper.selectByExample(example).size()>0){
-            throw new ServiceParamValidateException("存在具有相同注册信息的用户!");
+            throw new ServiceParamValidateException("存在具有相同用户名的用户!");
+        }
+
+        example.clear();
+        criteria = example.createCriteria();
+        criteria.andNotEqualTo("id",id);
+        criteria.andEqualTo("email",userData.getEmail());
+        if(userMapper.selectByExample(example).size()>0){
+            throw new ServiceParamValidateException("存在具有相同邮箱用户!");
         }
 
         userData.setId(user.getId());
