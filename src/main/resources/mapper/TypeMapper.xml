@@ -6,18 +6,18 @@
     <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.Type">
         select * from type
         <where>
-            <if test="selectMap!=null">
-                <if test="selectMap.name!=null  and selectMap.name!=''">
-                    and name = #{selectMap.name}
+            <if test="filterMap!=null">
+                <if test="filterMap.name!=null  and filterMap.name!=''">
+                    and name = #{filterMap.name}
                 </if>
-                <if test="selectMap.description!=null  and selectMap.description!=''">
-                    and description = #{selectMap.description}
+                <if test="filterMap.description!=null  and filterMap.description!=''">
+                    and description = #{filterMap.description}
                 </if>
             </if>
             <if test="searchMap!=null and searchMap.search!=null">
                 <bind name="searchValue" value="'%'+searchMap.search+'%'"/>
                 <if test="searchMap.search!=null  and searchMap.search!=''">
-                    and name like #{searchValue}
+                    and ( name like #{searchValue} or description like #{searchValue} )
                 </if>
             </if>
         </where>

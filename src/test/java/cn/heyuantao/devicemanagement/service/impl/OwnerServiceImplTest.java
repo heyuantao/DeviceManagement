@@ -42,7 +42,7 @@ class OwnerServiceImplTest {
         System.out.println(newOwner);
     }
 
-    @Test
+/*    @Test
     @Transactional
     void addTestOwner() {
         for(Integer i=0;i<10;i++){
@@ -61,9 +61,10 @@ class OwnerServiceImplTest {
             Owner newOwner = ownerService.addOwner(oneOwner);
             System.out.println(newOwner);
         }
-    }
+    }*/
 
     @Test
+    @Transactional
     void testGetOwners() {
         Map<String,Object> params = new HashMap<String,Object>();
         Map<String,Object> selectMap = new HashMap<String,Object>();
