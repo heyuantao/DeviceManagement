@@ -49,7 +49,7 @@ public class QueryParamsUtils {
         return finalMap;
     }
 
-    public static Map<String, Object> formatRequestParamsFromRequestServlet(ServletRequest request){
+    public static Map<String, Object> getRequestParamMapFromRequestServlet(ServletRequest request){
         Map<String,String[]> rawParams = request.getParameterMap();
         Map<String,Object> finalParams = new HashMap<>();
         for(Iterator<String> iter = rawParams.keySet().iterator(); iter.hasNext();){

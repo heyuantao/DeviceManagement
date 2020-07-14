@@ -5,7 +5,7 @@
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.UserMapper">
 
     <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.User">
-        select * from owner
+        select * from user
         <where>
             <if test="filterMap!=null">
                 <if test="filterMap.name!=null  and filterMap.name!=''">

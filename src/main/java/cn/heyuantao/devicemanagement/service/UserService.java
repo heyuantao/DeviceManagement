@@ -14,4 +14,10 @@ public interface UserService {
     public User addUser(User oneUser);
 
     List<User> getUsersByParams(Map<String, Object> params);
+
+    User getUsersById(Integer id);
+
+    void deleteById(Integer id);
+
+    User updateById(Integer id, User convertToDO);
 }

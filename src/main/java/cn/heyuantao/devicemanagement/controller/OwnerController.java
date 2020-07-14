@@ -10,18 +10,15 @@ import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,7 +46,7 @@ public class OwnerController {
 
 
 
-        Map<String,Object> params = QueryParamsUtils.formatRequestParamsFromRequestServlet(request);
+        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
         //Map<String,Object> params = QueryParamsUtils.formatRequestParams(rawPrams);
 
         PageHelper.startPage(pageNum,pageSize);

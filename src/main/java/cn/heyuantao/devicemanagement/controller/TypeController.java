@@ -38,7 +38,7 @@ public class TypeController {
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
-        Map<String,Object> params = QueryParamsUtils.formatRequestParamsFromRequestServlet(request);
+        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
         List<Type> typeList = typeService.getTypesByParams(params);
         PageInfo<Type> pageInfo = new PageInfo<Type>(typeList);
