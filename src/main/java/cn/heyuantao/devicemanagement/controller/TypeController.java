@@ -33,6 +33,8 @@ public class TypeController {
 
     @GetMapping
     public ResponseEntity<List<?>> list(//@RequestParam Map map,
+                                        @RequestParam(value="name",defaultValue = "") String name,
+                                        @RequestParam(value="description",defaultValue = "") String description,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
