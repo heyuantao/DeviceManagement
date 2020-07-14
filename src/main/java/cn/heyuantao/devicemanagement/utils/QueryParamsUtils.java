@@ -1,6 +1,8 @@
 package cn.heyuantao.devicemanagement.utils;
 
+import javax.servlet.ServletRequest;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -47,4 +49,18 @@ public class QueryParamsUtils {
         return finalMap;
     }
 
+    public static Map<String,String> formatRequestParamsFromRequestServlet(ServletRequest request){
+        Map<String,String[]> rawParams = request.getParameterMap();
+        Map<String,String> finalParams = new HashMap<>();
+        for(Iterator<String> iter = rawParams.keySet().iterator(); iter.hasNext();){
+            String name = (String) iter.next();
+            String[] values = (String[]) rawParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
+            }
+            finalParams.put(name, valueStr);
+        }
+        return finalParams;
+    }
 }

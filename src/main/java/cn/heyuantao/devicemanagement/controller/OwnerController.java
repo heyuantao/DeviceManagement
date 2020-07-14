@@ -10,9 +10,11 @@ import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -36,13 +38,13 @@ public class OwnerController {
 
     @ApiOperation(value = "List the owner !")
     @GetMapping
-    public ResponseEntity<List<?>> list(@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
-                                        @RequestParam(value="search",defaultValue = "") String  search,
+    public ResponseEntity<List<?>> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
+                                        @ApiParam(name = "搜索信息", required = false) @RequestParam(required = false) Map<String,String> map,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
 
-        //Map rawParams = (Map<String,String>)request.getParameterMap();
+        Map rawParams = request.getParameterMap();
         Map<String,Object> params = QueryParamsUtils.formatRequestParams(map);
 /*        System.out.println("#############");
         System.out.println(rawParams);
