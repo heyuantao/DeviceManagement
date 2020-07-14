@@ -9,6 +9,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -29,5 +30,11 @@ public class UserServiceImpl implements UserService {
     public User addUser(User oneUser) {
         userMapper.insert(oneUser);
         return oneUser;
+    }
+
+    @Override
+    public List<User> getUsersByParams(Map<String, Object> params) {
+
+        return userMapper.selectByParams(params);
     }
 }

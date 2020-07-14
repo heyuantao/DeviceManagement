@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.heyuantao.devicemanagement.mapper.UserMapper">
+
+    <select id="selectByParams" parameterType="java.util.Map" resultType="cn.heyuantao.devicemanagement.domain.User">
+        select * from owner
+        <where>
+            <if test="filterMap!=null">
+                <if test="filterMap.name!=null  and filterMap.name!=''">
+                    and name = #{filterMap.name}
+                </if>
+                <if test="filterMap.email!=null  and filterMap.email!=''">
+                    and department = #{filterMap.email}
+                </if>
+            </if>
+            <if test="searchMap!=null and searchMap.search!=null">
+                <bind name="searchValue" value="'%'+searchMap.search+'%'"/>
+                <if test="searchMap.search!=null  and searchMap.search!=''">
+                    and name like #{searchValue} or email like #{searchValue}
+                </if>
+            </if>
+        </where>
+    </select>
+
+<!--
+
+    <foreach collection="searchMap" index="key" item="value" open=""  separator=" and "  close="" >
+        name like #{value}
+    </foreach>
+    <foreach collection="filterMap" index="key" item="value" open=""  separator=" and "  close="" >
+        ${key}=#{value}
+    </foreach>
+-->
+
+</mapper>
