@@ -42,20 +42,27 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Location updateLocationById(Integer id, Location location) {
+    public Location updateLocationById(Integer id, Location locationData) {
         Location locationRecord = this.getLocationById(id);
 
         Example example = new Example(Location.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andNotEqualTo("id",id);
-        criteria.andEqualTo("name",location.getName());
-        if(locationMapper.selectByExample(example).size()>0){
-            throw new ServiceParamValidateException("存在同名的位置");
+
+        if(locationData.getName()!=null){
+            criteria.andNotEqualTo("id",id);
+            criteria.andEqualTo("name",locationData.getName());
+            if(locationMapper.selectByExample(example).size()>0){
+                throw new ServiceParamValidateException("存在同名的位置");
+            }
+            locationRecord.setName(locationData.getName());
         }
 
-        location.setId(id);
-        locationMapper.updateByPrimaryKey(location);
-        return location;
+        if(locationData.getDescription()!=null){
+            locationRecord.setDescription(locationData.getDescription());
+        }
+
+        locationMapper.updateByPrimaryKey(locationRecord);
+        return locationRecord;
     }
 
     @Override

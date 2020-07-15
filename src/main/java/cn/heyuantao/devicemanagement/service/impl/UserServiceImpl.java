@@ -78,8 +78,6 @@ public class UserServiceImpl implements UserService {
         User user = getUsersById(id);
 
         Example example= new Example(User.class);
-
-        example.clear();
         Example.Criteria criteria = example.createCriteria();
 
         if(userData.getEmail()!=null){
