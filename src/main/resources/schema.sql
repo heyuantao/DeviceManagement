@@ -5,9 +5,9 @@ USE devicemanagement;
 #系统用户表
 CREATE TABLE `user` (
                         `id`          INT PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
-                        `name`       CHAR(30) NOT NULL COMMENT '用户姓名',
+                        `name`        CHAR(30) NOT NULL UNIQUE COMMENT '用户姓名',
                         `password`    CHAR(30) NOT NULL COMMENT '用户密码',
-                        `email`       CHAR(30)  COMMENT '用户邮箱',
+                        `email`       CHAR(30) NOT NULL UNIQUE COMMENT '用户邮箱',
                         `superuser`   TINYINT NOT NULL DEFAULT 0 COMMENT '是否为管理员'
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 

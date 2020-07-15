@@ -25,6 +25,12 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    private Example example;
+
+    public UserServiceImpl() {
+        this.example = new Example(User.class);
+    }
+
     @Override
     public List<User> getUsers() {
         return userMapper.selectAll();
@@ -32,8 +38,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User oneUser) {
-        Example example = new Example(User.class);
-        Example.Criteria criteria = example.createCriteria();
+        //Example example = new Example(User.class);
+        this.example.clear();
+        Example.Criteria criteria = this.example.createCriteria();
         criteria.orEqualTo("name",oneUser.getName());
         criteria.orEqualTo("email",oneUser.getEmail());
         if(userMapper.selectByExample(example).size()>0){
@@ -77,7 +84,8 @@ public class UserServiceImpl implements UserService {
         Example.Criteria criteria2 = example.createCriteria();
         criteria2.andNotEqualTo("id",id);
         example.and(criteria2);*/
-        Example example= new Example(User.class);
+        //Example example= new Example(User.class);
+        example.clear();
         Example.Criteria criteria = example.createCriteria();
         criteria.andNotEqualTo("id",id);
         criteria.andEqualTo("name",userData.getName());
@@ -97,5 +105,17 @@ public class UserServiceImpl implements UserService {
         userData.setPassword(user.getPassword());
         userMapper.updateByPrimaryKey(userData);
         return userData;
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        example.clear();
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",username);
+        List<User> userList = userMapper.selectByExample(example);
+        if(userList.size()==0){
+            throw new ServiceParamValidateException("未找到名字为 "+username+" 的用户");
+        }
+        return userList.get(0);
     }
 }

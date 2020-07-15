@@ -20,4 +20,6 @@ public interface UserService {
     void deleteById(Integer id);
 
     User updateById(Integer id, User convertToDO);
+
+    User getUserByName(String username);
 }

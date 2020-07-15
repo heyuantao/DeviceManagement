@@ -57,7 +57,8 @@ public class UserController {
         return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{id}")
+
+/*    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") Integer id, @Validated @RequestBody UserRequestDTO requestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
@@ -65,7 +66,7 @@ public class UserController {
         User user = userService.updateById(id,requestDTO.convertToDO());
         UserResponseDTO responseDTO = new UserResponseDTO(user);
         return new ResponseEntity(responseDTO,HttpStatus.ACCEPTED);
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id){
