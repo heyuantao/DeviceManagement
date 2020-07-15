@@ -28,18 +28,17 @@ import java.util.stream.Collectors;
 public class UserController {
     @Resource
     private UserService userService;
-    @Autowired
-    private HttpServletRequest httpServletRequest;
 
     @GetMapping
-    public ResponseEntity<?> list(
+    public ResponseEntity<CustomItemPagination> list(
+            HttpServletRequest request,
             @RequestParam(value="name",defaultValue = "") String name,
             @RequestParam(value="email",defaultValue = "") String email,
             @RequestParam(value="search",defaultValue = "") String search,
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
-        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(httpServletRequest);
+        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
         List<User> userList=userService.getUsersByParams(params);
         PageInfo<User> pageInfo = new PageInfo<User>(userList);
@@ -52,24 +51,28 @@ public class UserController {
     //not use create method
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> retrive(@PathVariable("id") Integer id){
+    public ResponseEntity<UserResponseDTO> retrive(@PathVariable("id") Integer id){
         UserResponseDTO userResponseDTO = new UserResponseDTO(userService.getUsersById(id));
         return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
     }
 
 
-/*    @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @Validated @RequestBody UserRequestDTO requestDTO, BindingResult bindingResult){
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> update(
+                        @PathVariable("id") Integer id,
+                        @Validated @RequestBody UserRequestDTO requestDTO,
+                        BindingResult bindingResult){
+
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
         User user = userService.updateById(id,requestDTO.convertToDO());
         UserResponseDTO responseDTO = new UserResponseDTO(user);
         return new ResponseEntity(responseDTO,HttpStatus.ACCEPTED);
-    }*/
+    }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") Integer id){
+    public ResponseEntity<String> delete(@PathVariable("id") Integer id){
         userService.deleteById(id);
         return new ResponseEntity("",HttpStatus.ACCEPTED);
     }

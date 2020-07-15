@@ -10,7 +10,6 @@ import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -29,22 +28,17 @@ public class OwnerController {
     @Resource
     OwnerService ownerService;
 
-    @Autowired
-    private HttpServletRequest request;
-
-
     @ApiOperation(value = "List the owner !")
     @GetMapping
-    public ResponseEntity<List<?>> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
+    public ResponseEntity<List<OwnerResponseDTO>> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
                                         //@ApiParam(name = "搜索信息", required = false) @RequestParam(required = false) Map<String,String> map,
+                                        HttpServletRequest request,
                                         @RequestParam(value="name",defaultValue = "") String name,
                                         @RequestParam(value="department",defaultValue = "") String department,
                                         @RequestParam(value="search",defaultValue = "") String search,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
-
-
 
         Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
 
@@ -62,7 +56,7 @@ public class OwnerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
+    public ResponseEntity<OwnerResponseDTO> create(@Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
@@ -71,13 +65,13 @@ public class OwnerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> retrive(@PathVariable("id") Integer id){
+    public ResponseEntity<OwnerResponseDTO> retrive(@PathVariable("id") Integer id){
         OwnerResponseDTO responseDTO = new OwnerResponseDTO(ownerService.getOwnerById(id));
         return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
+    public ResponseEntity<OwnerResponseDTO> update(@PathVariable("id") Integer id, @Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }

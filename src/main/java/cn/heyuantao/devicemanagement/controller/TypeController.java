@@ -28,11 +28,12 @@ public class TypeController {
     @Resource
     TypeService typeService;
 
-    @Autowired
-    private HttpServletRequest request;
+/*    @Autowired
+    private HttpServletRequest request;*/
 
     @GetMapping
     public ResponseEntity<List<?>> list(//@RequestParam Map map,
+                                        HttpServletRequest request,
                                         @RequestParam(value="name",defaultValue = "") String name,
                                         @RequestParam(value="description",defaultValue = "") String description,
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,

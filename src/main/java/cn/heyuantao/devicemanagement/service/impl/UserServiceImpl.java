@@ -6,6 +6,7 @@ import cn.heyuantao.devicemanagement.mapper.UserMapper;
 import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -76,36 +77,34 @@ public class UserServiceImpl implements UserService {
     public User updateById(Integer id, User userData) {
         User user = getUsersById(id);
 
-
-/*        Example example= new Example(User.class);
-        Example.Criteria criteria1 = example.createCriteria();
-        criteria1.orEqualTo("name",user.getName());
-        criteria1.orEqualTo("email",user.getEmail());
-
-        Example.Criteria criteria2 = example.createCriteria();
-        criteria2.andNotEqualTo("id",id);
-        example.and(criteria2);*/
         Example example= new Example(User.class);
-        example.clear();
+/*        example.clear();
         Example.Criteria criteria = example.createCriteria();
         criteria.andNotEqualTo("id",id);
         criteria.andEqualTo("name",userData.getName());
         if(userMapper.selectByExample(example).size()>0){
             throw new ServiceParamValidateException("存在具有相同用户名的用户!");
-        }
+        }*/
 
         example.clear();
-        criteria = example.createCriteria();
-        criteria.andNotEqualTo("id",id);
-        criteria.andEqualTo("email",userData.getEmail());
-        if(userMapper.selectByExample(example).size()>0){
-            throw new ServiceParamValidateException("存在具有相同邮箱用户!");
+        Example.Criteria criteria = example.createCriteria();
+
+        if(userData.getEmail()!=null){
+            criteria.andNotEqualTo("id",id);
+            criteria.andEqualTo("email",userData.getEmail());
+            if(userMapper.selectByExample(example).size()>0){
+                throw new ServiceParamValidateException("存在具有相同邮箱用户!");
+            }
+            user.setEmail(userData.getEmail());
         }
 
-        userData.setId(user.getId());
-        userData.setPassword(user.getPassword());
-        userMapper.updateByPrimaryKey(userData);
-        return userData;
+
+        if(userData.getPassword()!=null){
+            user.setPassword(passwordHash(userData.getPassword()));
+        }
+
+        userMapper.updateByPrimaryKey(user);
+        return user;
     }
 
     @Override
@@ -119,5 +118,11 @@ public class UserServiceImpl implements UserService {
             throw new ServiceParamValidateException("未找到名字为 "+username+" 的用户");
         }
         return userList.get(0);
+    }
+
+    @Override
+    public String passwordHash(String rawPassword) {
+        BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder(11);
+        return bCryptPasswordEncoder.encode(rawPassword);
     }
 }

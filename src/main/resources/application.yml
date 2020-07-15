@@ -12,6 +12,8 @@ spring:
     encoding: UTF-8
     cache: false
     mode: HTML
+  jackson:
+    default-property-inclusion: non_empty
 
 mapper:
   mappers:
@@ -40,3 +42,5 @@ pagehelper:
   row-bounds-with-count: true
   params: count=countSql
   page-size-zero: true
+
+

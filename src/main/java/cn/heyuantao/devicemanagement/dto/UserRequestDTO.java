@@ -18,16 +18,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class UserRequestDTO implements Serializable {
-    @NotEmpty(message = "类型不能为空")
+/*    @NotEmpty(message = "类型不能为空")
     @Length(max = 10, message = "类型名字过长")
-    private String name;
+    private String name;*/
 
-    @NotEmpty(message = "类型不能为空")
-    @Length(max = 20, message = "类型名字过长")
+    @Length(max = 30, message = "邮箱名字过长")
     @Email
     private String email;
 
-    //private Boolean superuser;
+    @Length(max = 30, message = "密码过长")
+    private String password;
 
     public User convertToDO(){
         User user = new User();

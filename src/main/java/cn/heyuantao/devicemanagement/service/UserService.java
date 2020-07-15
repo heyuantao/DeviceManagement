@@ -22,4 +22,6 @@ public interface UserService {
     User updateById(Integer id, User convertToDO);
 
     User getUserByName(String username);
+
+    public String passwordHash(String rawPassword);
 }
