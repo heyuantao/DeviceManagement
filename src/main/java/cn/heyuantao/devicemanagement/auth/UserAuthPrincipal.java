@@ -11,7 +11,7 @@ import java.util.Collections;
 /**
  * @author he_yu
  */
-/*public class UserAuthPrincipal implements UserDetails {
+public class UserAuthPrincipal implements UserDetails {
 
     private User user;
 
@@ -54,4 +54,4 @@ import java.util.Collections;
     public boolean isEnabled() {
         return true;
     }
-}*/
+}

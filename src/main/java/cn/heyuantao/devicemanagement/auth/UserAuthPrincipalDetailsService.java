@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-/*
 @Service
 public class UserAuthPrincipalDetailsService implements UserDetailsService {
 
@@ -19,9 +18,10 @@ public class UserAuthPrincipalDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //User user = this.userService.getUserByName(username);
+        User user = this.userService.getUserByName(username);
+        //may throw exception
         //return new UserAuthPrincipal(user);
-        return null;
+        return new UserAuthPrincipal(user);
+        //return null;
     }
 }
-*/
