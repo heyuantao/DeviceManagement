@@ -55,22 +55,32 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Owner updateOwnerById(Integer id, Owner oneOwner) {
+    public Owner updateOwnerById(Integer id, Owner ownerData) {
         /*确保该编号存在,否则会抛出异常*/
-        this.getOwnerById(id);
+        Owner ownerRecord = getOwnerById(id);
 
         Example example = new Example(Owner.class);
         Example.Criteria criteria = example.createCriteria();
+
         criteria.andNotEqualTo("id",id);
-        criteria.andEqualTo("name",oneOwner.getName());
+        criteria.andEqualTo("name",ownerData.getName());
+        criteria.andEqualTo("department",ownerData.getDepartment());
         List<Owner> ownerList=ownerMapper.selectByExample(example);
         if(ownerList.size()>=1){
             throw new ServiceParamValidateException("存在重名的数据");
         }
 
-        oneOwner.setId(id);
-        ownerMapper.updateByPrimaryKey(oneOwner);
-        return oneOwner;
+        if(ownerData.getName()!=null){
+            ownerRecord.setName(ownerData.getName());
+        }
+        if(ownerData.getDepartment()!=null){
+            ownerRecord.setDepartment(ownerData.getDepartment());
+        }
+        if(ownerData.getDescription()!=null){
+            ownerRecord.setDescription(ownerData.getDescription());
+        }
+        ownerMapper.updateByPrimaryKey(ownerRecord);
+        return ownerRecord;
         //return this.getOwnerById(id);
     }
 

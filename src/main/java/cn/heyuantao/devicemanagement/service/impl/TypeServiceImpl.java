@@ -53,19 +53,26 @@ public class TypeServiceImpl implements TypeService {
     }
 
     @Override
-    public Type updateTypeById(Integer id, Type newType) {
+    public Type updateTypeById(Integer id, Type typeData) {
+        Type typeRecord = this.getTypeById(id);
+
         Example example = new Example(Type.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("name",newType.getName());
+        criteria.andEqualTo("name",typeData.getName());
         criteria.andNotEqualTo("id",id);
         if(typeMapper.selectByExample(example).size()>0){
             throw new ServiceParamValidateException(("存在同名数据"));
         }
 
-        Type typeRecord = this.getTypeById(id);
-        newType.setId(typeRecord.getId());
-        typeMapper.updateByPrimaryKey(newType);
-        return newType;
+        if(typeData.getName()!=null){
+            typeRecord.setName(typeData.getName());
+        }
+        if(typeData.getDescription()!=null){
+            typeRecord.setDescription(typeData.getDescription());
+        }
+
+        typeMapper.updateByPrimaryKey(typeRecord);
+        return typeRecord;
     }
 
     @Override

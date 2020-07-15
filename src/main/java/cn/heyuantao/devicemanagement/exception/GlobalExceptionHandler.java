@@ -1,7 +1,9 @@
 package cn.heyuantao.devicemanagement.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -37,6 +39,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceParamValidateException.class)
     public ResponseEntity<?> handleServiceValidateException(ServiceParamValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("数据校验错误", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    // 全局异常处理，处理API接口接受数据解析出错的异常，当传入的json数据语法出现问题时发生
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails("输入数据格式错误", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

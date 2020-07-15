@@ -78,13 +78,6 @@ public class UserServiceImpl implements UserService {
         User user = getUsersById(id);
 
         Example example= new Example(User.class);
-/*        example.clear();
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andNotEqualTo("id",id);
-        criteria.andEqualTo("name",userData.getName());
-        if(userMapper.selectByExample(example).size()>0){
-            throw new ServiceParamValidateException("存在具有相同用户名的用户!");
-        }*/
 
         example.clear();
         Example.Criteria criteria = example.createCriteria();
