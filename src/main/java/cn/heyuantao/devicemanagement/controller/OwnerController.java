@@ -47,7 +47,6 @@ public class OwnerController {
 
 
         Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
-        //Map<String,Object> params = QueryParamsUtils.formatRequestParams(rawPrams);
 
         PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);
