@@ -25,11 +25,21 @@
     <nav class="navbar navbar-light bg-light justify-content-between">
         <div class="container">
             <a class="navbar-brand" >设备管理</a>
-            <div sec:authorize="isAuthenticated()" class="nav navbar-nav ml-auto">
+
+
+            <div class="nav navbar-nav ml-auto"></div>
+            <div sec:authentication="name">Bob</div>
+            <div sec:authorize="isAuthenticated()" >
                 已经登录
             </div>
-            <span style="width: 10px"></span>
-            <a th:href="@{/login}" class="btn btn-primary" type="submit">登录</a>
+            <span style="width:20px"></span>
+            <div sec:authorize="!isAuthenticated()" >
+                <a th:href="@{/login}" class="btn btn-primary" type="submit">登录</a>
+            </div>
+            <div sec:authorize="isAuthenticated()" >
+                <a th:href="@{/logout}" class="btn btn-primary" type="submit">注销</a>
+            </div>
+
         </div>
 
     </nav>
