@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
@@ -18,11 +21,15 @@
     <p><input type="submit" value="login"></p>
 </form>
 -->
-<div>
-    <nav class="navbar navbar-dark bg-dark justify-content-between">
+<div style="font-weight: bolder">
+    <nav class="navbar navbar-light bg-light justify-content-between">
         <div class="container">
-            <a class="navbar-brand">设备管理</a>
-                <a th:href="@{/login}" class="btn btn-light" type="submit">登录</a>
+            <a class="navbar-brand" >设备管理</a>
+            <div sec:authorize="isAuthenticated()" class="nav navbar-nav ml-auto">
+                已经登录
+            </div>
+            <span style="width: 10px"></span>
+            <a th:href="@{/login}" class="btn btn-primary" type="submit">登录</a>
         </div>
 
     </nav>

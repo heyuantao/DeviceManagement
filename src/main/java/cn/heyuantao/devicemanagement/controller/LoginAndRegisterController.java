@@ -1,5 +1,9 @@
 package cn.heyuantao.devicemanagement.controller;
 
+import cn.heyuantao.devicemanagement.auth.UserAuthPrincipal;
+import cn.heyuantao.devicemanagement.domain.User;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +24,8 @@ public class LoginAndRegisterController {
     }*/
 
     @RequestMapping("/")
-    public String welcome(){
+    public String home(Model model){
+        //UserAuthPrincipal user = (UserAuthPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return "index";
     }
 
