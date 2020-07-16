@@ -2,25 +2,14 @@ package cn.heyuantao.devicemanagement.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
 public class LoginAndRegisterController {
 
-
-/*    @RequestMapping("/login")
-    public String dologin(String username,String password){
-        try {
-            System.out.println("---------登录成功-----------");
-            return "index";
-        } catch (Exception e) {
-            System.out.println("---------登录失败-----------");
-            return "login";
-        }
-    }*/
-
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login(Model model){
         return "login";
     }
@@ -32,7 +21,7 @@ public class LoginAndRegisterController {
 
     @RequestMapping("/")
     public String welcome(){
-        return "login";
+        return "index";
     }
 
     @RequestMapping("/index")
@@ -40,9 +29,13 @@ public class LoginAndRegisterController {
         return "index";
     }
 
-    @RequestMapping("/logout")
-    public String logout(){
-        System.out.println("-------用户注销----------");
-        return "login";
+/*    @GetMapping("/logout")
+    public String logout(Model model){
+        return "logout";
+    }*/
+
+    @GetMapping("/logout-success")
+    public String logoutSuccess(Model model){
+        return "logout";
     }
 }
