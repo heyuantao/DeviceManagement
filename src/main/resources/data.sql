@@ -1,10 +1,10 @@
 USE devicemanagement;
 
-#系统用户数据
-INSERT INTO `user` (name, password, email, superuser) values ('admin','19831122','admin@example.com',1);
-INSERT INTO `user` (name, password, email, superuser) values ('abc','123','abc@example.com',0);
-INSERT INTO `user` (name, password, email, superuser) values ('efg','123','efg@example.com',0);
-INSERT INTO `user` (name, password, email, superuser) values ('hij','123','hij@example.com',0);
+#系统用户数据,admin password is 123456
+INSERT INTO `user` (name, password, email, superuser) values ('admin','$2a$11$kML2kl4wPbMj9sCOskSJduz.thd9EyDLlVX/utjLZoi3g2TuvpjkW','admin@example.com',1);
+INSERT INTO `user` (name, password, email, superuser) values ('abc','$2a$11$kML2kl4wPbMj9sCOskSJduz.thd9EyDLlVX/utjLZoi3g2TuvpjkW','abc@example.com',0);
+#INSERT INTO `user` (name, password, email, superuser) values ('efg','123','efg@example.com',0);
+#INSERT INTO `user` (name, password, email, superuser) values ('hij','123','hij@example.com',0);
 
 #位置信息数据
 INSERT INTO `location` (name, description) values ('08A501','实验中心准备室');
