@@ -1,8 +1,8 @@
 USE devicemanagement;
 
 #系统用户数据,admin password is 123456
-INSERT INTO `user` (name, password, email, superuser) values ('admin','$2a$11$kML2kl4wPbMj9sCOskSJduz.thd9EyDLlVX/utjLZoi3g2TuvpjkW','admin@example.com',1);
-INSERT INTO `user` (name, password, email, superuser) values ('abc','$2a$11$kML2kl4wPbMj9sCOskSJduz.thd9EyDLlVX/utjLZoi3g2TuvpjkW','abc@example.com',0);
+INSERT INTO `user` (name, password, email, superuser) values ('admin','$2a$11$P/FfaEg8TwLiZgKVCV.L/.rByDlDA1AtaOzos8edWdGXZ9ERZJoLG','admin@example.com',1);
+INSERT INTO `user` (name, password, email, superuser) values ('abc','$2a$11$P/FfaEg8TwLiZgKVCV.L/.rByDlDA1AtaOzos8edWdGXZ9ERZJoLG','abc@example.com',0);
 #INSERT INTO `user` (name, password, email, superuser) values ('efg','123','efg@example.com',0);
 #INSERT INTO `user` (name, password, email, superuser) values ('hij','123','hij@example.com',0);
 
