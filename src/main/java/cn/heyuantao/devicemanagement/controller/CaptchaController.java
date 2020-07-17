@@ -1,16 +1,18 @@
 package cn.heyuantao.devicemanagement.controller;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
-import org.apache.tomcat.util.http.fileupload.MultipartStream;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
@@ -24,6 +26,7 @@ public class CaptchaController {
     @Autowired
     DefaultKaptcha defaultKaptcha;
 
+    @ApiOperation(value = "该接口用于生成验证码图片")
     @GetMapping
     public void getCatpcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)throws Exception{
         byte[] captchaJpg = null;
@@ -46,5 +49,19 @@ public class CaptchaController {
         responseOutputStream.write(captchaJpg);
         responseOutputStream.flush();
         responseOutputStream.close();
+    }
+
+    @ApiOperation(value = "该接口用检查验证码")
+    @PostMapping("/check")
+    public ResponseEntity<?> checkCaptcha(
+            @RequestParam(value = "code") String verificationCode,
+            HttpServletRequest httpServletRequest) {
+
+        String code = (String) httpServletRequest.getSession().getAttribute("captcha");
+        httpServletRequest.getSession().removeAttribute("verificationCode");
+        if (StringUtils.isEmpty(code) || !code.equals(verificationCode)) {
+            return new ResponseEntity("验证码错误，或已失效", HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity("验证通过", HttpStatus.ACCEPTED);
     }
 }
