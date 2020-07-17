@@ -2,7 +2,6 @@ package cn.heyuantao.devicemanagement.auth;
 
 import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class UserAuthPrincipalDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Resource
     private UserService userService;
@@ -21,7 +20,7 @@ public class UserAuthPrincipalDetailsService implements UserDetailsService {
         User user = this.userService.getUserByName(username);
         //may throw exception
         //return new UserAuthPrincipal(user);
-        return new UserAuthPrincipal(user);
+        return new CustomUserDetails(user);
         //return null;
     }
 }

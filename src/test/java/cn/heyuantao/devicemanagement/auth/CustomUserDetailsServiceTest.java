@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class UserAuthPrincipalDetailsServiceTest {
+class CustomUserDetailsServiceTest {
 
     @Resource
     UserMapper userMapper;

@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import java.text.SimpleDateFormat;
 
 //@Configuration
-public class JacksonConfig {
+/*public class JacksonConfig {
     @Bean
     public ObjectMapper getObjectMapper(){
         ObjectMapper mapper = new ObjectMapper();
         mapper.setDateFormat(new SimpleDateFormat("yyy-MM-dd HH:mm:ss"));
         return mapper;
     }
-}
+}*/

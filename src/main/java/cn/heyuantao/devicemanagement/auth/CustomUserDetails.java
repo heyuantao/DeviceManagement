@@ -11,11 +11,11 @@ import java.util.Collections;
 /**
  * @author he_yu
  */
-public class UserAuthPrincipal implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private User user;
 
-    public UserAuthPrincipal(User user) {
+    public CustomUserDetails(User user) {
         super();
         this.user = user;
     }
