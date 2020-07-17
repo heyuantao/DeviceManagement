@@ -1,5 +1,6 @@
 package cn.heyuantao.devicemanagement.config;
 
+import cn.heyuantao.devicemanagement.auth.CustomAuthenticationSuccessHandler;
 import cn.heyuantao.devicemanagement.auth.UserAuthPrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.proxy.NoOp;
@@ -29,6 +30,9 @@ import java.util.List;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @Autowired
     private UserAuthPrincipalDetailsService userDetailsService;
 
     @Override
@@ -40,8 +44,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/index","/css/*","/js/*","/swagger-ui.html**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                //.loginPage("/login").successHandler().permitAll() #add successhandler with different user
+                .formLogin().loginPage("/login").successHandler(customAuthenticationSuccessHandler).permitAll()
+                //.formLogin().loginPage("/login").successHandler().permitAll() #add successhandler with different user
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
