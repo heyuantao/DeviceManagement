@@ -40,8 +40,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/index","/css/*","/js/*","/swagger-ui.html**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login").permitAll()
+                .formLogin().loginPage("/login").permitAll()
+                //.loginPage("/login").successHandler().permitAll() #add successhandler with different user
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

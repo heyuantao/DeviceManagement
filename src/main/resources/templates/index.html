@@ -28,7 +28,12 @@
 
 
             <div class="nav navbar-nav ml-auto"></div>
+            <!--
             <div sec:authentication="name">Bob</div>
+            -->
+            <div th:text="${username}">
+                用户登录名
+            </div>
             <div sec:authorize="isAuthenticated()" >
                 已经登录
             </div>
