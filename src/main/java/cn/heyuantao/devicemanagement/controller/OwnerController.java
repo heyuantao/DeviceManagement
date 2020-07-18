@@ -30,7 +30,7 @@ public class OwnerController {
 
     @ApiOperation(value = "List the owner !")
     @GetMapping
-    public ResponseEntity<List<OwnerResponseDTO>> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
+    public ResponseEntity<CustomItemPagination> list(//@RequestParam(required = false) Map<String,String> map, //HttpServletRequest request
                                         //@ApiParam(name = "搜索信息", required = false) @RequestParam(required = false) Map<String,String> map,
                                         HttpServletRequest request,
                                         @RequestParam(value="name",defaultValue = "") String name,
@@ -50,9 +50,10 @@ public class OwnerController {
             return new OwnerResponseDTO(item);
         }).collect(Collectors.toList());
 
+
         CustomItemPagination customItemPagination=new CustomItemPagination(responseDTOs,pageInfo);
 
-        return new ResponseEntity(customItemPagination.getPaginatedData(),HttpStatus.ACCEPTED);
+        return new ResponseEntity(customItemPagination,HttpStatus.ACCEPTED);
     }
 
     @PostMapping
@@ -81,8 +82,8 @@ public class OwnerController {
     }
 
     @DeleteMapping("/{id}")
-    public String destroy(@PathVariable("id") Integer id){
+    public ResponseEntity<String > destroy(@PathVariable("id") Integer id){
         ownerService.deleteById(id);
-        return "";
+        return new ResponseEntity("",HttpStatus.ACCEPTED);
     }
 }

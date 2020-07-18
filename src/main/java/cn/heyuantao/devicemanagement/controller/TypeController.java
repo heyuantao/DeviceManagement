@@ -46,7 +46,7 @@ public class TypeController {
 
         List<TypeResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new TypeResponseDTO(item);}).collect(Collectors.toList());
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
-        return new ResponseEntity(customItemPagination.getPaginatedData(),HttpStatus.ACCEPTED);
+        return new ResponseEntity(customItemPagination,HttpStatus.ACCEPTED);
     }
 
     @PostMapping

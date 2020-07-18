@@ -3,15 +3,38 @@ package cn.heyuantao.devicemanagement.utils;
 import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import io.swagger.models.auth.In;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author he_yu
+ * 该模块用户处理对list类型接口的返回数据，该类接口通常需要分页
  */
-public class CustomItemPagination {
-    private Map<String,Object> returnMap;
+@Data
+@NoArgsConstructor
+public class CustomItemPagination implements Serializable {
+    private Integer pageSize;
+    private Integer pageNum;
+    private Integer pages;
+    private List<?> data;
+
+    public CustomItemPagination(List<?> data, PageInfo<?> pageInfo){
+        this.pageSize = pageInfo.getPageSize();
+        this.pageNum = pageInfo.getPageNum();
+        this.pages = pageInfo.getPages();
+        this.data = data;
+    }
+
+/*    public CustomItemPagination getPaginatedData(){
+        return this;
+    }*/
+/*    private Map<String,Object> returnMap;
     public CustomItemPagination(List<?> data, PageInfo<?> pageInfo){
         this.returnMap=new HashMap<>();
         this.returnMap.put("data",data);
@@ -22,5 +45,5 @@ public class CustomItemPagination {
     }
     public Map<String,Object> getPaginatedData(){
         return this.returnMap;
-    }
+    }*/
 }

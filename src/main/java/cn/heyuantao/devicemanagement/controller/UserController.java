@@ -45,7 +45,7 @@ public class UserController {
 
         List<UserResponseDTO> userResponseDTOs =userList.stream().map((item)->{return new UserResponseDTO(item);}).collect(Collectors.toList());
         CustomItemPagination customItemPagination= new CustomItemPagination(userResponseDTOs,pageInfo);
-        return new ResponseEntity(customItemPagination.getPaginatedData(), HttpStatus.ACCEPTED);
+        return new ResponseEntity(customItemPagination, HttpStatus.ACCEPTED);
     }
 
     //not use create method
