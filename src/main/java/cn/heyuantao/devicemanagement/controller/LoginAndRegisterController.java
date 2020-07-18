@@ -24,30 +24,7 @@ public class LoginAndRegisterController {
         return "login";
     }*/
 
-    @RequestMapping("/")
-    public String home(Model model){
-        //AnonymousAuthenticationToken
-        String usernameForDisplay = "";
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth instanceof AnonymousAuthenticationToken){
-            System.out.println("匿名用户");
-            usernameForDisplay = "访客";
-        }else if(auth instanceof UsernamePasswordAuthenticationToken){
-            System.out.println("系统注册用户");
-            CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
-            System.out.println(customUserDetails.getUsername());
-            usernameForDisplay= customUserDetails.getUsername();
-        }else{
-            System.out.println("系统未知类型用户");
-        }
-        model.addAttribute("username",usernameForDisplay);
-        //String username = (String)auth.getPrincipal();
-        //AbstractAuthenticationToken token = SecurityContextHolder.getContext().getAuthentication();
-        //User user = (User) SecurityContextHolder.getContext().getAuthentication();
-        //UserAuthPrincipal user = (UserAuthPrincipal)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return "index";
-    }
 
     @RequestMapping("/index")
     public String index(Model model){
