@@ -12,36 +12,29 @@
 
 <body>
 
-    <!--
-    <form action="/dologin">
-        <p>账号:<input type="text" name="username"></p>
-        <p>密码:<input type="text" name="password"></p>
-        <p><input type="submit" value="login"></p>
-    </form>
-    -->
     <div class="container">
         <div class="row" style="margin-top: 15%">
             <div class="col-md-4 offset-md-4">
                 <p class="h2" style="font-weight: bolder">用户登录</p>
-                <form th:action="@{/login}" method="post" style="margin-top: 20px" id="form">
+                <form th:action="@{/login}" style="margin-top: 20px" id="form">
                     <div th:if="${param.error}">
                         <div class="alert alert-danger">用户名或者密码错误</div>
                     </div>
                     <div class="form-group">
                         <label for="username">登录用户名</label>
-                        <input type="text" class="form-control" id="username" name="username" aria-describedby="username-helper">
+                        <input type="text" class="form-control" id="username" name="username" aria-describedby="username-helper"/>
                         <small id="username-helper" class="form-text text-muted">请输入您的登录用户名</small>
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password"/>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="captcha">验证码</label>
-                                <input type="password" class="form-control" id="captcha" name="captcha">
+                                <input type="password" class="form-control" id="captcha" name="captcha"/>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -53,38 +46,42 @@
                         </div>
                     </div>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme">
+                        <input type="checkbox" class="form-check-input" id="rememberme" name="rememberme"/>
                         <label class="form-check-label" for="rememberme">记住我</label>
                     </div>
-                    <button type="submit" value="login" class="btn btn-primary" id="button">用户登录</button>
+
                 </form>
+                <button value="login" class="btn btn-primary" id="button">用户登录</button>
             </div>
         </div>
     </div>
-</body>
-<script>
-    $("#button").click(function (event) {
-        event.preventDefault();
-        console.log("button clock !");
-        var formData = {};
-        var t = $('#form').serializeArray();
-        $.each(t, function() {
-            formData[this.name] = this.value;
-        });
-        console.log(JSON.stringify(formData));
-        $.ajax({
-            type: 'POST',    // 请求方式
-            url: '/api/v1/login',    // 另一个服务器 URL
-            data: JSON.stringify(formData),    // 将数据 JSON 化
-            dataType: 'json',
-            contentType : 'application/json',
-            success: function(responseData, textStatus, jqXHR) {
-                console.log("Success!");
-            },
-            error: function (responseData, textStatus, errorThrown) {
-                console.log('Oh, POST failed for some reason.');
-            }
+    <script>
+
+        $("#button").click(function (event) {
+            //event.preventDefault();
+            console.log("button clock !");
+            var formData = {};
+            var t = $('#form').serializeArray();
+            $.each(t, function () {
+                formData[this.name] = this.value;
+            });
+            console.log(JSON.stringify(formData));
+            $.ajax({
+                type: 'POST',    // 请求方式
+                url: '/api/v1/login',    // 另一个服务器 URL
+                data: JSON.stringify(formData),    // 将数据 JSON 化
+                contentType: "application/json",
+                dataType: "json",
+                success: function (responseData, textStatus, jqXHR) {
+                    console.log("Success!");
+                },
+                error: function (responseData, textStatus, errorThrown) {
+                    console.log('Oh, POST failed for some reason.');
+                }
+            })
         })
 
-</script>
+    </script>
+</body>
+
 </html>
