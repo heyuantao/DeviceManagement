@@ -21,6 +21,7 @@ import java.io.IOException;
  * @author he_yu
  * 对验证码进行处理，验证用户输入的验证码是否与在会话中存储的验证码是否一致
  */
+/*
 @Component
 public class ValidateCaptchaFilter extends OncePerRequestFilter {
 
@@ -61,3 +62,4 @@ public class ValidateCaptchaFilter extends OncePerRequestFilter {
         httpSession.removeAttribute("captcha");
     }
 }
+*/

@@ -72,11 +72,19 @@
             formData[this.name] = this.value;
         });
         console.log(JSON.stringify(formData));
-        $.post("/login",JSON.stringify(formData),function (result) {
-            console.log("result is");
-            console.log(result);
+        $.ajax({
+            type: 'POST',    // 请求方式
+            url: '/api/v1/login',    // 另一个服务器 URL
+            data: JSON.stringify(formData),    // 将数据 JSON 化
+            dataType: 'json',
+            contentType : 'application/json',
+            success: function(responseData, textStatus, jqXHR) {
+                console.log("Success!");
+            },
+            error: function (responseData, textStatus, errorThrown) {
+                console.log('Oh, POST failed for some reason.');
+            }
         })
-    })
 
 </script>
 </html>
