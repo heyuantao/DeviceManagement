@@ -29,7 +29,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
         if(customUserDetails.getUsername().equals("admin")){
-            redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,"/admin");
+            redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,"/");
         }else{
             redirectStrategy.sendRedirect(httpServletRequest,httpServletResponse,"/user");
         }

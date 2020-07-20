@@ -26,12 +26,11 @@ public class ValidateCaptchaFilter extends OncePerRequestFilter {
 
     @Autowired
     AuthenticationFailureHandler authenticationFailureHandler;
-    //CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-        if( StringUtils.equalsIgnoreCase("/login",httpServletRequest.getRequestURL())&&
+        if( StringUtils.equalsIgnoreCase("/login",httpServletRequest.getRequestURI())&&
                 StringUtils.equalsIgnoreCase("POST",httpServletRequest.getMethod()) ){
             try{
                 validateCaptcha(httpServletRequest);
@@ -39,23 +38,24 @@ public class ValidateCaptchaFilter extends OncePerRequestFilter {
                 authenticationFailureHandler.onAuthenticationFailure(httpServletRequest,httpServletResponse, e);
                 return;
             }
-
-
         }
         filterChain.doFilter(httpServletRequest,httpServletResponse);
     }
 
     private void validateCaptcha(HttpServletRequest httpServletRequest) {
         HttpSession httpSession= httpServletRequest.getSession();
-        String captchaInSessioin = (String) httpSession.getAttribute("captcha");
+        String captchaInSession = (String) httpSession.getAttribute("captcha");
         String captchaInRequest = httpServletRequest.getParameter("captcha");
+        System.out.println("Captcha in session and in request is !");
+        System.out.println(captchaInSession);
+        System.out.println(httpServletRequest.getParameterMap().toString());
         if(StringUtils.isBlank(captchaInRequest)){
             throw new ValidateCaptchaException("验证码为空");
         }
-        if(captchaInSessioin==null){
+        if(captchaInSession==null){
             throw new ValidateCaptchaException("验证码不存在");
         }
-        if(!StringUtils.equalsIgnoreCase(captchaInRequest,captchaInSessioin)){
+        if(!StringUtils.equalsIgnoreCase(captchaInRequest,captchaInSession)){
             throw new ValidateCaptchaException("验证码不正确！");
         }
         httpSession.removeAttribute("captcha");

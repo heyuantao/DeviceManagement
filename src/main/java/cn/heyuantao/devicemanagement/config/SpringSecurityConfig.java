@@ -1,5 +1,6 @@
 package cn.heyuantao.devicemanagement.config;
 
+import cn.heyuantao.devicemanagement.auth.CustomAuthenticationFailureHandler;
 import cn.heyuantao.devicemanagement.auth.CustomAuthenticationSuccessHandler;
 import cn.heyuantao.devicemanagement.auth.CustomUserDetailsService;
 import cn.heyuantao.devicemanagement.filter.ValidateCaptchaFilter;
@@ -26,6 +27,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
 
     @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
     private ValidateCaptchaFilter validateCaptchaFilter;
 
     @Autowired
@@ -35,14 +39,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .addFilterBefore(validateCaptchaFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/api/v1/captcha","/api/v1/captcha/check").permitAll()
                 .antMatchers("/","/index","/css/*","/js/*","/swagger-ui.html**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .addFilterBefore(validateCaptchaFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin().loginPage("/login").permitAll()
+                .successHandler(customAuthenticationSuccessHandler).failureHandler(customAuthenticationFailureHandler)
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
