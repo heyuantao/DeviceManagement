@@ -55,33 +55,34 @@
             </div>
         </div>
     </div>
-    <script>
 
-        $("#button").click(function (event) {
-            //event.preventDefault();
-            console.log("button clock !");
-            var formData = {};
-            var t = $('#form').serializeArray();
-            $.each(t, function () {
-                formData[this.name] = this.value;
-            });
-            console.log(JSON.stringify(formData));
-            $.ajax({
-                type: 'POST',    // 请求方式
-                url: '/api/v1/login',    // 另一个服务器 URL
-                data: JSON.stringify(formData),    // 将数据 JSON 化
-                contentType: "application/json",
-                dataType: "json",
-                success: function (responseData, textStatus, jqXHR) {
-                    console.log("Success!");
-                },
-                error: function (responseData, textStatus, errorThrown) {
-                    console.log('Oh, POST failed for some reason.');
-                }
-            })
-        })
-
-    </script>
 </body>
+<script>
 
+    $("#button").click(function (event) {
+        console.log("button clock !");
+        var formData = {};
+        var t = $('#form').serializeArray();
+        $.each(t, function () {
+            formData[this.name] = this.value;
+        });
+        console.log(JSON.stringify(formData));
+        $.ajax({
+            type: 'POST',    // 请求方式
+            url: '/api/v1/login',    // 另一个服务器 URL
+            data: JSON.stringify(formData),    // 将数据 JSON 化
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                console.log("Success!");
+                window.location.href="/";
+            },
+            error: function (response) {
+                console.log('Oh, POST failed for some reason.');
+                alert("错误");
+            }
+        })
+    })
+
+</script>
 </html>
