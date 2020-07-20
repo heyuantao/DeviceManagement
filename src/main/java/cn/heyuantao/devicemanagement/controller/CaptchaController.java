@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
@@ -54,7 +53,7 @@ public class CaptchaController {
     @ApiOperation(value = "该接口用检查验证码")
     @PostMapping("/check")
     public ResponseEntity<?> checkCaptcha(
-            @RequestParam(value = "code") String verificationCode,
+            @RequestParam(value = "captcha") String verificationCode,
             HttpServletRequest httpServletRequest) {
 
         String code = (String) httpServletRequest.getSession().getAttribute("captcha");

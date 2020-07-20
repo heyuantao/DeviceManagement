@@ -97,6 +97,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!--语言工具库-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
+
         <!--验证码生成--> <!-- Google Kaptcha -->
         <dependency>
             <groupId>com.github.penggle</groupId>

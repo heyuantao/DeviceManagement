@@ -7,8 +7,12 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
+/**
+ * @author he_yu
+ * 对Kcaptcha进行了基本的配置
+ */
 @Configuration
-public class KaptchaConfig {
+public class CaptchaConfig {
     @Bean
     public DefaultKaptcha getDefaultKaptcha() {
         com.google.code.kaptcha.impl.DefaultKaptcha defaultKaptcha = new com.google.code.kaptcha.impl.DefaultKaptcha();
