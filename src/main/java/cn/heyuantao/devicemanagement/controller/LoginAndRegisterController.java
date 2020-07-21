@@ -1,7 +1,10 @@
 package cn.heyuantao.devicemanagement.controller;
 
+import cn.heyuantao.devicemanagement.auth.CustomUserDetails;
+import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.dto.AuthRequestDTO;
 import cn.heyuantao.devicemanagement.dto.AuthResponseDTO;
+import cn.heyuantao.devicemanagement.dto.UserResponseDTO;
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.util.JsonWebTokenUtil;
@@ -11,9 +14,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -62,6 +69,17 @@ public class LoginAndRegisterController {
 
         return new ResponseEntity(authResponseDTO,HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/api/v1/status")
+    public ResponseEntity<UserResponseDTO> status(HttpServletRequest httpServletRequest){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        User user = customUserDetails.getUser();
+        UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+
+        return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
+    }
+
 
 /*    @GetMapping("/api/v1/hello")
     public ResponseEntity<String> hello(){

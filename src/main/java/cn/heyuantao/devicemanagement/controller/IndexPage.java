@@ -17,32 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @author he_yu
  * 首页信息
  */
-@RestController
+@Controller
 @RequestMapping("/")
 public class IndexPage {
 
     @GetMapping
-    public ResponseEntity<String> Index(){
-        return new ResponseEntity("", HttpStatus.ACCEPTED);
-    }
-/*    @GetMapping
-    public String home(Model model){
-        String usernameForDisplay = "";
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth instanceof AnonymousAuthenticationToken){
-            System.out.println("匿名用户");
-            usernameForDisplay = "访客";
-        }else if(auth instanceof UsernamePasswordAuthenticationToken){
-            System.out.println("系统注册用户");
-            CustomUserDetails customUserDetails = (CustomUserDetails) auth.getPrincipal();
-            System.out.println(customUserDetails.getUsername());
-            usernameForDisplay= customUserDetails.getUsername();
-        }else{
-            System.out.println("系统未知类型用户");
-        }
-        model.addAttribute("username",usernameForDisplay);
-
+    public String Index(Model model){
         return "index";
-    }*/
+    }
 }

@@ -13,6 +13,5 @@ import java.util.Map;
 @org.apache.ibatis.annotations.Mapper
 public interface UserMapper extends Mapper<User>{
 
-
     List<User> selectByParams(Map<String, Object> params);
 }

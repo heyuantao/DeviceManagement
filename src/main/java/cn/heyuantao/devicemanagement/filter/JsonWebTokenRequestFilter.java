@@ -36,6 +36,9 @@ public class JsonWebTokenRequestFilter extends OncePerRequestFilter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Override
     protected void doFilterInternal(
             HttpServletRequest httpServletRequest,
@@ -80,17 +83,16 @@ public class JsonWebTokenRequestFilter extends OncePerRequestFilter {
     private void responseWithErrorDetails(HttpServletResponse httpServletResponse, ErrorDetails errorDetails, HttpStatus httpStatus) throws IOException {
         String content = null;
 
-        ObjectMapper mapper = new ObjectMapper();
         if (errorDetails == null) {
-            content = mapper.writeValueAsString(new HashMap<>());
+            content = objectMapper.writeValueAsString(new HashMap<>());
         }else{
-            content = mapper.writeValueAsString(errorDetails);
+            content = objectMapper.writeValueAsString(errorDetails);
         }
 
         httpServletResponse.setContentType("application/json");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setStatus(httpStatus.value());
-        httpServletResponse.getWriter().print(content);
+        httpServletResponse.getWriter().write(content);
     }
 
 }

@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.auth;
 
 import cn.heyuantao.devicemanagement.domain.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import java.util.Collections;
 /**
  * @author he_yu
  */
+@Data
 public class CustomUserDetails implements UserDetails {
 
     private User user;
