@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class APILoginRequestDTO implements Serializable {
+public class AuthRequestDTO implements Serializable {
     @Length(max = 30, message = "名字过长")
     @NotEmpty(message = "名字不能为空")
     private String username;
@@ -24,7 +24,4 @@ public class APILoginRequestDTO implements Serializable {
     @NotEmpty(message = "密码不能为空")
     private String password;
 
-    @Length(max = 30, message = "验证码过长")
-    @NotEmpty(message = "验证码不能为空")
-    private String captcha;
 }
