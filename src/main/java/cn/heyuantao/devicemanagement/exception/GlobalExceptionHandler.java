@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -55,5 +56,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("接口不支持该方法", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    //处理JWT验证异常
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<?> handleExpiredJwtException(ExpiredJwtException exception,WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails("接口权限异常", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
     }
 }
