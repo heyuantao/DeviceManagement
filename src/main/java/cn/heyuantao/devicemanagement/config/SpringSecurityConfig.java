@@ -30,12 +30,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
-
-    @Autowired
-    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
-
-    @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Override
@@ -59,18 +53,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.logoutSuccessUrl("/logout-success").permitAll();
     }
 
-/*    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(new BCryptPasswordEncoder(11));
-        return provider;
-    }*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
@@ -89,13 +71,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-/*    @Bean
-    public AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails> authenticationDetailsSource(){
-        return new AuthenticationDetailsSource<HttpServletRequest, WebAuthenticationDetails>() {
-            @Override
-            public WebAuthenticationDetails buildDetails(HttpServletRequest context) {
-                return new WebAuthenticationDetails(context);
-            }
-        };
-    }*/
 }

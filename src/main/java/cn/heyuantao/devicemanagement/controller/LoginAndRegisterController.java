@@ -86,16 +86,7 @@ public class LoginAndRegisterController {
     @PostMapping("/api/v1/logout")
     public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response,
                                     Authentication authentication){
-/*        Assert.notNull(request, "HttpServletRequest required");
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            //logger.debug("Invalidating session: " + session.getId());
-            session.invalidate();
-        }
 
-        SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(null);
-        SecurityContextHolder.clearContext();*/
         SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
         securityContextLogoutHandler.logout(request, response, authentication);
         return new ResponseEntity(new HashMap<>(),HttpStatus.ACCEPTED);
