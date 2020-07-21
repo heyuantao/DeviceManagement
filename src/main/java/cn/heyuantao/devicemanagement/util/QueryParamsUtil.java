@@ -39,11 +39,6 @@ public class QueryParamsUtil {
                 searchMap.put(entry.getKey(),entry.getValue());
             }
         }
-/*        if(searchMap.size()>0){
-            finalMap.put("searchMap",searchMap);
-        }else {
-            finalMap.put("filterMap",filterMap);
-        }*/
         finalMap.put("searchMap",searchMap);
         finalMap.put("filterMap",filterMap);
         return finalMap;

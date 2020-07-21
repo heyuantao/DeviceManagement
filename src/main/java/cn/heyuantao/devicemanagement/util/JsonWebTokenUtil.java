@@ -14,8 +14,6 @@ import java.util.function.Function;
  * @author he_yu
  * 该用工具类用于生成JWT的信息
  */
-
-@Service
 public class JsonWebTokenUtil {
     private String secret = "test";
 
@@ -30,15 +28,15 @@ public class JsonWebTokenUtil {
         return createToken(claims,username);
     }
 
-    /**
+/*    *//**
      * 生成Token
      * @param username
      * @param claims
      * @return
-     */
+     *//*
     public String generateToken(String username,Map<String,Object> claims){
         return createToken(claims,username);
-    }
+    }*/
 
     /**
      * 用Token与用户名进行验证
