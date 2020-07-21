@@ -3,6 +3,7 @@ package cn.heyuantao.devicemanagement.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.function.Function;
  * @author he_yu
  * 该用工具类用于生成JWT的信息
  */
+@Component
 public class JsonWebTokenUtil {
     private String secret = "test";
 
@@ -75,8 +77,10 @@ public class JsonWebTokenUtil {
     }
 
     private String createToken(Map<String,Object> claims, String subject){
+
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis()+1000*60*60*10))
                 .signWith(SignatureAlgorithm.HS256,secret).compact();
     }
+
 }

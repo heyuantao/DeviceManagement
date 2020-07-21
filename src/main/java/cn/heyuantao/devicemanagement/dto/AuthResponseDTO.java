@@ -14,5 +14,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthResponseDTO implements Serializable {
-    private String token;
+    private String jwt;
 }

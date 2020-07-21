@@ -37,7 +37,7 @@ class JsonWebTokenUtilTest {
         String token;
         token = jsonWebTokenUtil.generateToken(username);
         Date date= jsonWebTokenUtil.extractExpiration(token);
-        System.out.println(date);
+        System.out.println("Token expire at:"+date);
     }
 
 }

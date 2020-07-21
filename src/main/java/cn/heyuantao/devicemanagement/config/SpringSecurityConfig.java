@@ -3,6 +3,7 @@ package cn.heyuantao.devicemanagement.config;
 import cn.heyuantao.devicemanagement.auth.CustomAuthenticationFailureHandler;
 import cn.heyuantao.devicemanagement.auth.CustomAuthenticationSuccessHandler;
 import cn.heyuantao.devicemanagement.auth.CustomUserDetailsService;
+import cn.heyuantao.devicemanagement.filter.JsonWebTokenRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -32,25 +34,19 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Autowired
+    private JsonWebTokenRequestFilter jsonWebTokenRequestFilter;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/swagger-ui.html","/null/swagger-resources","/swagger-resources/**","/v2/api-docs").permitAll()
-                .antMatchers("/login","/api/v1/login").permitAll()
-                .antMatchers("/api/v1/captcha","/api/v1/captcha/check").permitAll()
-                .antMatchers("/","/index","/css/*","/js/*","/webjars/**").permitAll()
+                .antMatchers("/api/v1/login").permitAll()
+                //.antMatchers("/","/index","/css/*","/js/*","/webjars/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                //.addFilterBefore(validateCaptchaFilter, UsernamePasswordAuthenticationFilter.class)
-                //.formLogin().loginPage("/login").permitAll()
-                //.successHandler(customAuthenticationSuccessHandler).failureHandler(customAuthenticationFailureHandler)
-                //.and()
-                .logout().invalidateHttpSession(true).clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").permitAll();
-                //.logoutSuccessUrl("/logout-success").permitAll();
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jsonWebTokenRequestFilter,UsernamePasswordAuthenticationFilter.class);
     }
 
 
