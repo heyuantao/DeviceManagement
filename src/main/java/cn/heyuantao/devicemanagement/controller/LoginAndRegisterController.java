@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.dto.AuthRequestDTO;
+import cn.heyuantao.devicemanagement.dto.AuthResponseDTO;
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
 import cn.heyuantao.devicemanagement.util.JsonWebTokenUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -39,8 +40,7 @@ public class LoginAndRegisterController {
      * @return
      */
     @PostMapping("/api/v1/login")
-    public ResponseEntity<String> loginAPI(
-            @RequestBody AuthRequestDTO authRequestDTO){
+    public ResponseEntity<AuthResponseDTO> loginAPI(@RequestBody AuthRequestDTO authRequestDTO){
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(
                 authRequestDTO.getUsername(),
@@ -57,7 +57,11 @@ public class LoginAndRegisterController {
 
         JsonWebTokenUtil jsonWebTokenUtil = new JsonWebTokenUtil();
         String token = jsonWebTokenUtil.generateToken(authRequestDTO.getUsername());
-        return new ResponseEntity(token,HttpStatus.ACCEPTED);
+
+        AuthResponseDTO authResponseDTO = new AuthResponseDTO();
+        authResponseDTO.setToken(token);
+
+        return new ResponseEntity(authResponseDTO,HttpStatus.ACCEPTED);
     }
-    
+
 }
