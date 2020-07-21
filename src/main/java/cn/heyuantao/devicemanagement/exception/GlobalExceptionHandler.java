@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
     // custom exception
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("Resource not Found !",exception.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails("该信息未找到 !",exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }
 
@@ -32,14 +32,14 @@ public class GlobalExceptionHandler {
     // 全局异常处理，处理接口层面的数据异常的错误
     @ExceptionHandler(RequestParamValidateException.class)
     public ResponseEntity<?> handleRequestParamValidateException(RequestParamValidateException exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("数据校验错误", exception.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(),"Request 数据校验错误");
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
     // 全局异常处理，处理服务层面的数据异常
     @ExceptionHandler(ServiceParamValidateException.class)
     public ResponseEntity<?> handleServiceValidateException(ServiceParamValidateException exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("数据校验错误", exception.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(),"Service 层数据校验错误");
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
@@ -53,7 +53,7 @@ public class GlobalExceptionHandler {
     //方法不支持的异常，当对模型接口发送了不被支持的方法时候会触发该异常
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<?> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("对接口的方法不被支持", exception.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails("接口不支持该方法", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 }

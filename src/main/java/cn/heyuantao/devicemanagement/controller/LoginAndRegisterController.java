@@ -3,6 +3,7 @@ package cn.heyuantao.devicemanagement.controller;
 import cn.heyuantao.devicemanagement.dto.AuthRequestDTO;
 import cn.heyuantao.devicemanagement.dto.AuthResponseDTO;
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
+import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.util.JsonWebTokenUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -40,7 +43,13 @@ public class LoginAndRegisterController {
      * @return
      */
     @PostMapping("/api/v1/login")
-    public ResponseEntity<AuthResponseDTO> loginAPI(@RequestBody AuthRequestDTO authRequestDTO){
+    public ResponseEntity<AuthResponseDTO> loginAPI(
+            @Validated @RequestBody AuthRequestDTO authRequestDTO,
+            BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            throw new RequestParamValidateException(bindingResult);
+        }
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(
                 authRequestDTO.getUsername(),
