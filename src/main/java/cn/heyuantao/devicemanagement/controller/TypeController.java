@@ -5,11 +5,10 @@ import cn.heyuantao.devicemanagement.dto.TypeRequestDTO;
 import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.TypeService;
-import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
-import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import cn.heyuantao.devicemanagement.util.CustomItemPagination;
+import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -39,7 +38,7 @@ public class TypeController {
                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
-        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
+        Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
         List<Type> typeList = typeService.getTypesByParams(params);
         PageInfo<Type> pageInfo = new PageInfo<Type>(typeList);

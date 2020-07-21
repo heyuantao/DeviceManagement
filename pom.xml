@@ -85,6 +85,13 @@
             <optional>true</optional>
         </dependency>
 
+        <!--JWT utils-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+
         <!--Swagger2-->
         <dependency>
             <groupId>io.springfox</groupId>

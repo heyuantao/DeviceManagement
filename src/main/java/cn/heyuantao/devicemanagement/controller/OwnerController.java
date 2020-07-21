@@ -5,8 +5,8 @@ import cn.heyuantao.devicemanagement.dto.OwnerRequestDTO;
 import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.OwnerService;
-import cn.heyuantao.devicemanagement.utils.CustomItemPagination;
-import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import cn.heyuantao.devicemanagement.util.CustomItemPagination;
+import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.ApiOperation;
@@ -40,7 +40,7 @@ public class OwnerController {
                                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                                         ){
 
-        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
+        Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
 
         PageHelper.startPage(pageNum,pageSize);
         List<Owner> ownerList = ownerService.getOwnersByParams(params);

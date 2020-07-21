@@ -5,9 +5,8 @@ import cn.heyuantao.devicemanagement.dto.LocationRequestDTO;
 import cn.heyuantao.devicemanagement.dto.LocationResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.LocationService;
-import cn.heyuantao.devicemanagement.utils.QueryParamsUtils;
+import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -39,7 +38,7 @@ public class LocationController {
                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                         ){
 
-        Map<String,Object> params = QueryParamsUtils.getRequestParamMapFromRequestServlet(request);
+        Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
 
         List<LocationResponseDTO> locationResponseDTOList =locationService.getLocations().stream().

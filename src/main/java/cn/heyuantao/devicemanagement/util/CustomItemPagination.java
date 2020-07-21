@@ -1,16 +1,11 @@
-package cn.heyuantao.devicemanagement.utils;
+package cn.heyuantao.devicemanagement.util;
 
-import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
-import io.swagger.models.auth.In;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author he_yu

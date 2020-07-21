@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.utils;
+package cn.heyuantao.devicemanagement.util;
 
 import javax.servlet.ServletRequest;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import java.util.Map;
  * 其中列名在*Mapper.xml文件中指定
  */
 
-public class QueryParamsUtils {
+public class QueryParamsUtil {
     private static Map<String,Object> chaneMapFormat(Map<String,Object> originMap){
         Map<String,Object> finalMap = new HashMap<String,Object>();
 
