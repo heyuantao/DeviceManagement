@@ -6,7 +6,9 @@ import cn.heyuantao.devicemanagement.mapper.UserMapper;
 import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.weekend.Weekend;
@@ -25,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
 
     //private Example example= new Example(User.class);
@@ -113,7 +118,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String passwordHash(String rawPassword) {
-        BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder(11);
-        return bCryptPasswordEncoder.encode(rawPassword);
+        //BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder(11);
+        //return bCryptPasswordEncoder.encode(rawPassword);
+        return passwordEncoder.encode(rawPassword);
     }
 }

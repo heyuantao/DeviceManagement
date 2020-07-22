@@ -52,10 +52,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Bean
+/*    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(11);
-    }
+    }*/
 
     @Bean
     @Override

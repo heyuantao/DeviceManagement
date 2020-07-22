@@ -10,6 +10,9 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 import java.util.List;
 
+/**
+ * @author he_yu
+ */
 @Service
 public class LocationServiceImpl implements LocationService {
     @Resource
