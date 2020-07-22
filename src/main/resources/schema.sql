@@ -1,4 +1,4 @@
-CREATE DATABASE devicemanagement ;
+#CREATE DATABASE devicemanagement ;
 
 USE devicemanagement;
 

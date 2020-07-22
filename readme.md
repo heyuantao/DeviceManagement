@@ -1,5 +1,27 @@
-这是一个Java的练习项目,使用MySQL数据库。启动后用'/src/main/resources/'目录中的连个数据库文件进行建表和初始化数据
+如何部署：
+  
+一、在Linux系统上提前安装好Docker，准备启动MySQL
+
+```markdown
+sudo mkdir -p /app/data/db
+docker run -d --name=mysql --restart=always --network=host -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=devicemanagement -v /app/data/db:/var/lib/mysql  mysql:5.6
+```
+
+二、初始化数据库
+```markdown
+mysql -h 127.0.0.1 -u -p < ./src/main/resources/schema.sql
+mysql -h 127.0.0.1 -u -p < ./src/main/resources/data.sql
+```
+
+三、打包
+```markdown
+mvn clean package
+```
+
+四、运行（测试环境)
+```markdown
+java -jar target/devicemanagement-0.0.1-SNAPSHOT.jar
+```
 其中包含了'admin'和'abc'两个用户，用户密码都为'123456'
 
-分支Master为Session的实现
-分支JWT为JWT的实现
+
