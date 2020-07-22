@@ -6,12 +6,13 @@ import com.github.pagehelper.PageHelper;
 
 import java.util.Properties;
 
-/**
+/**分页的配置类
  * @author he_yu
- * 分页配置
+ *
  */
 @Configuration
 public class PageHelperConfig {
+
     @Bean
     public PageHelper pageHelper(){
         PageHelper pageHelper=new PageHelper();

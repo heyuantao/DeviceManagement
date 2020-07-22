@@ -25,8 +25,8 @@ public class GlobalExceptionHandler {
 
     // 全局异常处理，处理未知的错误
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGlobalException(ResourceNotFoundException exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("Global exception happen !", exception.getMessage());
+    public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails("发现错误", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
