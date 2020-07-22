@@ -12,14 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author he_yu
  * 首页信息
  */
+@ApiIgnore
 @Controller
 @RequestMapping("/")
-public class IndexPage {
+public class IndexPageController {
 
     @GetMapping
     public String Index(Model model){

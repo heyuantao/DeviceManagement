@@ -8,6 +8,8 @@ import cn.heyuantao.devicemanagement.dto.UserResponseDTO;
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.util.JsonWebTokenUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author he_yu
  * 处理登录和注销
  */
+@Api(tags = {"登录接口"})
 @RestController
 @RequestMapping("/")
 public class LoginAndRegisterController {
@@ -39,6 +42,7 @@ public class LoginAndRegisterController {
      * @param authRequestDTO
      * @return
      */
+    @ApiOperation(value = "登录接口",notes = "根据用户名和密码返回JWT")
     @PostMapping("/api/v1/login")
     public ResponseEntity<AuthResponseDTO> loginAPI(
             @Validated @RequestBody AuthRequestDTO authRequestDTO,
@@ -69,6 +73,7 @@ public class LoginAndRegisterController {
         return new ResponseEntity(authResponseDTO,HttpStatus.ACCEPTED);
     }
 
+    @ApiOperation(value = "用户状态",notes = "用携带JWT的请求来获取用户信息")
     @GetMapping("/api/v1/status")
     public ResponseEntity<UserResponseDTO> status(HttpServletRequest httpServletRequest){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

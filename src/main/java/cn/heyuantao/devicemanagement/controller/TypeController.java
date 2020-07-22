@@ -9,6 +9,8 @@ import cn.heyuantao.devicemanagement.util.CustomItemPagination;
 import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
+@Api(tags={"设备类型管理接口"})
 @RestController
 @RequestMapping("/api/v1/type")
 public class TypeController {
