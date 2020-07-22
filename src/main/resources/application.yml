@@ -1,7 +1,7 @@
 server:
   port: 8080
 
-debug: off
+debug: on
 
 spring:
   datasource:
@@ -33,16 +33,8 @@ mybatis:
 
 logging:
   level:
-    com.coding: info
+    com.coding: debug
     com.coding.mapper: debug
 
-
-pagehelper:
-  helper-dialect: mysql
-  reasonable: true
-  support-methods-arguments: true
-  row-bounds-with-count: true
-  params: count=countSql
-  page-size-zero: true
 
 

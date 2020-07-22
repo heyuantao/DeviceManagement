@@ -64,8 +64,7 @@ public class LoginAndRegisterController {
         JsonWebTokenUtil jsonWebTokenUtil = new JsonWebTokenUtil();
         String token = jsonWebTokenUtil.generateToken(authRequestDTO.getUsername());
 
-        AuthResponseDTO authResponseDTO = new AuthResponseDTO();
-        authResponseDTO.setJwt(token);
+        AuthResponseDTO authResponseDTO = new AuthResponseDTO(token);
 
         return new ResponseEntity(authResponseDTO,HttpStatus.ACCEPTED);
     }
