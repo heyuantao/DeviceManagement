@@ -5,10 +5,13 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -59,9 +62,10 @@ public class GlobalExceptionHandler {
     }
 
     //处理JWT验证异常
-    @ExceptionHandler(ExpiredJwtException.class)
-    public ResponseEntity<?> handleExpiredJwtException(ExpiredJwtException exception,WebRequest request){
+/*    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ResponseEntity> handleExpiredJwtException(ExpiredJwtException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("接口权限异常", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
-    }
+    }*/
+
 }
