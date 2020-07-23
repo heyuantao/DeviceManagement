@@ -1,50 +1,49 @@
 package cn.heyuantao.devicemanagement.controller;
-import cn.heyuantao.devicemanagement.auth.CustomUserDetails;
-import cn.heyuantao.devicemanagement.dto.OwnerResponseDTO;
+
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ErrorProperties;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
-import org.springframework.boot.web.error.ErrorAttributeOptions;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.context.request.WebRequest;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author he_yu
  */
-
+@Slf4j
 @RestController
 @RequestMapping("/error")
 public class CustomErrorController implements ErrorController{
 
+    /**根据错误码返回相应的状态数据，状态数据以JSON的方式返回
+     * @param request
+     * @return
+     */
     @RequestMapping
     public ResponseEntity<ErrorDetails> handleError(HttpServletRequest request){
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        if(statusCode == 401){
-            ErrorDetails errorDetails=new ErrorDetails("拒绝访问","你没有权限访问该接口");
+
+        if(statusCode == HttpStatus.UNAUTHORIZED.value()){
+            ErrorDetails errorDetails=new ErrorDetails("拒绝访问","Http Status Code 401");
             return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
-        }else if(statusCode == 404){
-            ErrorDetails errorDetails=new ErrorDetails("页面不存在","该页面不存在");
-            return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
-        }else if(statusCode == 403){
-            ErrorDetails errorDetails=new ErrorDetails("禁止访问","你没有权限访问该接口");
+        }else if(statusCode == HttpStatus.FORBIDDEN.value()){
+            ErrorDetails errorDetails=new ErrorDetails("禁止访问","Http Status Code 403");
             return new ResponseEntity(errorDetails, HttpStatus.FORBIDDEN);
-        }else {
-            ErrorDetails errorDetails = new ErrorDetails("服务器出错", "服务器出错");
+        }else if(statusCode == HttpStatus.NOT_FOUND.value() ){
+            ErrorDetails errorDetails=new ErrorDetails("页面不存在","Http Status Code 404");
+            return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
+        }else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            ErrorDetails errorDetails = new ErrorDetails("服务器出错", "Http Status Code 500");
+            return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+        }else{
+            /**
+             * 遇到了不在计划中的错误，将信息返回
+             */
+            log.error("Error happend in CustomErrorController.handleError !");
+            ErrorDetails errorDetails = new ErrorDetails("服务器出错", "Http Status Code "+statusCode);
             return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     @Override
