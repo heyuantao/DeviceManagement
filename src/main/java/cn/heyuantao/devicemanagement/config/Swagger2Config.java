@@ -92,9 +92,9 @@ public class Swagger2Config {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title(softwareInformation.getTitle())
-                .description("使用JWT进行数据交互，使用前先用login-and-register-controller获得Token！")
+                .description(softwareInformation.getDescription())
                 //.termsOfServiceUrl("http://www.abc.com")
-                .version("1.0")
+                .version(softwareInformation.getVersion())
                 .build();
     }
 }
