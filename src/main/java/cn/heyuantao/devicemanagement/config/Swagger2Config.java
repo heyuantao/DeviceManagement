@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.config;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -26,6 +27,10 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 public class Swagger2Config {
+
+    @Autowired
+    SoftwareInformation softwareInformation;
+
     List<String> excludedPathPrefix=null;
 
     /**
@@ -86,7 +91,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("设备管理系统API接口")
+                .title(softwareInformation.getTitle())
                 .description("使用JWT进行数据交互，使用前先用login-and-register-controller获得Token！")
                 //.termsOfServiceUrl("http://www.abc.com")
                 .version("1.0")
