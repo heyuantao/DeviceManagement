@@ -49,6 +49,8 @@ class RepositoryInitTest {
         type.setName("微型计算机");
         type.setDescription("台式计算机");
         typeRepository.save(type);
+
+
     }
 
     private void insertOwner(){

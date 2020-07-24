@@ -25,22 +25,28 @@ public class Device {
     @Column
     private Long id;
 
-    @Column(length = 128,nullable = false,unique = true)
+    @NotNull
+    @Column(length = 128)
     private String name;
 
-    @Column(length = 128,nullable = false)
+    @NotNull
+    @Column(length = 128)
     private String vendor;
 
-    @Column(length = 128,nullable = false)
+    @NotNull
+    @Column(length = 128)
     private String sn;
 
-    @Column(length = 128,nullable = false)
+    @NotNull
+    @Column(length = 128,unique = true)
     private String assetNo;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private Date inDate;
 
-    @Column(nullable = false)
+    @NotNull
+    @Column
     private Date updated;
 
     @NotNull

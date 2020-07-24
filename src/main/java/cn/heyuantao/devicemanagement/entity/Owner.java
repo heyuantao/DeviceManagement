@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -24,10 +25,12 @@ public class Owner implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 128,nullable = false,unique = true)
+    @NotNull
+    @Column(length = 128,unique = true)
     private String name;
 
-    @Column(length = 128,nullable = false)
+    @NotNull
+    @Column(length = 128)
     private String department;
 
     @Column(length = 257)
