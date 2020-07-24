@@ -33,7 +33,7 @@ public class Owner implements Serializable {
     @Column(length = 257)
     private String description;
 
-    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn
     private List<Device> devices;
 }

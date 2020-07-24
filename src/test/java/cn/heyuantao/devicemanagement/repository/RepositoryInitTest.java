@@ -1,9 +1,6 @@
 package cn.heyuantao.devicemanagement.repository;
 
-import cn.heyuantao.devicemanagement.entity.Location;
-import cn.heyuantao.devicemanagement.entity.Owner;
-import cn.heyuantao.devicemanagement.entity.Type;
-import cn.heyuantao.devicemanagement.entity.User;
+import cn.heyuantao.devicemanagement.entity.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +8,8 @@ import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Date;
 
 
 @SpringBootTest
@@ -99,18 +98,30 @@ class RepositoryInitTest {
 
     public void insertDevice(){
         Owner owner = ownerRepository.findOwnerByName("张三");
-        Location location = locationRepository.findLocationByName("08A0502");
+        Location location = locationRepository.findLocationByName("08A502");
         Type type = typeRepository.findTypeByName("微型计算机");
-        System.out.println(owner);
-        System.out.println(location);
-        System.out.println(type);
+
+        Device device = null;
+        device = new Device();
+        device.setName("HP台式计算机");
+        device.setAssetNo("0xsdfsdfsdfsdf");
+        device.setSn("01212121212");
+        device.setVendor("惠普");
+        device.setInDate(new Date(System.currentTimeMillis()));
+        device.setUpdated(new Date(System.currentTimeMillis()));
+        device.setLocation(location);
+        device.setOwner(owner);
+        device.setType(type);
+        deviceRepository.save(device);
     }
 
     @Test
     public void initData(){
-        insertOwner();
+/*        insertOwner();
         insertLocatioin();
         insertUser();
+        insertType();*/
+
         insertDevice();
     }
 }

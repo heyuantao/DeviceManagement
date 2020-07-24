@@ -30,7 +30,7 @@ public class Location implements Serializable {
     @Column(length = 256,nullable = true)
     private String description;
 
-    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn
     private List<Device> devices;
 }
