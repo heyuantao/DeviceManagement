@@ -43,11 +43,14 @@ public class Device {
     private Date updated;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Location location;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Type type;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private Owner owner;
 }

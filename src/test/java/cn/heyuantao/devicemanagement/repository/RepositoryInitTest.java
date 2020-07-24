@@ -98,15 +98,19 @@ class RepositoryInitTest {
     }
 
     public void insertDevice(){
-        User user= userRepository.findUserByName("admin");
-        System.out.println(user);
+        Owner owner = ownerRepository.findOwnerByName("张三");
+        Location location = locationRepository.findLocationByName("08A0502");
+        Type type = typeRepository.findTypeByName("微型计算机");
+        System.out.println(owner);
+        System.out.println(location);
+        System.out.println(type);
     }
 
     @Test
     public void initData(){
-/*        insertOwner();
+        insertOwner();
         insertLocatioin();
-        insertUser();*/
+        insertUser();
         insertDevice();
     }
 }

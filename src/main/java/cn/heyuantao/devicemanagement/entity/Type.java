@@ -32,5 +32,6 @@ public class Type implements Serializable {
     private String description;
 
     @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<Device> devices;
+    @JoinColumn
+    private List<Device> devices;
 }

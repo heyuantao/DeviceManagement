@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,5 +31,6 @@ public class Location implements Serializable {
     private String description;
 
     @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private Set<Device> devices;
+    @JoinColumn
+    private List<Device> devices;
 }

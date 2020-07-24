@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserRepository extends JpaRepository<User,Integer> {
     /**
-     *
+     *通过查找用户名，返回该用户实例
      * @param name
      * @return
      */
-    public User findUserByName(String name);
+    User findUserByName(String name);
 }
