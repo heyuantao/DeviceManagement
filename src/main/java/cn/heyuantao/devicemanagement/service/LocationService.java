@@ -1,7 +1,7 @@
 package cn.heyuantao.devicemanagement.service;
 
 
-import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.entity.Location;
 
 import java.util.List;
 

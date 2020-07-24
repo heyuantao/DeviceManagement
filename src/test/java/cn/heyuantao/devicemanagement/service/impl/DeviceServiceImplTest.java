@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.service.impl;
 
-import cn.heyuantao.devicemanagement.domain.Device;
+import cn.heyuantao.devicemanagement.entity.Device;
 import cn.heyuantao.devicemanagement.service.DeviceService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

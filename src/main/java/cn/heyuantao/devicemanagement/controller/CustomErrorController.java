@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
@@ -8,18 +9,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Slf4j
 @RestController
 @RequestMapping("/error")
 public class CustomErrorController implements ErrorController{
 
-    /**根据错误码返回相应的状态数据，状态数据以JSON的方式返回
+    */
+/**根据错误码返回相应的状态数据，状态数据以JSON的方式返回
      * @param request
      * @return
-     */
+     *//*
+
     @RequestMapping
     public ResponseEntity<ErrorDetails> handleError(HttpServletRequest request){
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
@@ -37,9 +42,11 @@ public class CustomErrorController implements ErrorController{
             ErrorDetails errorDetails = new ErrorDetails("服务器出错", "Http Status Code 500");
             return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
         }else{
-            /**
+            */
+/**
              * 遇到了不在计划中的错误，将信息返回
-             */
+             *//*
+
             log.error("Error happend in CustomErrorController.handleError !");
             ErrorDetails errorDetails = new ErrorDetails("服务器出错", "Http Status Code "+statusCode);
             return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -51,4 +58,5 @@ public class CustomErrorController implements ErrorController{
         return null;
     }
 }
+*/
 

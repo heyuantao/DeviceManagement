@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Location;
@@ -28,8 +29,10 @@ public class LocationController {
     @Resource
     LocationService locationService;
 
+*/
 /*    @Autowired
-    private HttpServletRequest request;*/
+    private HttpServletRequest request;*//*
+
 
     @GetMapping
     public ResponseEntity<List<LocationResponseDTO>> list(
@@ -84,3 +87,4 @@ public class LocationController {
     }
 
 }
+*/

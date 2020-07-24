@@ -1,7 +1,7 @@
 package cn.heyuantao.devicemanagement.dto;
 
-import cn.heyuantao.devicemanagement.domain.Owner;
-import cn.heyuantao.devicemanagement.domain.Type;
+
+import cn.heyuantao.devicemanagement.entity.Type;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

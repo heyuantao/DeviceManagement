@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.service;
 
-import cn.heyuantao.devicemanagement.domain.User;
+import cn.heyuantao.devicemanagement.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

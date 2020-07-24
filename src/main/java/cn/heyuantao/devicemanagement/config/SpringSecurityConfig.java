@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.config;
 
 
@@ -19,9 +20,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -52,10 +55,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+*/
 /*    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(11);
-    }*/
+    }*//*
+
 
     @Bean
     @Override
@@ -64,3 +69,4 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
+*/

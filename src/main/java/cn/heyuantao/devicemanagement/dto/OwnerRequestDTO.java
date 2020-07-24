@@ -1,7 +1,7 @@
 package cn.heyuantao.devicemanagement.dto;
 
-import cn.heyuantao.devicemanagement.domain.Owner;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import cn.heyuantao.devicemanagement.entity.Owner;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;

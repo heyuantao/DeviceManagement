@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Device;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Service
 public class DeviceServiceImpl implements DeviceService {
     @Resource
@@ -28,3 +31,4 @@ public class DeviceServiceImpl implements DeviceService {
         return device;
     }
 }
+*/

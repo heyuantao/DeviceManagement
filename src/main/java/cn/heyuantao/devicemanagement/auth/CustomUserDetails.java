@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.auth;
 
 import cn.heyuantao.devicemanagement.domain.User;
@@ -9,9 +10,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Data
 public class CustomUserDetails implements UserDetails {
 
@@ -57,3 +60,4 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 }
+*/

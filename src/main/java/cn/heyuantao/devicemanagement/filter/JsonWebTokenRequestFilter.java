@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.filter;
+/*package cn.heyuantao.devicemanagement.filter;
 
 import cn.heyuantao.devicemanagement.auth.CustomUserDetailsService;
 import cn.heyuantao.devicemanagement.exception.ErrorDetails;
@@ -23,10 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
+*//**
  * @author he_yu
  * 用于过滤请求，并识别所携带的JWT信息
- */
+ *//*
 @Component
 public class JsonWebTokenRequestFilter extends OncePerRequestFilter {
 
@@ -95,4 +95,4 @@ public class JsonWebTokenRequestFilter extends OncePerRequestFilter {
         httpServletResponse.getWriter().write(content);
     }
 
-}
+}*/

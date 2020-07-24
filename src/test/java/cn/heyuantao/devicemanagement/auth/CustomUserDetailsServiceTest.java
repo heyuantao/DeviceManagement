@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.auth;
 
 import cn.heyuantao.devicemanagement.domain.User;
@@ -40,4 +41,4 @@ class CustomUserDetailsServiceTest {
         System.out.println("Update password finiashed !");
 
     }
-}
+}*/

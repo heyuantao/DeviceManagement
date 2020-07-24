@@ -1,6 +1,8 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.entity.Location;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.LocationMapper;
 import cn.heyuantao.devicemanagement.service.LocationService;
@@ -10,9 +12,11 @@ import tk.mybatis.mapper.entity.Example;
 import javax.annotation.Resource;
 import java.util.List;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Service
 public class LocationServiceImpl implements LocationService {
     @Resource
@@ -74,3 +78,4 @@ public class LocationServiceImpl implements LocationService {
         locationMapper.delete(location);
     }
 }
+*/

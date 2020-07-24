@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Type;
@@ -11,9 +12,11 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 
 @Service
 public class TypeServiceImpl implements TypeService {
@@ -82,3 +85,4 @@ public class TypeServiceImpl implements TypeService {
     }
 
 }
+*/

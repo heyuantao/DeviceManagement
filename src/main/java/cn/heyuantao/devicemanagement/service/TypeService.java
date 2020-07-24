@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.service;
 
-import cn.heyuantao.devicemanagement.domain.Type;
+import cn.heyuantao.devicemanagement.entity.Type;
 
 import java.util.List;
 import java.util.Map;

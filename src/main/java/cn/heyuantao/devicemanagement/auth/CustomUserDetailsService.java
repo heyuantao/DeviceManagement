@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.auth;
 
 import cn.heyuantao.devicemanagement.domain.User;
@@ -9,10 +10,12 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+*/
 /**
  * @author he_yu
  * 根据传入的用户名对数据库进行查找，如果查找失败会抛出异常
- */
+ *//*
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -30,3 +33,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 }
+*/

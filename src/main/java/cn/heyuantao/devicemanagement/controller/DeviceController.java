@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Device;
@@ -13,3 +14,4 @@ import java.util.List;
 @RequestMapping("/api/v1/devices")
 public class DeviceController {
 }
+*/

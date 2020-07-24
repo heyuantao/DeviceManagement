@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.auth.CustomUserDetails;
@@ -25,10 +26,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 
 
+*/
 /**
  * @author he_yu
  * 处理登录和注销
- */
+ *//*
+
 @Api(tags = {"登录接口"})
 @RestController
 @RequestMapping("/")
@@ -37,11 +40,13 @@ public class LoginAndRegisterController {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    /**
+    */
+/**
      * 输入用户名和密码，返回Jwt Token
      * @param authRequestDTO
      * @return
-     */
+     *//*
+
     @ApiOperation(value = "登录接口",notes = "根据用户名和密码返回JWT")
     @PostMapping("/api/v1/login")
     public ResponseEntity<AuthResponseDTO> loginAPI(
@@ -85,9 +90,12 @@ public class LoginAndRegisterController {
     }
 
 
+*/
 /*    @GetMapping("/api/v1/hello")
     public ResponseEntity<String> hello(){
         return new ResponseEntity("hello",HttpStatus.ACCEPTED);
-    }*/
+    }*//*
+
 
 }
+*/

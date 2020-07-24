@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.auth.CustomUserDetails;
@@ -23,10 +24,12 @@ import springfox.documentation.service.ApiInfo;
 import java.util.HashMap;
 import java.util.Map;
 
+*/
 /**
  * @author he_yu
  * 首页信息
- */
+ *//*
+
 @Api(tags={"软件基本信息"})
 @Controller
 @RequestMapping("/")
@@ -47,3 +50,4 @@ public class IndexPageController {
         return new ResponseEntity(softwareInformation,HttpStatus.ACCEPTED);
     }
 }
+*/

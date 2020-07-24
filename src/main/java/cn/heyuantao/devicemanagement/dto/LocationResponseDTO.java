@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.dto;
 
-import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.entity.Location;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

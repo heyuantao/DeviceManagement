@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Type;
@@ -31,8 +32,10 @@ public class TypeController {
     @Resource
     TypeService typeService;
 
+*/
 /*    @Autowired
-    private HttpServletRequest request;*/
+    private HttpServletRequest request;*//*
+
 
     @GetMapping
     public ResponseEntity<List<?>> list(//@RequestParam Map map,
@@ -83,3 +86,4 @@ public class TypeController {
         return "";
     }
 }
+*/

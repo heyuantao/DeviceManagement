@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
@@ -12,9 +13,11 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Service
 public class OwnerServiceImpl implements OwnerService {
 
@@ -56,7 +59,9 @@ public class OwnerServiceImpl implements OwnerService {
 
     @Override
     public Owner updateOwnerById(Integer id, Owner ownerData) {
-        /*确保该编号存在,否则会抛出异常*/
+        */
+/*确保该编号存在,否则会抛出异常*//*
+
         Owner ownerRecord = getOwnerById(id);
 
         Example example = new Example(Owner.class);
@@ -90,3 +95,4 @@ public class OwnerServiceImpl implements OwnerService {
         ownerMapper.deleteByPrimaryKey(id);
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
@@ -19,9 +20,11 @@ import java.util.List;
 import java.util.Map;
 
 
+*/
 /**
  * @author he_yu
- */
+ *//*
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -34,9 +37,11 @@ public class UserServiceImpl implements UserService {
 
     //private Example example= new Example(User.class);
 
+*/
 /*    public UserServiceImpl() {
         this.example = new Example(User.class);
-    }*/
+    }*//*
+
 
     @Override
     public List<User> getUsers() {
@@ -123,3 +128,4 @@ public class UserServiceImpl implements UserService {
         return passwordEncoder.encode(rawPassword);
     }
 }
+*/

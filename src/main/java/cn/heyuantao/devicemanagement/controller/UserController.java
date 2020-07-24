@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.User;
@@ -78,3 +79,4 @@ public class UserController {
         return new ResponseEntity("",HttpStatus.ACCEPTED);
     }
 }
+*/

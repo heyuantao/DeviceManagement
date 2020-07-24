@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
@@ -90,3 +91,4 @@ public class OwnerController {
         return new ResponseEntity("",HttpStatus.ACCEPTED);
     }
 }
+*/

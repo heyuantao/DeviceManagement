@@ -1,6 +1,6 @@
 package cn.heyuantao.devicemanagement.service;
 
-import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.entity.Owner;
 
 import java.util.Arrays;
 import java.util.List;
