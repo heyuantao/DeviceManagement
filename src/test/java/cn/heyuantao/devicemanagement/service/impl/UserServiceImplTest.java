@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 
@@ -53,4 +54,4 @@ class UserServiceImplTest {
 
 //@MybatisTest
 //@AutoConfigureTestDatabase
-//@ContextConfiguration("classpath:/applicationContext.xml")
+//@ContextConfiguration("classpath:/applicationContext.xml")*/

@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 
@@ -43,6 +44,7 @@ class OwnerServiceImplTest {
         System.out.println(newOwner);
     }
 
+*/
 /*    @Test
     @Transactional
     void addTestOwner() {
@@ -62,7 +64,8 @@ class OwnerServiceImplTest {
             Owner newOwner = ownerService.addOwner(oneOwner);
             System.out.println(newOwner);
         }
-    }*/
+    }*//*
+
 
     @Test
     @Transactional
@@ -80,4 +83,4 @@ class OwnerServiceImplTest {
             System.out.println(owner);
         }
     }
-}
+}*/

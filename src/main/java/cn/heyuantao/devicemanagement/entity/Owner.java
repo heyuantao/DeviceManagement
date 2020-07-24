@@ -34,6 +34,6 @@ public class Owner implements Serializable {
     private String description;
 
     @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn
+    @JoinColumn(name="owner_id",referencedColumnName = "id")
     private List<Device> devices;
 }

@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.config;
 
 import org.springframework.context.annotation.Bean;
@@ -6,10 +7,12 @@ import com.github.pagehelper.PageHelper;
 
 import java.util.Properties;
 
+*/
 /**分页的配置类
  * @author he_yu
  *
- */
+ *//*
+
 @Configuration
 public class PageHelperConfig {
 
@@ -27,3 +30,4 @@ public class PageHelperConfig {
         return pageHelper;
     }
 }
+*/

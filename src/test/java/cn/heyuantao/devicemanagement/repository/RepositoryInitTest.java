@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.repository;
 
 import cn.heyuantao.devicemanagement.entity.*;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import java.util.Date;
 
 
@@ -34,7 +37,7 @@ class RepositoryInitTest {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public void insertType(){
+    private void insertType(){
         Type type=null;
 
         type=new Type();
@@ -48,7 +51,7 @@ class RepositoryInitTest {
         typeRepository.save(type);
     }
 
-    public void insertOwner(){
+    private void insertOwner(){
         Owner owner = null;
 
         owner = new Owner();
@@ -64,7 +67,7 @@ class RepositoryInitTest {
         ownerRepository.save(owner);
     }
 
-    public void insertLocatioin(){
+    private void insertLocatioin(){
         Location location=null;
 
         location=new Location();
@@ -78,7 +81,7 @@ class RepositoryInitTest {
         locationRepository.save(location);
     }
 
-    public void insertUser(){
+    private void insertUser(){
         User user= null;
 
         user = new User();
@@ -96,32 +99,76 @@ class RepositoryInitTest {
         userRepository.save(user);
     }
 
-    public void insertDevice(){
-        Owner owner = ownerRepository.findOwnerByName("张三");
-        Location location = locationRepository.findLocationByName("08A502");
-        Type type = typeRepository.findTypeByName("微型计算机");
-
+    private void insertDevice(){
         Device device = null;
+
         device = new Device();
-        device.setName("HP台式计算机");
-        device.setAssetNo("0xsdfsdfsdfsdf");
-        device.setSn("01212121212");
-        device.setVendor("惠普");
+        device.setName("Inspire2");
+        device.setAssetNo("0xsdfs324fsdf");
+        device.setSn("0121232432212");
+        device.setVendor("大疆");
         device.setInDate(new Date(System.currentTimeMillis()));
         device.setUpdated(new Date(System.currentTimeMillis()));
-        device.setLocation(location);
-        device.setOwner(owner);
-        device.setType(type);
+        device.setLocation(locationRepository.findLocationByName("08A502"));
+        device.setOwner(ownerRepository.findOwnerByName("李四"));
+        device.setType(typeRepository.findTypeByName("无人机"));
         deviceRepository.save(device);
+
+        try{
+            device = new Device();
+            device.setName("HP台式计算机");
+            device.setAssetNo("0xsdfsdfsdfsdf");
+            device.setSn("01212121212");
+            device.setVendor("惠普");
+            device.setInDate(new Date(System.currentTimeMillis()));
+            device.setUpdated(new Date(System.currentTimeMillis()));
+            device.setLocation(locationRepository.findLocationByName("08A506"));
+            device.setOwner(ownerRepository.findOwnerByName("张三"));
+            device.setType(typeRepository.findTypeByName("微型计算机"));
+            deviceRepository.save(device);
+        }catch (ConstraintViolationException ex){
+            System.out.println("Exception Happen");
+            System.out.println(ex.getStackTrace());
+            System.out.println(ex.getMessage());
+        }
+
+    }
+
+    private Boolean isDataExist(){
+        Long count = deviceRepository.count();
+        if(count>0){
+            return Boolean.TRUE;
+        }else{
+            return Boolean.FALSE;
+        }
     }
 
     @Test
     public void initData(){
-/*        insertOwner();
-        insertLocatioin();
-        insertUser();
-        insertType();*/
+        if(!isDataExist()){
+            insertOwner();
 
-        insertDevice();
+            insertLocatioin();
+            insertUser();
+            insertType();
+
+            insertDevice();
+
+            System.out.println("Insert new data !");
+        }else{
+            System.out.println("Data has exist !");
+        }
+
+    }
+
+
+    @Test
+    public void clearData(){
+        deviceRepository.deleteAll();
+
+        userRepository.deleteAll();
+        typeRepository.deleteAll();
+        ownerRepository.deleteAll();
+        locationRepository.deleteAll();
     }
 }

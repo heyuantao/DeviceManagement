@@ -31,7 +31,8 @@ public class Type implements Serializable {
     @Column(length = 256)
     private String description;
 
+
     @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn
+    @JoinColumn(name="type_id",referencedColumnName = "id")
     private List<Device> devices;
 }

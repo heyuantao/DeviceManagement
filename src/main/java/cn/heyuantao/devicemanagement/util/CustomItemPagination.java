@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.util;
+/*package cn.heyuantao.devicemanagement.util;
 
 import com.github.pagehelper.PageInfo;
 import lombok.Data;
@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.*;
 
-/**
+*//**
  * @author he_yu
  * 该模块用户处理对list类型接口的返回数据，该类接口通常需要分页
- */
+ *//*
 @Data
 @NoArgsConstructor
 public class CustomItemPagination implements Serializable {
@@ -25,4 +25,4 @@ public class CustomItemPagination implements Serializable {
         this.pages = pageInfo.getPages();
         this.data = data;
     }
-}
+}*/

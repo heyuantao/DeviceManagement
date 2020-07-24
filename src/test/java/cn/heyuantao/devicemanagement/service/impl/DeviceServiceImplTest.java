@@ -1,3 +1,4 @@
+/*
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.entity.Device;
@@ -25,4 +26,4 @@ class DeviceServiceImplTest {
             System.out.println(oneDevice);
         }
     }
-}
+}*/
