@@ -20,8 +20,8 @@ import java.util.Date;
 public class Device {
 
     @Id
-    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @Column(length = 128,nullable = false,unique = true)
@@ -42,7 +42,10 @@ public class Device {
     @Column(nullable = false)
     private Date updated;
 
+/*    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id")*/
     private Location location;
+
     private Type type;
     private Owner owner;
 }
