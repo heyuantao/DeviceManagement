@@ -42,10 +42,12 @@ public class Device {
     @Column(nullable = false)
     private Date updated;
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id")*/
+    @ManyToOne(fetch = FetchType.EAGER)
     private Location location;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     private Type type;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Owner owner;
 }

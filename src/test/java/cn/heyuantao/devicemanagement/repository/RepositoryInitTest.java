@@ -30,6 +30,9 @@ class RepositoryInitTest {
     UserRepository userRepository;
 
     @Autowired
+    DeviceRepository deviceRepository;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     public void insertType(){
@@ -95,12 +98,15 @@ class RepositoryInitTest {
     }
 
     public void insertDevice(){
+        User user= userRepository.findUserByName("admin");
+        System.out.println(user);
     }
 
     @Test
     public void initData(){
-        //insertOwner();
-        //insertLocatioin();
-        //insertUser();
+/*        insertOwner();
+        insertLocatioin();
+        insertUser();*/
+        insertDevice();
     }
 }

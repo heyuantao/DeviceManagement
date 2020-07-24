@@ -1,10 +1,10 @@
 package cn.heyuantao.devicemanagement.repository;
 
 import cn.heyuantao.devicemanagement.entity.Type;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author he_yu
  */
-public interface TypeRepository extends CrudRepository<Type,String> {
+public interface TypeRepository extends JpaRepository<Type,Integer> {
 }

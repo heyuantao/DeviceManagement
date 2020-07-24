@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author he_yu
@@ -30,4 +32,8 @@ public class Owner implements Serializable {
 
     @Column(length = 257)
     private String description;
+
+    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name="OwnerDevice_FK",referencedColumnName = "id")
+    private List<Device> devices;
 }

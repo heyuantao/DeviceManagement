@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * @author he_yu
@@ -27,4 +28,7 @@ public class Location implements Serializable {
 
     @Column(length = 256,nullable = true)
     private String description;
+
+    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Device> devices;
 }

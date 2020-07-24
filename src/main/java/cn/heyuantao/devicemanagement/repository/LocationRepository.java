@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * @author he_yu
  */
 @Repository
-public interface LocationRepository extends JpaRepository<Location, String> {
+public interface LocationRepository extends JpaRepository<Location, Integer> {
 
 }

@@ -7,6 +7,9 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author he_yu
@@ -27,4 +30,7 @@ public class Type implements Serializable {
 
     @Column(length = 256)
     private String description;
+
+    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    private Set<Device> devices;
 }
