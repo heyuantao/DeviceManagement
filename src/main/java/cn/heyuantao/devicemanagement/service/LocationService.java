@@ -1,42 +1,84 @@
 package cn.heyuantao.devicemanagement.service;
 
-
 import cn.heyuantao.devicemanagement.entity.Location;
-
+import cn.heyuantao.devicemanagement.exception.DatabaseValidateException;
+import cn.heyuantao.devicemanagement.exception.ServiceValidateException;
+import cn.heyuantao.devicemanagement.repository.LocationRepository;
+import cn.heyuantao.devicemanagement.service.LocationService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
+
 
 /**
  * @author he_yu
  */
-public interface LocationService {
-    /**获取所有的设备保存地址
-     * 获得所有位置
-     * @return
-     */
-    List<Location> getLocations();
+@Slf4j
+@Service
+public class LocationService {
 
-    /**添加一个设备存放地址
-     * @param oneLocation
-     * @return
-     */
-    Location addLocation(Location oneLocation);
+    @Autowired
+    private LocationRepository locationRepository;
 
-    /**通过ID来获取设备保存地址
-     * @param id
-     * @return
-     */
-    Location getLocationById(Long id);
 
-    /**更新设备保存地址
-     *
-     * @param id 位置在数据库的编号
-     * @param location  位置对象
-     * @return
-     */
-    Location updateLocationById(Long id, Location location);
+    public List<Location> getLocations() {
+        return locationRepository.findAll();
+    }
 
-    /**删除指定的存放位置
-     * @param id
-     */
-    void deleteLocationById(Long id);
+
+    public Location addLocation(Location location) {
+
+        if(locationRepository.findLocationByName(location.getName()).size()>0){
+            throw new ServiceValidateException("存在同名的位置");
+        }
+
+        try{
+            locationRepository.save(location);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            throw new DatabaseValidateException(ex.getMessage());
+        }
+
+        return location;
+    }
+
+    public Location getLocationById(Long id) {
+        Optional<Location> location = locationRepository.findById(id);
+
+        if(!location.isPresent()){
+            throw new ServiceValidateException("该位置不存在");
+        }
+
+        return location.get();
+    }
+
+    public Location updateLocationById(Long id, Location locationData) {
+        Optional<Location> locationRecord = locationRepository.findById(id);
+        if(!locationRecord.isPresent()){
+            throw new ServiceValidateException("该位置不存在");
+        }
+
+        if(locationRepository.findLocationByName(locationData.getName()).size()>0){
+            throw new ServiceValidateException("存在同名的位置");
+        }
+
+        Location savedLocation = null;
+        try{
+            locationData.setId(locationRecord.get().getId());
+            savedLocation = locationRepository.save(locationData);
+        }catch (Exception ex){
+            throw new DatabaseValidateException(ex.getMessage());
+        }
+        return savedLocation;
+    }
+
+    public void deleteLocationById(Long id) {
+        Optional<Location> location = locationRepository.findById(id);
+        if(!location.isPresent()){
+            throw new ServiceValidateException("该位置不存在");
+        }
+        locationRepository.deleteById(id);
+    }
 }

@@ -1,14 +1,15 @@
-/*
 package cn.heyuantao.devicemanagement.controller;
 
-import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.entity.Location;
 import cn.heyuantao.devicemanagement.dto.LocationRequestDTO;
 import cn.heyuantao.devicemanagement.dto.LocationResponseDTO;
-import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.service.LocationService;
 import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -29,10 +30,6 @@ public class LocationController {
     @Resource
     LocationService locationService;
 
-*/
-/*    @Autowired
-    private HttpServletRequest request;*//*
-
 
     @GetMapping
     public ResponseEntity<List<LocationResponseDTO>> list(
@@ -44,15 +41,16 @@ public class LocationController {
                         @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
                         ){
 
-        Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
-        PageHelper.startPage(pageNum,pageSize);
+        Pageable pageable = PageRequest.of(pageNum, pageSize);
+
+
 
         List<LocationResponseDTO> locationResponseDTOList =locationService.getLocations().stream().
                 map((item)->{return new LocationResponseDTO(item);}).collect(Collectors.toList());
         return new ResponseEntity(locationResponseDTOList, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping
+/*    @PostMapping
     public ResponseEntity<LocationResponseDTO> create(@Validated @RequestBody LocationRequestDTO locationRequestDTO,
                                  BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -84,7 +82,6 @@ public class LocationController {
     public String delete(@PathVariable("id") Integer id){
         locationService.deleteLocationById(id);
         return "";
-    }
+    }*/
 
 }
-*/

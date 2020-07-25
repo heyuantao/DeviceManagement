@@ -1,9 +1,6 @@
-/*
 package cn.heyuantao.devicemanagement.config;
 
 
-import cn.heyuantao.devicemanagement.auth.CustomUserDetailsService;
-import cn.heyuantao.devicemanagement.filter.JsonWebTokenRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,20 +17,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-*/
-/**
- * @author he_yu
- *//*
+
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+/*    @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
-    private JsonWebTokenRequestFilter jsonWebTokenRequestFilter;
+    private JsonWebTokenRequestFilter jsonWebTokenRequestFilter;*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,31 +36,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html","/null/swagger-resources","/swagger-resources/**","/v2/api-docs","/webjars/**").permitAll()
                 .antMatchers("/api/v1/login").permitAll()
                 .antMatchers("/","/version").permitAll()
-                //.antMatchers("/","/index","/css/*","/js/*","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jsonWebTokenRequestFilter,UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterBefore(jsonWebTokenRequestFilter,UsernamePasswordAuthenticationFilter.class);
     }
 
 
-    @Override
+/*    @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService);
-    }
+    }*/
 
 
-*/
-/*    @Bean
+
+    /*
+    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(11);
-    }*//*
+    }*/
 
 
+/*
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+*/
 
 }
-*/

@@ -65,14 +65,24 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    // 全局异常处理，处理API接口接受数据解析出错的异常，当传入的json数据语法出现问题时发生
+    /**
+     * 全局异常处理，处理API接口接受数据解析出错的异常，当传入的json数据语法出现问题时发生
+     * @param exception
+     * @param request
+     * @return
+     */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleHttpMessageNotReadableException(HttpMessageNotReadableException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("输入数据格式错误", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    //方法不支持的异常，当对模型接口发送了不被支持的方法时候会触发该异常
+    /**
+     * 方法不支持的异常，当对模型接口发送了不被支持的方法时候会触发该异常
+     * @param exception
+     * @param request
+     * @return
+     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<?> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("接口不支持该方法", exception.getMessage());
