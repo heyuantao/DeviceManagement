@@ -1,48 +1,91 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
+import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
+import cn.heyuantao.devicemanagement.mapper.OwnerMapper;
+import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
-import java.util.Arrays;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author he_yu
  */
-public interface OwnerService {
-    /**返回所有的设备所有人
-     * @return
-     */
-    List<Owner> getOwners();
-
-    /**通过map来进行查询
-     * @param map
-     * @return
-     */
-    List<Owner> getOwnersByParams(Map<String,Object> map);
-
-    /**添加一个设备所有人
-     * @param oneOwner
-     * @return
-     */
-    Owner addOwner(Owner oneOwner);
+@Service
+public class OwnerService  {
 
 
-    /**查找设备所有人
-     * @param id
-     * @return
-     */
-    Owner getOwnerById(Integer id);
+    OwnerMapper ownerMapper;
 
-    /**更新设备所有人
-     * @param id
-     * @param oneOwner
-     * @return
-     */
-    Owner updateOwnerById(Integer id, Owner oneOwner);
 
-    /**删除设备所有人
-     * @param id
-     */
-    void deleteById(Integer id);
+    public List<Owner> getOwners() {
+        return ownerMapper.selectAll();
+    }
+
+
+    public List<Owner> getOwnersByParams(Map<String,Object> map) {
+        return ownerMapper.selectByParams(map);
+    }
+
+
+    public Owner addOwner(Owner oneOwner) {
+        Example example = new Example(Owner.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",oneOwner.getName());
+        List<Owner> userList=ownerMapper.selectByExample(example);
+        if(userList.size()>=1){
+            throw new ServiceParamValidateException("数据库中已经存在名为" +oneOwner.getName()+"的用户！");
+        }
+        ownerMapper.insert(oneOwner);
+        return oneOwner;
+    }
+
+
+    public Owner getOwnerById(Integer id){
+        Owner oneOwner = ownerMapper.selectByPrimaryKey(id);
+        if(oneOwner==null){
+            throw new ResourceNotFoundException("该设备所有者不存在 !");
+        }
+
+        return oneOwner;
+    }
+
+
+    public Owner updateOwnerById(Integer id, Owner ownerData) {
+        /*确保该编号存在,否则会抛出异常*/
+        Owner ownerRecord = getOwnerById(id);
+
+        Example example = new Example(Owner.class);
+        Example.Criteria criteria = example.createCriteria();
+
+        criteria.andNotEqualTo("id",id);
+        criteria.andEqualTo("name",ownerData.getName());
+        criteria.andEqualTo("department",ownerData.getDepartment());
+        List<Owner> ownerList=ownerMapper.selectByExample(example);
+        if(ownerList.size()>=1){
+            throw new ServiceParamValidateException("存在重名的数据");
+        }
+
+        if(ownerData.getName()!=null){
+            ownerRecord.setName(ownerData.getName());
+        }
+        if(ownerData.getDepartment()!=null){
+            ownerRecord.setDepartment(ownerData.getDepartment());
+        }
+        if(ownerData.getDescription()!=null){
+            ownerRecord.setDescription(ownerData.getDescription());
+        }
+        ownerMapper.updateByPrimaryKey(ownerRecord);
+        return ownerRecord;
+        //return this.getOwnerById(id);
+    }
+
+
+    public void deleteById(Integer id) {
+        this.getOwnerById(id);
+        ownerMapper.deleteByPrimaryKey(id);
+    }
 }

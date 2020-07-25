@@ -1,63 +1,119 @@
 package cn.heyuantao.devicemanagement.service;
 
+import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
+import cn.heyuantao.devicemanagement.mapper.UserMapper;
 import cn.heyuantao.devicemanagement.domain.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * @author he_yu
  */
-public interface UserService {
-    /**获取所有的系统用户
-     * @return
-     */
-    public List<User> getUsers();
+@Service
+public class UserService {
 
-    /**添加系统用户
-     * @param oneUser
-     * @return
-     */
-    public User addUser(User oneUser);
+    @Resource
+    private UserMapper userMapper;
 
-    /**根据Map来查找
-     * @param params
-     * @return
-     */
-    List<User> getUsersByParams(Map<String, Object> params);
+    @Resource
+    private PasswordEncoder passwordEncoder;
 
-    /**根据ID来查找用户
-     * @param id
-     * @return
-     */
-    User getUsersById(Integer id);
 
-    /**
-     * 根据ID来删除用户
-     * @param id
-     */
-    void deleteById(Integer id);
+    //private Example example= new Example(User.class);
 
-    /**
-     * 根据ID来更新用户
-     * @param id
-     * @param user
-     * @return
-     */
-    User updateById(Integer id, User user);
+/*    public UserServiceImpl() {
+        this.example = new Example(User.class);
+    }*/
 
-    /**
-     * 根据用户来查找用户
-     * @param username
-     * @return
-     */
-    User getUserByName(String username);
 
-    /**
-     * 对原始密码进行加密
-     * @param rawPassword 原始的密码
-     * @return 加密后的密码
-     */
-    public String passwordHash(String rawPassword);
+    public List<User> getUsers() {
+        return userMapper.selectAll();
+    }
+
+
+    public User addUser(User oneUser) {
+        Example example = new Example(User.class);
+        example.clear();
+        Example.Criteria criteria = example.createCriteria();
+        criteria.orEqualTo("name",oneUser.getName());
+        criteria.orEqualTo("email",oneUser.getEmail());
+        if(userMapper.selectByExample(example).size()>0){
+            throw new ServiceParamValidateException("存在具有相同注册信息的用户!");
+        }
+        userMapper.insert(oneUser);
+        return oneUser;
+    }
+
+
+    public List<User> getUsersByParams(Map<String, Object> params) {
+
+        return userMapper.selectByParams(params);
+    }
+
+
+    public User getUsersById(Integer id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if(user==null){
+            throw new ServiceParamValidateException("该用户数据不存在");
+        }
+        return user;
+    }
+
+
+    public void deleteById(Integer id) {
+        User user = getUsersById(id);
+        userMapper.delete(user);
+    }
+
+
+    public User updateById(Integer id, User userData) {
+        User user = getUsersById(id);
+
+        Example example= new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+
+        if(userData.getEmail()!=null){
+            criteria.andNotEqualTo("id",id);
+            criteria.andEqualTo("email",userData.getEmail());
+            if(userMapper.selectByExample(example).size()>0){
+                throw new ServiceParamValidateException("存在具有相同邮箱用户!");
+            }
+            user.setEmail(userData.getEmail());
+        }
+
+
+        if(userData.getPassword()!=null){
+            user.setPassword(passwordHash(userData.getPassword()));
+        }
+
+        userMapper.updateByPrimaryKey(user);
+        return user;
+    }
+
+
+    public User getUserByName(String username) {
+        Example example=new Example(User.class);
+        example.clear();
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",username);
+        List<User> userList = userMapper.selectByExample(example);
+        if(userList.size()==0){
+            throw new ServiceParamValidateException("未找到名字为 "+username+" 的用户");
+        }
+        return userList.get(0);
+    }
+
+
+    public String passwordHash(String rawPassword) {
+        //BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder(11);
+        //return bCryptPasswordEncoder.encode(rawPassword);
+        return passwordEncoder.encode(rawPassword);
+    }
 }

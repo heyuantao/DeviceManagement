@@ -1,10 +1,28 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
+import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
-public interface DeviceService {
-    public List<Device> getDevices();
-    public Device addDevice(Device device);
+/**
+ * @author he_yu
+ */
+@Service
+public class DeviceService {
+    @Resource
+    DeviceMapper deviceMapper;
+
+    public List<Device> getDevices() {
+        System.out.println("Device information !");
+        return deviceMapper.getDevicesInformation();
+    }
+
+
+    public Device addDevice(Device device) {
+        deviceMapper.insert(device);
+        return device;
+    }
 }
