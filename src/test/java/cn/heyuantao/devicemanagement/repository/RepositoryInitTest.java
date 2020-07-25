@@ -138,7 +138,19 @@ class RepositoryInitTest {
             System.out.println(ex.getMessage());
         }
 
-
+        for(int i=0;i<30;i++){
+            device = new Device();
+            device.setName("HP台式计算机"+i);
+            device.setAssetNo("0xsdfsdfsdfsdf"+i);
+            device.setSn("01212121212"+i);
+            device.setVendor("惠普");
+            device.setInDate(new Date(System.currentTimeMillis()));
+            device.setUpdated(new Date(System.currentTimeMillis()));
+            device.setLocation(locationRepository.findLocationByName("网络安全实验室"));
+            device.setOwner(ownerRepository.findOwnerByName("张三"));
+            device.setType(typeRepository.findTypeByName("微型计算机"));
+            deviceRepository.save(device);
+        }
 
     }
 

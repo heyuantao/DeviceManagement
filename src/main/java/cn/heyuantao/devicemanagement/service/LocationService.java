@@ -27,7 +27,7 @@ public interface LocationService {
      * @param id
      * @return
      */
-    Location getLocationById(Integer id);
+    Location getLocationById(Long id);
 
     /**
      *
@@ -35,11 +35,11 @@ public interface LocationService {
      * @param location  位置对象
      * @return
      */
-    Location updateLocationById(Integer id, Location location);
+    Location updateLocationById(Long id, Location location);
 
     /**
      * 删除指定的存放位置
      * @param id
      */
-    void deleteLocationById(Integer id);
+    void deleteLocationById(Long id);
 }

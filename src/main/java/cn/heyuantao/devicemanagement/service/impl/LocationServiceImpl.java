@@ -1,81 +1,84 @@
-/*
 package cn.heyuantao.devicemanagement.service.impl;
 
-import cn.heyuantao.devicemanagement.domain.Location;
 import cn.heyuantao.devicemanagement.entity.Location;
+import cn.heyuantao.devicemanagement.entity.Location;
+import cn.heyuantao.devicemanagement.exception.ErrorDetails;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
-import cn.heyuantao.devicemanagement.mapper.LocationMapper;
+import cn.heyuantao.devicemanagement.repository.LocationRepository;
 import cn.heyuantao.devicemanagement.service.LocationService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tk.mybatis.mapper.entity.Example;
-
-import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
-*/
+
 /**
  * @author he_yu
- *//*
-
+ */
+@Slf4j
 @Service
 public class LocationServiceImpl implements LocationService {
-    @Resource
-    LocationMapper locationMapper;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     @Override
     public List<Location> getLocations() {
-        return locationMapper.selectAll();
+        return locationRepository.findAll();
     }
 
     @Override
     public Location addLocation(Location location) {
-        Example example=new Example(Location.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("name",location.getName());
-        if(locationMapper.selectByExample(example).size()>0){
+
+        if(locationRepository.findLocationByName(location.getName())!=null){
             throw new ServiceParamValidateException("存在同名的位置");
         }
-        locationMapper.insert(location);
+
+        try{
+            locationRepository.save(location);
+        }catch (Exception ex){
+            log.error(ex.getMessage());
+            throw new ServiceParamValidateException(ex.getMessage());
+        }
+
         return location;
     }
 
     @Override
-    public Location getLocationById(Integer id) {
-        Location location = locationMapper.selectByPrimaryKey(id);
-        if(location==null){
+    public Location getLocationById(Long id) {
+        Optional<Location> location = locationRepository.findById(id);
+
+        if(!location.isPresent()){
             throw new ServiceParamValidateException("该位置不存在");
         }
-        return location;
+
+        return location.get();
     }
 
     @Override
-    public Location updateLocationById(Integer id, Location locationData) {
-        Location locationRecord = this.getLocationById(id);
-
-        Example example = new Example(Location.class);
-        Example.Criteria criteria = example.createCriteria();
-
-        if(locationData.getName()!=null){
-            criteria.andNotEqualTo("id",id);
-            criteria.andEqualTo("name",locationData.getName());
-            if(locationMapper.selectByExample(example).size()>0){
-                throw new ServiceParamValidateException("存在同名的位置");
-            }
-            locationRecord.setName(locationData.getName());
+    public Location updateLocationById(Long id, Location locationData) {
+        Optional<Location> locationRecord = locationRepository.findById(id);
+        if(!locationRecord.isPresent()){
+            throw new ServiceParamValidateException("该位置不存在");
         }
 
-        if(locationData.getDescription()!=null){
-            locationRecord.setDescription(locationData.getDescription());
+        Location savedLocation = null;
+        try{
+            locationData.setId(locationRecord.get().getId());
+            savedLocation = locationRepository.save(locationData);
+        }catch (Exception ex){
+            throw new ServiceParamValidateException(ex.getMessage());
         }
-
-        locationMapper.updateByPrimaryKey(locationRecord);
-        return locationRecord;
+        return savedLocation;
     }
 
     @Override
-    public void deleteLocationById(Integer id) {
-        Location location = this.getLocationById(id);
-        locationMapper.delete(location);
+    public void deleteLocationById(Long id) {
+        Optional<Location> location = locationRepository.findById(id);
+        if(!location.isPresent()){
+            throw new ServiceParamValidateException("该位置不存在");
+        }
+        locationRepository.deleteById(id);
     }
 }
-*/

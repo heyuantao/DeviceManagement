@@ -11,7 +11,7 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create #update
+      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   thymeleaf:
     encoding: UTF-8
@@ -39,7 +39,7 @@ spring:
 logging:
   level:
     com.coding: debug
-    com.coding.mapper: debug
+    #com.coding.mapper: debug
 
 
 
