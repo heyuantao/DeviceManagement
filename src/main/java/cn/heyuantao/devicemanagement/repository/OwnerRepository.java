@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @author he_yu
  */
 @Repository
-public interface OwnerRepository extends JpaRepository<Owner, Integer> {
+public interface OwnerRepository extends JpaRepository<Owner, Long> {
     /**
      *
      * @param name

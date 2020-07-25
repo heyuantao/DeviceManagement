@@ -73,13 +73,17 @@ class RepositoryInitTest {
         Location location=null;
 
         location=new Location();
-        location.setName("08A502");
-        location.setDescription("计算机组成原理实验");
+        location.setName("计算机组成原理实验");
+        location.setRoomNumber("08A502");
+        location.setAddress("08实验楼，A座五楼");
+        location.setDescription("暂时没有");
         locationRepository.save(location);
 
         location=new Location();
-        location.setName("08A506");
-        location.setDescription("网络安全实验室");
+        location.setName("网络安全实验室");
+        location.setRoomNumber("08A506");
+        location.setAddress("08实验楼，A座五楼");
+        location.setDescription("不写了");
         locationRepository.save(location);
     }
 
@@ -111,7 +115,7 @@ class RepositoryInitTest {
         device.setVendor("大疆");
         device.setInDate(new Date(System.currentTimeMillis()));
         device.setUpdated(new Date(System.currentTimeMillis()));
-        device.setLocation(locationRepository.findLocationByName("08A502"));
+        device.setLocation(locationRepository.findLocationByName("计算机组成原理实验"));
         device.setOwner(ownerRepository.findOwnerByName("李四"));
         device.setType(typeRepository.findTypeByName("无人机"));
         deviceRepository.save(device);
@@ -124,7 +128,7 @@ class RepositoryInitTest {
             device.setVendor("惠普");
             device.setInDate(new Date(System.currentTimeMillis()));
             device.setUpdated(new Date(System.currentTimeMillis()));
-            device.setLocation(locationRepository.findLocationByName("08A506"));
+            device.setLocation(locationRepository.findLocationByName("网络安全实验室"));
             device.setOwner(ownerRepository.findOwnerByName("张三"));
             device.setType(typeRepository.findTypeByName("微型计算机"));
             deviceRepository.save(device);
@@ -133,6 +137,8 @@ class RepositoryInitTest {
             System.out.println(ex.getStackTrace());
             System.out.println(ex.getMessage());
         }
+
+
 
     }
 

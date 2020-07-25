@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -45,8 +46,8 @@ public class Device {
     @Column
     private Date inDate;
 
-    @NotNull
     @Column
+    @LastModifiedDate
     private Date updated;
 
     @NotNull

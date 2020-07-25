@@ -23,7 +23,7 @@ public class Owner implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Column(length = 128,unique = true)
@@ -36,7 +36,9 @@ public class Owner implements Serializable {
     @Column(length = 257)
     private String description;
 
-    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="owner_id",referencedColumnName = "id")
+/*    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="owner_id",referencedColumnName = "id")*/
+
+    @OneToMany(mappedBy = "owner")
     private List<Device> devices;
 }

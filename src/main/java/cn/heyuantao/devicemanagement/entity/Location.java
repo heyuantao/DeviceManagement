@@ -23,15 +23,25 @@ public class Location implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    @Column(length = 128,nullable = false)
+    @NotNull
+    @Column(length = 128)
     private String name;
 
-    @Column(length = 256,nullable = true)
+    @NotNull
+    @Column(length = 128)
+    private String roomNumber;
+
+    @Column(length = 128)
+    private String address;
+
+    @Column(columnDefinition="text")
     private String description;
 
-    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="location_id",referencedColumnName = "id")
+/*    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="location_id",referencedColumnName = "id")*/
+
+    @OneToMany(mappedBy = "location")
     private List<Device> devices;
 }

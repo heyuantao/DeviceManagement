@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * @author he_yu
  */
-public interface DeviceRepository extends CrudRepository<Device,Integer> {
+public interface DeviceRepository extends CrudRepository<Device,Long> {
 }

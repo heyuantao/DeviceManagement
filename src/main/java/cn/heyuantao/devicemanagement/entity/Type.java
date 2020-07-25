@@ -24,7 +24,7 @@ public class Type implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Column(length = 128,unique = true)
@@ -34,7 +34,8 @@ public class Type implements Serializable {
     private String description;
 
 
-    @OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name="type_id",referencedColumnName = "id")
+    //@OneToMany(targetEntity = Device.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    //@JoinColumn(name="type_id",referencedColumnName = "id")
+    @OneToMany(mappedBy = "type")
     private List<Device> devices;
 }

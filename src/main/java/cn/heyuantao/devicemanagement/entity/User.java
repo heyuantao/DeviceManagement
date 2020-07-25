@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 
 /**
@@ -21,7 +22,7 @@ public class User implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @Column(length = 128,unique = true)
@@ -37,5 +38,5 @@ public class User implements Serializable {
 
     @NotNull
     @Column
-    private Boolean superuser;
+    private Boolean superuser = Boolean.FALSE;
 }
