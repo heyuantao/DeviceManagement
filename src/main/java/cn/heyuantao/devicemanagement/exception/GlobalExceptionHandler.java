@@ -1,17 +1,13 @@
 package cn.heyuantao.devicemanagement.exception;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
-
-import javax.validation.constraints.NotNull;
 
 
 /**
@@ -33,17 +29,39 @@ public class GlobalExceptionHandler {
         return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    // 全局异常处理，处理接口层面的数据异常的错误
-    @ExceptionHandler(RequestParamValidateException.class)
-    public ResponseEntity<?> handleRequestParamValidateException(RequestParamValidateException exception, WebRequest request){
+    /**
+     * 全局异常处理，处理接口层面的数据异常的错误
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(ControllerValidateException.class)
+    public ResponseEntity<?> handleRequestParamValidateException(ControllerValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(),"Request 数据校验错误");
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 
-    // 全局异常处理，处理服务层面的数据异常
-    @ExceptionHandler(ServiceParamValidateException.class)
-    public ResponseEntity<?> handleServiceValidateException(ServiceParamValidateException exception, WebRequest request){
+    /**
+     * 全局异常处理，处理服务层面的数据异常
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(ServiceValidateException.class)
+    public ResponseEntity<?> handleServiceValidateException(ServiceValidateException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(),"Service 层数据校验错误");
+        return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * 全局异常处理处理数据库入库时的问题
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(DatabaseValidateException.class)
+    public ResponseEntity<?> handleDatabaseValidateException(DatabaseValidateException exception, WebRequest request){
+        ErrorDetails errorDetails = new ErrorDetails(exception.getMessage(),"Database 层数据校验错误");
         return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
     }
 

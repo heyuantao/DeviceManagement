@@ -9,11 +9,11 @@ import org.springframework.validation.BindingResult;
  * 如果发现参数错误则抛出异常，最终该异常被全局异常处理函数俘获
  */
 
-public class RequestParamValidateException extends RuntimeException {
+public class ControllerValidateException extends RuntimeException {
     /*This is validate result from controller */
     private BindingResult bindingResult;
 
-    public RequestParamValidateException(BindingResult bindingResult){
+    public ControllerValidateException(BindingResult bindingResult){
         this.bindingResult=bindingResult;
     }
 

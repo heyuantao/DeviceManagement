@@ -1,9 +1,8 @@
 package cn.heyuantao.devicemanagement.service.impl;
 
 import cn.heyuantao.devicemanagement.entity.Location;
-import cn.heyuantao.devicemanagement.entity.Location;
-import cn.heyuantao.devicemanagement.exception.ErrorDetails;
-import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
+import cn.heyuantao.devicemanagement.exception.DatabaseValidateException;
+import cn.heyuantao.devicemanagement.exception.ServiceValidateException;
 import cn.heyuantao.devicemanagement.repository.LocationRepository;
 import cn.heyuantao.devicemanagement.service.LocationService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,14 +31,14 @@ public class LocationServiceImpl implements LocationService {
     public Location addLocation(Location location) {
 
         if(locationRepository.findLocationByName(location.getName())!=null){
-            throw new ServiceParamValidateException("存在同名的位置");
+            throw new ServiceValidateException("存在同名的位置");
         }
 
         try{
             locationRepository.save(location);
         }catch (Exception ex){
             log.error(ex.getMessage());
-            throw new ServiceParamValidateException(ex.getMessage());
+            throw new DatabaseValidateException(ex.getMessage());
         }
 
         return location;
@@ -50,7 +49,7 @@ public class LocationServiceImpl implements LocationService {
         Optional<Location> location = locationRepository.findById(id);
 
         if(!location.isPresent()){
-            throw new ServiceParamValidateException("该位置不存在");
+            throw new ServiceValidateException("该位置不存在");
         }
 
         return location.get();
@@ -60,7 +59,7 @@ public class LocationServiceImpl implements LocationService {
     public Location updateLocationById(Long id, Location locationData) {
         Optional<Location> locationRecord = locationRepository.findById(id);
         if(!locationRecord.isPresent()){
-            throw new ServiceParamValidateException("该位置不存在");
+            throw new ServiceValidateException("该位置不存在");
         }
 
         Location savedLocation = null;
@@ -68,7 +67,7 @@ public class LocationServiceImpl implements LocationService {
             locationData.setId(locationRecord.get().getId());
             savedLocation = locationRepository.save(locationData);
         }catch (Exception ex){
-            throw new ServiceParamValidateException(ex.getMessage());
+            throw new DatabaseValidateException(ex.getMessage());
         }
         return savedLocation;
     }
@@ -77,7 +76,7 @@ public class LocationServiceImpl implements LocationService {
     public void deleteLocationById(Long id) {
         Optional<Location> location = locationRepository.findById(id);
         if(!location.isPresent()){
-            throw new ServiceParamValidateException("该位置不存在");
+            throw new ServiceValidateException("该位置不存在");
         }
         locationRepository.deleteById(id);
     }
