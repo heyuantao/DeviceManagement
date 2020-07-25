@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author he_yu
@@ -24,5 +25,9 @@ public class DeviceService {
     public Device addDevice(Device device) {
         deviceMapper.insert(device);
         return device;
+    }
+
+    public List<Device> getDevicesByParams(Map<String, Object> params) {
+        return deviceMapper.getByParams(params);
     }
 }
