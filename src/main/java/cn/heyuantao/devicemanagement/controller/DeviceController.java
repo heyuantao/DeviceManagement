@@ -79,8 +79,8 @@ public class DeviceController {
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
-        Device device = deviceRequestDTO.convertToDTO();
-        deviceService.addDevice(device);
+        Device device = deviceService.addDevice(deviceRequestDTO);
+
         DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO(device);
         return new ResponseEntity(deviceResponseDTO, HttpStatus.ACCEPTED);
     }

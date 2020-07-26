@@ -60,19 +60,19 @@ public class DeviceRequestDTO {
     @NotEmpty(message = "设备所有人不能为空")
     private String owner__name;
 
-    public Device convertToDTO(){
-/*        LocationService locationService = new LocationService();
+/*    public Device convertToDTO(){
+        LocationService locationService = new LocationService();
         OwnerService ownerService = new OwnerService();
-        TypeService typeService = new TypeService();*/
+        TypeService typeService = new TypeService();
 
         Device device = new Device();
         BeanUtils.copyProperties(this,device);
 
-/*        device.setOwner(ownerService.getOwnerByName(owner__name));
+        device.setOwner(ownerService.getOwnerByName(owner__name));
         device.setType(typeService.getTypeByName(type__name));
-        device.setLocation(locationService.getLocationByName(location__name));*/
+        device.setLocation(locationService.getLocationByName(location__name));
 
 
         return device;
-    }
+    }*/
 }
