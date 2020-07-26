@@ -6,7 +6,7 @@
 
     <select id="getByParams" parameterType="map" resultMap="DeviceInformationMap">
         select
-             *
+             d.*
         from
             device d
         left join
