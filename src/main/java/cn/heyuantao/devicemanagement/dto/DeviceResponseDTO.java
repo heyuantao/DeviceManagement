@@ -29,16 +29,16 @@ public class DeviceResponseDTO {
     private Date inDate;
     private Date updated;
 
-    private String location_name;
-    private String type_name;
-    private String owner_name;
-    private String owner_department;
+    private String location__name;
+    private String type__name;
+    private String owner__name;
+    private String owner__department;
 
     public DeviceResponseDTO(Device device){
         BeanUtils.copyProperties(device,this);
-        location_name = device.getLocation().getName();
-        type_name = device.getType().getName();
-        owner_name = device.getOwner().getName();
-        owner_department = device.getOwner().getDepartment();
+        location__name = device.getLocation().getName();
+        type__name = device.getType().getName();
+        owner__name = device.getOwner().getName();
+        owner__department = device.getOwner().getDepartment();
     }
 }

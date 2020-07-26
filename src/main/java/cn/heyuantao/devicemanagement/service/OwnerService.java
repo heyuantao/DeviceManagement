@@ -4,7 +4,9 @@ import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.OwnerMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -17,7 +19,7 @@ import java.util.Map;
 @Service
 public class OwnerService  {
 
-
+    @Resource
     OwnerMapper ownerMapper;
 
 
@@ -25,6 +27,21 @@ public class OwnerService  {
         return ownerMapper.selectAll();
     }
 
+    /**
+     * 根据输入的名字查找一个设备所有者的实例，如果不存在则抛出异常
+     * @param name
+     * @return
+     */
+    public Owner getOwnerByName(String name){
+        Example example = new Example(Owner.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",name);
+        List<Owner> ownerList = ownerMapper.selectByExample(example);
+        if(ownerList.size()!=1){
+            throw new ServiceParamValidateException("名字为"+name+"的设备保管人不存在");
+        }
+        return ownerList.get(0);
+    }
 
     public List<Owner> getOwnersByParams(Map<String,Object> map) {
         return ownerMapper.selectByParams(map);

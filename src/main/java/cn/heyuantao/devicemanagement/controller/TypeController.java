@@ -4,7 +4,7 @@ import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.dto.TypeRequestDTO;
 import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
-import cn.heyuantao.devicemanagement.service.impl.TypeService;
+import cn.heyuantao.devicemanagement.service.TypeService;
 import cn.heyuantao.devicemanagement.util.CustomItemPagination;
 import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;

@@ -17,7 +17,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LocationRequestDTO implements Serializable {
-    @NotEmpty(message = "位置名字能为空")
+    @NotEmpty(message = "位置名字能不能为空")
     @Length(max = 10, message = "位置名字过长")
     private String name;
 
@@ -26,7 +26,8 @@ public class LocationRequestDTO implements Serializable {
 
     public Location convertToDO(){
         Location location=new Location();
-        BeanUtils.copyProperties(location,this);
+        //BeanUtils.copyProperties(location,this);
+        BeanUtils.copyProperties(this,location);
         return location;
     }
 }

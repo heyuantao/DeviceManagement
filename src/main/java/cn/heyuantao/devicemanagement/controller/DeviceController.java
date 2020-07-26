@@ -2,8 +2,10 @@ package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Device;
 import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.dto.DeviceRequestDTO;
 import cn.heyuantao.devicemanagement.dto.DeviceResponseDTO;
 import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
+import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
 import cn.heyuantao.devicemanagement.service.DeviceService;
 import cn.heyuantao.devicemanagement.util.CustomItemPagination;
@@ -15,10 +17,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -67,5 +68,20 @@ public class DeviceController {
         List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
         return new ResponseEntity(customItemPagination,HttpStatus.ACCEPTED);
+    }
+
+    @ApiOperation(value = "创建一个新的设备")
+    @PostMapping
+    public ResponseEntity<DeviceRequestDTO> create(
+            @Validated @RequestBody DeviceRequestDTO deviceRequestDTO,
+            BindingResult bindingResult
+    ){
+        if(bindingResult.hasErrors()){
+            throw new RequestParamValidateException(bindingResult);
+        }
+        Device device = deviceRequestDTO.convertToDTO();
+        deviceService.addDevice(device);
+        DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO(device);
+        return new ResponseEntity(deviceResponseDTO, HttpStatus.ACCEPTED);
     }
 }

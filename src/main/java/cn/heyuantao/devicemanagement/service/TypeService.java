@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.service.impl;
+package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
@@ -24,6 +24,21 @@ public class TypeService{
         return typeMapper.selectAll();
     }
 
+    /**
+     * 根据输入的类型名字返回一个类型的实例，如果不存在则抛出异常
+     * @param name
+     * @return
+     */
+    public Type getTypeByName(String name){
+        Example example = new Example(Type.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",name);
+        List<Type> typeList = typeMapper.selectByExample(example);
+        if(typeList.size()!=1){
+            throw new ServiceParamValidateException("名字为"+name+"的类型不存在");
+        }
+        return typeList.get(0);
+    }
 
     public List<Type> getTypesByParams(Map<String, Object> params) {
         return typeMapper.selectByParams(params);

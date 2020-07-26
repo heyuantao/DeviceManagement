@@ -1,6 +1,7 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.LocationMapper;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,21 @@ public class LocationService{
         return locationMapper.selectAll();
     }
 
+    /**
+     * 通过查找名字来返回一个地址实例，如果不存在则抛异常
+     * @param name
+     * @return
+     */
+    public Location getLocationByName(String name){
+        Example example = new Example(Location.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("name",name);
+        List<Location> locationList = locationMapper.selectByExample(example);
+        if(locationList.size()!=1){
+            throw new ServiceParamValidateException("名字为"+name+"的地址不存在");
+        }
+        return locationList.get(0);
+    }
 
     public Location addLocation(Location location) {
         Example example=new Example(Location.class);

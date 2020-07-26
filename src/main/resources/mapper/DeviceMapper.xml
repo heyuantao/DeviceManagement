@@ -4,10 +4,7 @@
 
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.DeviceMapper">
     <select id="selectByParams" parameterType="map" resultMap="DeviceInformationMap">
-        select
-             d.*
-        from
-            device d
+        select d.* from device d
         left join
             owner o
         on
@@ -27,6 +24,9 @@
             <if test="vendor!=null  and vendor!=''">
                 and d.vendor = #{vendor}
             </if>
+            <if test="sn!=null  and sn!=''">
+                and d.sn = #{sn}
+            </if>
             <if test="asset_no!=null  and asset_no!=''">
                 and d.asset_no = #{asset_no}
             </if>
@@ -37,7 +37,7 @@
     </select>
 
 
-    <select id="filterByParams" resultMap="DeviceInformationMap">
+    <select id="filterByParams" parameterType="String" resultMap="DeviceInformationMap">
         select
             d.*
         from
