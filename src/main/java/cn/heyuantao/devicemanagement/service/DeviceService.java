@@ -27,7 +27,7 @@ public class DeviceService {
         return device;
     }
 
-    public List<Device> getDevicesByParams(Map<String, Object> params) {
-        return deviceMapper.getByParams(params);
+    public List<Device> selectDevicesByParams(Map<String, Object> params) {
+        return deviceMapper.selectByParams(params);
     }
 }

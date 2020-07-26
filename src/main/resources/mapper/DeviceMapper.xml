@@ -4,7 +4,7 @@
 
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.DeviceMapper">
 
-    <select id="getByParams" parameterType="map" resultMap="DeviceInformationMap">
+    <select id="selectByParams" parameterType="map" resultMap="DeviceInformationMap">
         select
              d.*
         from
@@ -22,7 +22,19 @@
         on
             d.type_id = t.id
         <where>
-            <if test="filterMap!=null">
+            <if test="name!=null  and name!=''">
+                and d.name = #{name}
+            </if>
+            <if test="vendor!=null  and vendor!=''">
+                and d.vendor = #{vendor}
+            </if>
+            <if test="asset_no!=null  and asset_no!=''">
+                and d.asset_no = #{asset_no}
+            </if>
+            <if test="sn!=null  and sn!=''">
+                and d.sn = #{sn}
+            </if>
+<!--            <if test="filterMap!=null">
                 <if test="filterMap.name!=null  and filterMap.name!=''">
                     and d.name = #{filterMap.name}
                 </if>
@@ -46,7 +58,7 @@
                     or
                         o.name like #{searchValue}
                 </if>
-            </if>
+            </if>-->
         </where>
     </select>
 

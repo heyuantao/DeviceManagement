@@ -7,6 +7,7 @@ import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
 import cn.heyuantao.devicemanagement.service.DeviceService;
 import cn.heyuantao.devicemanagement.util.CustomItemPagination;
+import cn.heyuantao.devicemanagement.util.HttpRequestQueryParams;
 import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -48,15 +49,15 @@ public class DeviceController {
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
     ){
-        Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(httpServletRequest);
+        //Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(httpServletRequest);
+        HttpRequestQueryParams params = new HttpRequestQueryParams(httpServletRequest);
 
         PageHelper.startPage(pageNum,pageSize);
-        List<Device> deviceList = deviceService.getDevicesByParams(params);
+        List<Device> deviceList = deviceService.selectDevicesByParams(params.getSelectMap());
         PageInfo<Device> pageInfo = new PageInfo<Device>(deviceList);
 
         List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
         return new ResponseEntity(customItemPagination,HttpStatus.ACCEPTED);
-
     }
 }

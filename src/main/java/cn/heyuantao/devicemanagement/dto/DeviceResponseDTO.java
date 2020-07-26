@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import java.util.Date;
 
 /**返回设备的详细信息
+ * 在返回的过程中将设备信息的分层对象结构转变为平面结构
  * @author he_yu
  */
 @Data
@@ -28,14 +29,16 @@ public class DeviceResponseDTO {
     private Date inDate;
     private Date updated;
 
-    private String location;
-    private String type;
-    private String owner;
+    private String location_name;
+    private String type_name;
+    private String owner_name;
+    private String owner_department;
 
     public DeviceResponseDTO(Device device){
         BeanUtils.copyProperties(device,this);
-        location = device.getLocation().getName();
-        type = device.getType().getName();
-        owner = device.getOwner().getName();
+        location_name = device.getLocation().getName();
+        type_name = device.getType().getName();
+        owner_name = device.getOwner().getName();
+        owner_department = device.getOwner().getDepartment();
     }
 }

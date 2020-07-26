@@ -1,8 +1,11 @@
 package cn.heyuantao.devicemanagement.util;
 
-import javax.servlet.ServletRequest;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,30 +27,25 @@ import java.util.Map;
  * 其中列名在*Mapper.xml文件中指定
  */
 
-public class QueryParamsUtil {
+public class HttpRequestQueryParams {
 
+    /**
+     * 存放select的信息,key为列名,value为列的值
+     */
+    private Map<String,Object> selectMap;
 
-    private static Map<String,Object> chaneMapFormat(Map<String,Object> originMap){
-        Map<String,Object> finalMap = new HashMap<String,Object>();
+    /**
+     * 存放是否包含过滤的状态和过滤的字符串
+     */
+    //private String filterValue;
+    private Boolean needFilter;
 
-        Map<String,Object> filterMap = new HashMap<String,Object>();
-        Map<String,Object> searchMap = new HashMap<String,Object>();
-        for(Map.Entry<String,Object> entry: originMap.entrySet()){
+    public HttpRequestQueryParams(HttpServletRequest httpServletRequest){
+        selectMap = new HashMap<String, Object>();
+        //filterValue= "";
+        needFilter = Boolean.FALSE;
 
-            if(!entry.getKey().equals("search")){
-                filterMap.put(entry.getKey(),entry.getValue());
-            }
-            if(entry.getKey().equals("search")){
-                searchMap.put(entry.getKey(),entry.getValue());
-            }
-        }
-        finalMap.put("searchMap",searchMap);
-        finalMap.put("filterMap",filterMap);
-        return finalMap;
-    }
-
-    public static Map<String, Object> getRequestParamMapFromRequestServlet(ServletRequest request){
-        Map<String,String[]> rawParams = request.getParameterMap();
+        Map<String,String[]> rawParams = httpServletRequest.getParameterMap();
         Map<String,Object> finalParams = new HashMap<>();
         for(Iterator<String> iter = rawParams.keySet().iterator(); iter.hasNext();){
             String name = (String) iter.next();
@@ -56,8 +54,20 @@ public class QueryParamsUtil {
             for (int i = 0; i < values.length; i++) {
                 valueStr = (i == values.length - 1) ? valueStr + values[i] : valueStr + values[i] + ",";
             }
-            finalParams.put(name, valueStr);
+            if(StringUtils.equalsIgnoreCase(name,"search")){
+                needFilter = Boolean.TRUE;
+                //filterValue = valueStr;
+            }else{
+                selectMap.put(name, valueStr);
+            }
         }
-        return chaneMapFormat(finalParams);
+    }
+
+    public Boolean hasFilterParams(){
+        return needFilter;
+    }
+
+    public Map<String,Object> getSelectMap(){
+        return selectMap;
     }
 }

@@ -13,5 +13,5 @@ import java.util.Map;
 public interface DeviceMapper extends Mapper<Device> {
     List<Device> getDevicesInformation();
 
-    List<Device> getByParams(Map<String, Object> params);
+    List<Device> selectByParams(Map<String, Object> params);
 }
