@@ -37,12 +37,12 @@ public class HttpRequestQueryParams {
     /**
      * 存放是否包含过滤的状态和过滤的字符串
      */
-    //private String filterValue;
+    private String filterValue;
     private Boolean needFilter;
 
     public HttpRequestQueryParams(HttpServletRequest httpServletRequest){
         selectMap = new HashMap<String, Object>();
-        //filterValue= "";
+        filterValue= "";
         needFilter = Boolean.FALSE;
 
         Map<String,String[]> rawParams = httpServletRequest.getParameterMap();
@@ -56,7 +56,7 @@ public class HttpRequestQueryParams {
             }
             if(StringUtils.equalsIgnoreCase(name,"search")){
                 needFilter = Boolean.TRUE;
-                //filterValue = valueStr;
+                filterValue = valueStr;
             }else{
                 selectMap.put(name, valueStr);
             }
@@ -65,6 +65,10 @@ public class HttpRequestQueryParams {
 
     public Boolean hasFilterParams(){
         return needFilter;
+    }
+
+    public String getFilterString(){
+        return filterValue;
     }
 
     public Map<String,Object> getSelectMap(){

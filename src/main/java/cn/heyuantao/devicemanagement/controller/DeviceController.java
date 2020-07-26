@@ -49,12 +49,20 @@ public class DeviceController {
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
     ){
-        //Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(httpServletRequest);
-        HttpRequestQueryParams params = new HttpRequestQueryParams(httpServletRequest);
 
+        HttpRequestQueryParams params = new HttpRequestQueryParams(httpServletRequest);
         PageHelper.startPage(pageNum,pageSize);
-        List<Device> deviceList = deviceService.selectDevicesByParams(params.getSelectMap());
-        PageInfo<Device> pageInfo = new PageInfo<Device>(deviceList);
+        List<Device> deviceList = null;
+        PageInfo<Device> pageInfo = null;
+
+        if(params.hasFilterParams()){
+            deviceList = deviceService.filterDeviceByParams(params.getFilterString());
+            pageInfo = new PageInfo<Device>(deviceList);
+        }else{
+            deviceList = deviceService.selectDevicesByParams(params.getSelectMap());
+            pageInfo = new PageInfo<Device>(deviceList);
+        }
+
 
         List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);

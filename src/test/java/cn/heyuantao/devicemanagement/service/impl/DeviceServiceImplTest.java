@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,7 +22,8 @@ class DeviceServiceImplTest {
 
     @Test
     void getDevices() {
-        List<Device> deviceList = deviceService.getDevices();
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<Device> deviceList = deviceService.selectDevicesByParams(map);
         for(Device oneDevice:deviceList){
             System.out.println(oneDevice);
         }

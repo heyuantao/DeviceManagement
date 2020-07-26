@@ -16,11 +16,10 @@ public class DeviceService {
     @Resource
     DeviceMapper deviceMapper;
 
-    public List<Device> getDevices() {
+/*    public List<Device> getDevices() {
         System.out.println("Device information !");
         return deviceMapper.getDevicesInformation();
-    }
-
+    }*/
 
     public Device addDevice(Device device) {
         deviceMapper.insert(device);
@@ -29,5 +28,9 @@ public class DeviceService {
 
     public List<Device> selectDevicesByParams(Map<String, Object> params) {
         return deviceMapper.selectByParams(params);
+    }
+
+    public List<Device> filterDeviceByParams(String filterString){
+        return deviceMapper.filterByParams(filterString);
     }
 }
