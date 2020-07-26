@@ -5,26 +5,46 @@
 <mapper namespace="cn.heyuantao.devicemanagement.mapper.DeviceMapper">
 
     <select id="getByParams" parameterType="map" resultMap="DeviceInformationMap">
-        select * from device
+        select
+             *
+        from
+            device d
+        left join
+            owner o
+        on
+            d.owner_id = o.id
+        left join
+            location l
+        on
+            d.location_id = l.id
+        left join
+            type t
+        on
+            d.type_id = t.id
         <where>
             <if test="filterMap!=null">
                 <if test="filterMap.name!=null  and filterMap.name!=''">
-                    and name = #{filterMap.name}
+                    and d.name = #{filterMap.name}
                 </if>
                 <if test="filterMap.vendor!=null  and filterMap.vendor!=''">
-                    and vendor = #{filterMap.vendor}
+                    and d.vendor = #{filterMap.vendor}
                 </if>
                 <if test="filterMap.asset_no!=null  and filterMap.asset_no!=''">
-                    and asset_no = #{filterMap.asset_no}
+                    and d.asset_no = #{filterMap.asset_no}
                 </if>
                 <if test="filterMap.sn!=null  and filterMap.sn!=''">
-                    and sn = #{filterMap.sn}
+                    and d.sn = #{filterMap.sn}
                 </if>
             </if>
             <if test="searchMap!=null and searchMap.search!=null">
                 <bind name="searchValue" value="'%'+searchMap.search+'%'"/>
                 <if test="searchMap.search!=null  and searchMap.search!=''">
-                    and name like #{searchValue} or asset_no like #{searchValue}
+                    and
+                        d.name like #{searchValue}
+                    or
+                        d.asset_no like #{searchValue}
+                    or
+                        o.name like #{searchValue}
                 </if>
             </if>
         </where>
