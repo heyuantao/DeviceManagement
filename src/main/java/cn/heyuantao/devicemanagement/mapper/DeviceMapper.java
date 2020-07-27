@@ -11,7 +11,26 @@ import java.util.Map;
  */
 @org.apache.ibatis.annotations.Mapper
 public interface DeviceMapper extends Mapper<Device> {
+    /**
+     * 获取设备的信息，当前暂时不用
+     * @return
+     */
     List<Device> getDevicesInformation();
+
+
+    /**
+     * 更新该设备对应的记录，相应的参数存储在device.id中
+     * @param device
+     * @return
+     */
+    Device updateDevice(Device device);
+
+    /**
+     * 传入device的对象，包含相应的关联对象的引用，将其保存入数据库
+     * @param device
+     * @return
+     */
+    Device addDevice(Device device);
 
     /**
      *
