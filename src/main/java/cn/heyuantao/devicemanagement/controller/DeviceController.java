@@ -84,4 +84,17 @@ public class DeviceController {
         DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO(device);
         return new ResponseEntity(deviceResponseDTO, HttpStatus.ACCEPTED);
     }
+
+    /**
+     * 将请求的数据转换为对应的Device对象
+     * @param deviceRequestDTO
+     * @return
+     */
+    public static Device convertToDO(DeviceRequestDTO deviceRequestDTO){
+        return null;
+    }
+
+    public static DeviceResponseDTO convertToDTO(Device device){
+        return null;
+    }
 }

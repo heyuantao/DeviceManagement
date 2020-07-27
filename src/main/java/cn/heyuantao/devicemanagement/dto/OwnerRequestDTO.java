@@ -26,10 +26,4 @@ public class OwnerRequestDTO implements Serializable {
 
     @Length(max = 20, message = "备注信息过长")
     private String description;
-
-/*    public Owner convertToDO(){
-        Owner oneOwner = new Owner();
-        BeanUtils.copyProperties(this,oneOwner);
-        return oneOwner;
-    }*/
 }

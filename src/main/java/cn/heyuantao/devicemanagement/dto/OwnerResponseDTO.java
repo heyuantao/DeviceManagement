@@ -22,10 +22,4 @@ public class OwnerResponseDTO implements Serializable {
     private String name;
     private String department;
     private String description;
-
-
-/*    public OwnerResponseDTO(Owner oneOwner){
-        BeanUtils.copyProperties(oneOwner,this);
-    }*/
-
 }
