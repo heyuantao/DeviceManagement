@@ -30,7 +30,7 @@ public interface DeviceMapper extends Mapper<Device> {
      * @param device
      * @return
      */
-    Device addDevice(Device device);
+    Long addDevice(Device device);
 
     /**
      *
