@@ -8,6 +8,9 @@ import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
 import cn.heyuantao.devicemanagement.exception.RequestParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
 import cn.heyuantao.devicemanagement.service.DeviceService;
+import cn.heyuantao.devicemanagement.service.LocationService;
+import cn.heyuantao.devicemanagement.service.OwnerService;
+import cn.heyuantao.devicemanagement.service.TypeService;
 import cn.heyuantao.devicemanagement.util.CustomItemPagination;
 import cn.heyuantao.devicemanagement.util.HttpRequestQueryParams;
 import cn.heyuantao.devicemanagement.util.QueryParamsUtil;
@@ -15,6 +18,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -37,6 +44,15 @@ import java.util.stream.Collectors;
 public class DeviceController {
     @Resource
     DeviceService deviceService;
+
+    @Resource
+    LocationService locationService;
+
+    @Resource
+    TypeService typeService;
+
+    @Resource
+    OwnerService ownerService;
 
 
     @ApiOperation(value = "查找所有的设备")
@@ -65,7 +81,9 @@ public class DeviceController {
         }
 
 
-        List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
+        //List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
+        List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return convertToDTO(item);}).collect(Collectors.toList());
+
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
         return new ResponseEntity(customItemPagination,HttpStatus.ACCEPTED);
     }
@@ -90,11 +108,34 @@ public class DeviceController {
      * @param deviceRequestDTO
      * @return
      */
-    public static Device convertToDO(DeviceRequestDTO deviceRequestDTO){
-        return null;
+    public Device convertToDO(DeviceRequestDTO deviceRequestDTO){
+
+        Device device = new Device();
+        BeanUtils.copyProperties(deviceRequestDTO,device);
+
+        device.setUpdated(new Date(System.currentTimeMillis()));
+        device.setInDate(new Date(System.currentTimeMillis()));
+
+        device.setOwner(ownerService.getOwnerByName(deviceRequestDTO.getOwner__name()));
+        device.setType(typeService.getTypeByName(deviceRequestDTO.getType__name()));
+        device.setLocation(locationService.getLocationByName(deviceRequestDTO.getLocation__name()));
+
+        return device;
     }
 
-    public static DeviceResponseDTO convertToDTO(Device device){
-        return null;
+    /**
+     * 将设备实体转换为用户可以看的数据并返回
+     * @param device
+     * @return
+     */
+    public DeviceResponseDTO convertToDTO(Device device){
+        DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO();
+
+        BeanUtils.copyProperties(device,deviceResponseDTO);
+        deviceResponseDTO.setLocation__name(device.getLocation().getName());
+        deviceResponseDTO.setType__name(device.getType().getName());
+        deviceResponseDTO.setOwner__name(device.getOwner().getName());
+        deviceResponseDTO.setOwner__department(device.getOwner().getDepartment());
+        return deviceResponseDTO;
     }
 }

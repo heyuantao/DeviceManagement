@@ -102,7 +102,7 @@ public class OwnerController {
      * @param ownerRequestDTO
      * @return
      */
-    public static Owner convertToDO(OwnerRequestDTO ownerRequestDTO){
+    public Owner convertToDO(OwnerRequestDTO ownerRequestDTO){
         Owner oneOwner = new Owner();
         BeanUtils.copyProperties(ownerRequestDTO,oneOwner);
         return oneOwner;
@@ -113,7 +113,7 @@ public class OwnerController {
      * @param owner
      * @return
      */
-    public static OwnerResponseDTO convertToDTO(Owner owner){
+    public OwnerResponseDTO convertToDTO(Owner owner){
         OwnerResponseDTO ownerResponseDTO = new OwnerResponseDTO();
         BeanUtils.copyProperties(owner,ownerResponseDTO);
         return ownerResponseDTO;
