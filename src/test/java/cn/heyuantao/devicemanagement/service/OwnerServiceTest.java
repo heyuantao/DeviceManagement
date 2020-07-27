@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.service.impl;
+package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.service.OwnerService;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class OwnerServiceImplTest {
+class OwnerServiceTest {
 
     @Resource
     OwnerService ownerService;
@@ -31,7 +31,7 @@ class OwnerServiceImplTest {
         }
     }
 
-    @Test
+/*    @Test
     @Transactional
     void addOwner() {
         Owner oneOwner = new Owner();
@@ -40,7 +40,7 @@ class OwnerServiceImplTest {
         oneOwner.setDescription("这是一个测试用户");
         Owner newOwner = ownerService.addOwner(oneOwner);
         System.out.println(newOwner);
-    }
+    }*/
 
 /*    @Test
     @Transactional

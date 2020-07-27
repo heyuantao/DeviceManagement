@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.service.impl;
+package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
 import cn.heyuantao.devicemanagement.service.DeviceService;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class DeviceServiceImplTest {
+class DeviceServiceTest {
     @Resource
     DeviceService deviceService;
 

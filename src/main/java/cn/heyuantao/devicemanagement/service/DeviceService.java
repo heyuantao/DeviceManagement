@@ -35,7 +35,7 @@ public class DeviceService {
         return device;
     }
 
-    public Device addDevice(DeviceRequestDTO deviceRequestDTO){
+/*    public Device addDevice(DeviceRequestDTO deviceRequestDTO){
         Device device = new Device();
         BeanUtils.copyProperties(deviceRequestDTO,device);
         device.setInDate(new Date(System.currentTimeMillis()));
@@ -46,7 +46,7 @@ public class DeviceService {
         device.setLocation(locationService.getLocationByName(deviceRequestDTO.getLocation__name()));
 
         return addDevice(device);
-    }
+    }*/
 
     public List<Device> selectDevicesByParams(Map<String, Object> params) {
         return deviceMapper.selectByParams(params);

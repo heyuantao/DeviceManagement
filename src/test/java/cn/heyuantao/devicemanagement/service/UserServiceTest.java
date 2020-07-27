@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.service.impl;
+package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.User;
 import cn.heyuantao.devicemanagement.service.UserService;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class UserServiceImplTest {
+class UserServiceTest {
 
     @Resource
     UserService userService;

@@ -34,11 +34,11 @@ public class DeviceResponseDTO {
     private String owner__name;
     private String owner__department;
 
-    public DeviceResponseDTO(Device device){
+/*    public DeviceResponseDTO(Device device){
         BeanUtils.copyProperties(device,this);
         location__name = device.getLocation().getName();
         type__name = device.getType().getName();
         owner__name = device.getOwner().getName();
         owner__department = device.getOwner().getDepartment();
-    }
+    }*/
 }
