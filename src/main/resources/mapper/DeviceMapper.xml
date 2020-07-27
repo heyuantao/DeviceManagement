@@ -10,15 +10,15 @@
             device
             (name, vendor, sn, asset_no, in_date, updated, location_id, type_id, owner_id)
         VALUES
-            (#{name},#{vendor},#{sn},#{asset_no},#{in_date},#{update},#{location.id},#{type.id},#{owner.id})
+            (#{name},#{vendor},#{sn},#{assetNo},#{inDate},#{updated},#{location.id},#{type.id},#{owner.id})
     </insert>
 
     <update id="updateDevice" parameterType="cn.heyuantao.devicemanagement.domain.Device">
         UPDATE
             device
         SET
-            name = #{name}, vendor = #{vendor}, sn = #{sn}, vendor = #{asset_no},
-            in_date = #{in_date}, updated = #{updated},
+            name = #{name}, vendor = #{vendor}, sn = #{sn}, vendor = #{assetNo},
+            in_date = #{inDate}, updated = #{updated},
             location_id = #{location.id},type_id = #{type.id},owner_id = #{owner.id}
         WHERE id = #{id}
     </update>

@@ -31,7 +31,8 @@ public class DeviceService {
     }*/
 
     public Device addDevice(Device device) {
-        deviceMapper.insert(device);
+        //deviceMapper.insert(device);
+        deviceMapper.addDevice(device);
         return device;
     }
 
