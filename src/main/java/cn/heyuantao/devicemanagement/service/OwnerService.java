@@ -22,7 +22,10 @@ public class OwnerService  {
     @Resource
     OwnerMapper ownerMapper;
 
-
+    /**
+     * 获取所有的设备所有者，一般不要设使用
+     * @return
+     */
     public List<Owner> getOwners() {
         return ownerMapper.selectAll();
     }

@@ -1,6 +1,9 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
+import cn.heyuantao.devicemanagement.domain.Location;
+import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.service.DeviceService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +22,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeviceServiceTest {
     @Resource
     DeviceService deviceService;
+    @Resource
+    TypeService typeService;
+    @Resource
+    LocationService locationService;
+    @Resource
+    OwnerService ownerService;
 
     @Test
     void getDevices() {
@@ -27,5 +36,14 @@ class DeviceServiceTest {
         for(Device oneDevice:deviceList){
             System.out.println(oneDevice);
         }
+    }
+
+    @Test
+    void testAddDeviceWithForgienKey(){
+        Type type = typeService.getTypeByName("无人机");
+        Location location = locationService.getLocationByName("08A502");
+        Owner owner = ownerService.getOwnerByName("张三");
+        System.out.println(type+"\n"+location+"\n"+owner);
+
     }
 }
