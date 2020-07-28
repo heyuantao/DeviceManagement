@@ -44,7 +44,7 @@ class DeviceServiceTest {
     @Test
     void testAddDeviceWithForgienKey(){
         Map<String,Object> map = new HashMap<>();
-        map.put("name","Lenovo笔记本电脑");
+        map.put("name","Lenovo笔记本电脑1");
         List<Device> deviceList= deviceService.selectDevicesByParams(map);
 
         if(deviceList.size()==0){

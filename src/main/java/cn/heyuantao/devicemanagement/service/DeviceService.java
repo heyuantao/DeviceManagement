@@ -2,9 +2,11 @@ package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
 import cn.heyuantao.devicemanagement.dto.DeviceRequestDTO;
+import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -35,11 +37,18 @@ public class DeviceService {
         /**
          * 先检查设备对应的资产编号是否已经存在，否则不进行入库操作
          */
-        //Map<String,Object> queryMap= new HashMap<String, Object>();
-        //queryMap.put()
+        Device theDevice = null;
+        try {
+            theDevice = selectByAssetNo(device.getAssetNo());
+        }catch (Exception ex){
+            theDevice = null;
+        }
 
-
-        deviceMapper.addDevice(device);
+        if(theDevice==null){
+            deviceMapper.addDevice(device);
+        }else{
+            throw new ServiceParamValidateException("要添加的设备已经存在");
+        }
         return device;
     }
 
@@ -53,18 +62,22 @@ public class DeviceService {
         return deviceMapper.selectByPrimaryKey(device.getId());
     }
 
-/*    public Device addDevice(DeviceRequestDTO deviceRequestDTO){
-        Device device = new Device();
-        BeanUtils.copyProperties(deviceRequestDTO,device);
-        device.setInDate(new Date(System.currentTimeMillis()));
-        device.setUpdated(new Date(System.currentTimeMillis()));
 
-        device.setOwner(ownerService.getOwnerByName(deviceRequestDTO.getOwner__name()));
-        device.setType(typeService.getTypeByName(deviceRequestDTO.getType__name()));
-        device.setLocation(locationService.getLocationByName(deviceRequestDTO.getLocation__name()));
-
-        return addDevice(device);
-    }*/
+    /**
+     * 检查是否有相同资产编号的设备，如果存在则会抛出异常
+     * @param assetNo
+     * @return
+     */
+    public Device selectByAssetNo(String assetNo){
+        Example example = new Example(Device.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("assetNo",assetNo);
+        List<Device> deviceList = deviceMapper.selectByExample(example);
+        if(deviceList.size()==0){
+            throw new ServiceParamValidateException("资产编号为"+assetNo+"的设备不存在!");
+        }
+        return deviceList.get(0);
+    }
 
     public List<Device> selectDevicesByParams(Map<String, Object> params) {
         return deviceMapper.selectByParams(params);
