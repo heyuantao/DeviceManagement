@@ -74,12 +74,16 @@ class DeviceServiceTest {
     @Test
     void testUpdateDevice() {
         Map<String,Object> map = new HashMap<>();
-        map.put("name","Lenovo笔记本电脑");
+        map.put("asset_no","xxxxxxxxxxx");
         List<Device> deviceList= deviceService.selectDevicesByParams(map);
 
-        Device theDevice = deviceList.get(0);
+        Device theDeviceTobeUpdate = deviceList.get(0);
 
-        System.out.println(getAssetNo);
+        Type newType = typeService.getTypeByName("无人机");
+
+        theDeviceTobeUpdate.setType(newType);
+
+        deviceService.updateDevice(theDeviceTobeUpdate);
 
     }
 }

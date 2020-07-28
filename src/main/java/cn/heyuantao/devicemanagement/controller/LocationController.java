@@ -66,6 +66,8 @@ public class LocationController {
         return new ResponseEntity(location, HttpStatus.ACCEPTED);
     }
 
+
+
     @PutMapping("/{id}")
     public ResponseEntity<LocationResponseDTO> update(@PathVariable("id") Integer id,
                                     @Validated @RequestBody LocationRequestDTO locationRequestDTO,

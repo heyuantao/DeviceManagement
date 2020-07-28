@@ -29,10 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**管理设备的增删改查
@@ -44,6 +41,9 @@ import java.util.stream.Collectors;
 public class DeviceController {
     @Resource
     DeviceService deviceService;
+
+    @Resource
+    DeviceMapper deviceMapper;
 
     @Resource
     LocationService locationService;
@@ -103,6 +103,28 @@ public class DeviceController {
         //DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO(device);
         DeviceResponseDTO deviceResponseDTO = convertToDTO(deviceRecord);
         return new ResponseEntity(deviceResponseDTO, HttpStatus.ACCEPTED);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DeviceResponseDTO> retrive(@PathVariable("id") Long id){
+        Device device = deviceService.getDeviceById(id);
+        return new ResponseEntity(convertToDTO(device),HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DeviceResponseDTO> update(
+            @PathVariable("id") Long id,
+            @Validated @RequestBody DeviceRequestDTO deviceRequestDTO,
+            BindingResult bindingResult
+    ){
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map> delete(@PathVariable("id") Long id){
+        
+        return new ResponseEntity(new HashMap<String,Object>(1),HttpStatus.ACCEPTED);
     }
 
     /**

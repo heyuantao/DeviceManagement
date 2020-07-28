@@ -79,11 +79,20 @@ public class DeviceService {
         return deviceList.get(0);
     }
 
+
     public List<Device> selectDevicesByParams(Map<String, Object> params) {
         return deviceMapper.selectByParams(params);
     }
 
     public List<Device> filterDeviceByParams(String filterString){
         return deviceMapper.filterByParams(filterString);
+    }
+
+    public Device getDeviceById(Long id) {
+        Device device = deviceMapper.selectByPrimaryKey(id);
+        if(device==null){
+            throw new ServiceParamValidateException("记录为"+id+"的设备不存在");
+        }
+        return device;
     }
 }

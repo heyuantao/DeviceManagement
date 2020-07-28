@@ -21,16 +21,16 @@ public interface DeviceMapper extends Mapper<Device> {
     /**
      * 更新该设备对应的记录，相应的参数存储在device.id中
      * @param device
-     * @return
+     * @return 返回值表示更新数据是否正确
      */
-    Device updateDevice(Device device);
+    Boolean updateDevice(Device device);
 
     /**
-     * 传入device的对象，包含相应的关联对象的引用，将其保存入数据库
+     * 传入device的对象，包含相应的关联对象的引用，将其保存入数据库，新生成记录的主键存放在device.id中
      * @param device
-     * @return
+     * @return 返回值表示此次插入是否正确
      */
-    Long addDevice(Device device);
+    Boolean addDevice(Device device);
 
     /**
      *
