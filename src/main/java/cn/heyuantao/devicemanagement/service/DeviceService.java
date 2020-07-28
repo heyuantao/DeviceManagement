@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,9 +55,10 @@ public class DeviceService {
      * @param device
      * @return
      */
-    public Device updateDevice(Device device){
+    public Device updateDeviceById(Long id,Device device){
+        device.setId(id);
         deviceMapper.updateDevice(device);
-        return deviceMapper.selectByPrimaryKey(device.getId());
+        return deviceMapper.selectByPrimaryKey(id);
     }
 
 
@@ -93,6 +92,18 @@ public class DeviceService {
         if(device==null){
             throw new ServiceParamValidateException("记录为"+id+"的设备不存在");
         }
+        System.out.println(device);
         return device;
     }
+
+    public void deleteDeviceById(Long id) {
+        Device device = deviceMapper.selectByPrimaryKey(id);
+        if(device==null){
+            throw new ServiceParamValidateException("记录为"+id+"的设备不存在");
+        }
+        deviceMapper.deleteByPrimaryKey(id);
+    }
+
+/*    public Device updateDeviceById(Long id, Device convertToDO) {
+    }*/
 }

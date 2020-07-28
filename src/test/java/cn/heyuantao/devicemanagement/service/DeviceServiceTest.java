@@ -79,11 +79,11 @@ class DeviceServiceTest {
 
         Device theDeviceTobeUpdate = deviceList.get(0);
 
-        Type newType = typeService.getTypeByName("无人机");
+        Type newType = typeService.getTypeByName("微型计算机");
 
         theDeviceTobeUpdate.setType(newType);
 
-        deviceService.updateDevice(theDeviceTobeUpdate);
+        deviceService.updateDeviceById(theDeviceTobeUpdate.getId(),theDeviceTobeUpdate);
 
     }
 }

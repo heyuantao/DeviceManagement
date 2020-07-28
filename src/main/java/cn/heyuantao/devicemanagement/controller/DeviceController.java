@@ -118,12 +118,18 @@ public class DeviceController {
             @Validated @RequestBody DeviceRequestDTO deviceRequestDTO,
             BindingResult bindingResult
     ){
-        return null;
+        if(bindingResult.hasErrors()){
+            throw new RequestParamValidateException(bindingResult);
+        }
+
+        Device deviceUpdated = deviceService.updateDeviceById(id, convertToDO(deviceRequestDTO));
+
+        return new ResponseEntity(convertToDTO(deviceUpdated),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map> delete(@PathVariable("id") Long id){
-        
+        deviceService.deleteDeviceById(id);
         return new ResponseEntity(new HashMap<String,Object>(1),HttpStatus.ACCEPTED);
     }
 

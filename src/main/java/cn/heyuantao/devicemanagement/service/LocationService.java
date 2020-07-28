@@ -83,7 +83,10 @@ public class LocationService{
         return locationRecord;
     }
 
-
+    /**
+     * 通过ID来删除某个设备
+     * @param id
+     */
     public void deleteLocationById(Integer id) {
         Location location = this.getLocationById(id);
         locationMapper.delete(location);
