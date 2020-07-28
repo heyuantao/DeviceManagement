@@ -67,7 +67,11 @@ public class TypeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @Validated @RequestBody TypeRequestDTO typeRequestDTO, BindingResult bindingResult){
+    public ResponseEntity<?> update(
+            @PathVariable("id") Integer id,
+            @Validated @RequestBody TypeRequestDTO typeRequestDTO,
+            BindingResult bindingResult
+    ){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }

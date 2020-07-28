@@ -40,6 +40,14 @@ public interface DeviceMapper extends Mapper<Device> {
     List<Device> selectByParams(Map<String, Object> params);
 
     /**
+     * 根据id编号来返回POJO对象
+     * @param id
+     * @return
+     */
+    Device selectById(Long id);
+
+
+    /**
      * filter by device.name device.asset_no and owner.name
      * @param filterString
      * @return

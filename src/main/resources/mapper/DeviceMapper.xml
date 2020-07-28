@@ -57,6 +57,14 @@
         </where>
     </select>
 
+    <select id="selectById" parameterType="Long" resultMap="DeviceInformationMap">
+        select d.* from device d
+        <where>
+            <if test="id!=null  and id!=''">
+                and d.id = #{id}
+            </if>
+        </where>
+    </select>
 
     <select id="filterByParams" parameterType="String" resultMap="DeviceInformationMap">
         select
@@ -87,6 +95,7 @@
             </if>
         </where>
     </select>
+
 
 
     <!--Result Map for device -->

@@ -58,7 +58,7 @@ public class DeviceService {
     public Device updateDeviceById(Long id,Device device){
         device.setId(id);
         deviceMapper.updateDevice(device);
-        return deviceMapper.selectByPrimaryKey(id);
+        return deviceMapper.selectById(id);
     }
 
 
@@ -88,7 +88,7 @@ public class DeviceService {
     }
 
     public Device getDeviceById(Long id) {
-        Device device = deviceMapper.selectByPrimaryKey(id);
+        Device device = deviceMapper.selectById(id);
         if(device==null){
             throw new ServiceParamValidateException("记录为"+id+"的设备不存在");
         }
