@@ -43,11 +43,9 @@ class DeviceServiceTest {
 
     @Test
     void testAddDeviceWithForgienKey(){
-        Map<String,Object> map = new HashMap<>();
-        map.put("name","Lenovo笔记本电脑1");
-        List<Device> deviceList= deviceService.selectDevicesByParams(map);
 
-        if(deviceList.size()==0){
+        try{
+
             Type type = typeService.getTypeByName("无人机");
             Location location = locationService.getLocationByName("08A502");
             Owner owner = ownerService.getOwnerByName("张三");
@@ -68,8 +66,8 @@ class DeviceServiceTest {
 
             System.out.println("添加新的设备记录 !");
             System.out.println(device);
-        }else{
-            System.out.println("该条记录已经存在");
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
         }
     }
 
