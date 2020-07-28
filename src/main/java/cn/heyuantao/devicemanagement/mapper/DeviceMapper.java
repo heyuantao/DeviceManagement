@@ -15,7 +15,7 @@ public interface DeviceMapper extends Mapper<Device> {
      * 获取设备的信息，当前暂时不用
      * @return
      */
-    List<Device> getDevicesInformation();
+    //List<Device> getDevicesInformation();
 
 
     /**

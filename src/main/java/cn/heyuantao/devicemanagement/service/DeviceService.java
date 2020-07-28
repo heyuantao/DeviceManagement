@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,15 +26,31 @@ public class DeviceService {
     @Resource
     LocationService locationService;
 
-/*    public List<Device> getDevices() {
-        System.out.println("Device information !");
-        return deviceMapper.getDevicesInformation();
-    }*/
-
+    /**
+     * 添加一个设备对象，传入的device对象是pojo对象，带有对外键对象的关联
+     * @param device
+     * @return
+     */
     public Device addDevice(Device device) {
-        //deviceMapper.insert(device);
+        /**
+         * 先检查设备对应的资产编号是否已经存在，否则不进行入库操作
+         */
+        //Map<String,Object> queryMap= new HashMap<String, Object>();
+        //queryMap.put()
+
+
         deviceMapper.addDevice(device);
         return device;
+    }
+
+    /**
+     * 更新一个设备的数据库记录
+     * @param device
+     * @return
+     */
+    public Device updateDevice(Device device){
+        deviceMapper.updateDevice(device);
+        return deviceMapper.selectByPrimaryKey(device.getId());
     }
 
 /*    public Device addDevice(DeviceRequestDTO deviceRequestDTO){
