@@ -58,7 +58,7 @@ public class TypeService{
     }
 
 
-    public Type getTypeById(Integer id) {
+    public Type getTypeById(Long id) {
         Type oneType = typeMapper.selectByPrimaryKey(id);
         if(oneType==null){
             throw new ServiceParamValidateException("该类型数据不存在");
@@ -67,7 +67,7 @@ public class TypeService{
     }
 
 
-    public Type updateTypeById(Integer id, Type typeData) {
+    public Type updateTypeById(Long id, Type typeData) {
         Type typeRecord = this.getTypeById(id);
 
         Example example = new Example(Type.class);
@@ -90,7 +90,7 @@ public class TypeService{
     }
 
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         Type typeRecord = this.getTypeById(id);
         typeMapper.delete(typeRecord);
     }

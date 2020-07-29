@@ -51,7 +51,7 @@ public class LocationService{
     }
 
 
-    public Location getLocationById(Integer id) {
+    public Location getLocationById(Long id) {
         Location location = locationMapper.selectByPrimaryKey(id);
         if(location==null){
             throw new ServiceParamValidateException("该位置不存在");
@@ -60,7 +60,7 @@ public class LocationService{
     }
 
 
-    public Location updateLocationById(Integer id, Location locationData) {
+    public Location updateLocationById(Long id, Location locationData) {
         Location locationRecord = this.getLocationById(id);
 
         Example example = new Example(Location.class);
@@ -87,7 +87,7 @@ public class LocationService{
      * 通过ID来删除某个设备
      * @param id
      */
-    public void deleteLocationById(Integer id) {
+    public void deleteLocationById(Long id) {
         Location location = this.getLocationById(id);
         locationMapper.delete(location);
     }

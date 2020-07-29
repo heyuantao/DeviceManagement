@@ -64,7 +64,7 @@ public class OwnerService  {
     }
 
 
-    public Owner getOwnerById(Integer id){
+    public Owner getOwnerById(Long id){
         Owner oneOwner = ownerMapper.selectByPrimaryKey(id);
         if(oneOwner==null){
             throw new ResourceNotFoundException("该设备所有者不存在 !");
@@ -74,7 +74,7 @@ public class OwnerService  {
     }
 
 
-    public Owner updateOwnerById(Integer id, Owner ownerData) {
+    public Owner updateOwnerById(Long id, Owner ownerData) {
         /*确保该编号存在,否则会抛出异常*/
         Owner ownerRecord = getOwnerById(id);
 
@@ -104,7 +104,7 @@ public class OwnerService  {
     }
 
 
-    public void deleteById(Integer id) {
+    public void deleteById(Long id) {
         this.getOwnerById(id);
         ownerMapper.deleteByPrimaryKey(id);
     }

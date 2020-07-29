@@ -1,4 +1,4 @@
-#CREATE DATABASE devicemanagement ;
+CREATE DATABASE devicemanagement ;
 
 USE devicemanagement;
 
@@ -48,14 +48,9 @@ CREATE TABLE device (
                         `updated`       DATE NOT NULL COMMENT '记录更新时间',
                         `location_id`   INT COMMENT '设备的位置外键ID',
                         `type_id`       INT COMMENT '设备的类型外键ID',
-                        `owner_id`      INT COMMENT '设备的保管人外键ID',
-
-                        FOREIGN KEY (location_id)   REFERENCES location(id),
-                        FOREIGN KEY (type_id)       REFERENCES type(id),
-                        FOREIGN KEY (owner_id)      REFERENCES owner(id)
+                        `owner_id`      INT COMMENT '设备的保管人外键ID'
 )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
-#CONSTRAINT location_fk  FOREIGN KEY (location_id)   REFERENCES location(id),
-#CONSTRAINT type_fk      FOREIGN KEY (type_id)       REFERENCES type(id),
-#CONSTRAINT owner_fk     FOREIGN KEY (owner_id)       REFERENCES owner(id)
-#ON DELETE CASCADE ON UPDATE CASCADE
+#FOREIGN KEY (location_id)   REFERENCES location(id),
+#FOREIGN KEY (type_id)       REFERENCES type(id),
+#FOREIGN KEY (owner_id)      REFERENCES owner(id)
