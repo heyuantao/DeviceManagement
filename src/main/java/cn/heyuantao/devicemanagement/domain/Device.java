@@ -24,14 +24,6 @@ import java.util.Date;
 @Data
 @ToString
 public class Device {
-/*    @Resource
-    LocationService locationService;
-    @Resource
-    TypeService typeService;
-    @Resource
-    OwnerService ownerService;*/
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -16,6 +16,8 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.Resource;
+
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import java.util.List;
 @EnableSwagger2
 public class Swagger2Config {
 
-    @Autowired
+    @Resource
     SoftwareInformation softwareInformation;
 
     List<String> excludedPathPrefix=null;
@@ -93,7 +95,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title(softwareInformation.getTitle())
                 .description(softwareInformation.getDescription())
-                //.termsOfServiceUrl("http://www.abc.com")
+                .termsOfServiceUrl("http://www.abc.com")
                 .version(softwareInformation.getVersion())
                 .build();
     }

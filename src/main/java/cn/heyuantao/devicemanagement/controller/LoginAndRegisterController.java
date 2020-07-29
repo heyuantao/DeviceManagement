@@ -52,14 +52,11 @@ public class LoginAndRegisterController {
             throw new RequestParamValidateException(bindingResult);
         }
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken= new UsernamePasswordAuthenticationToken(
-                authRequestDTO.getUsername(),
-                authRequestDTO.getPassword()
-        );
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(authRequestDTO.getUsername(),authRequestDTO.getPassword());
 
-        Authentication authentication;
         try{
-            authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+            authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         }catch (Exception ex){
             ErrorDetails errorDetails=new ErrorDetails("登录失败",ex.getMessage());
             return new ResponseEntity(errorDetails, HttpStatus.BAD_REQUEST);
@@ -83,11 +80,5 @@ public class LoginAndRegisterController {
 
         return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
     }
-
-
-/*    @GetMapping("/api/v1/hello")
-    public ResponseEntity<String> hello(){
-        return new ResponseEntity("hello",HttpStatus.ACCEPTED);
-    }*/
 
 }

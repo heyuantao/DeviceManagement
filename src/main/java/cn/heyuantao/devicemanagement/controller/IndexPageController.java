@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.service.ApiInfo;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ import java.util.Map;
 @RequestMapping("/")
 public class IndexPageController {
 
-    @Autowired
+    @Resource
     SoftwareInformation softwareInformation;
 
     @ApiIgnore

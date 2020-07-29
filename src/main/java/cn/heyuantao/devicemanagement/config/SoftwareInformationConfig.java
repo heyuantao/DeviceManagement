@@ -16,7 +16,7 @@ public class SoftwareInformationConfig {
         SoftwareInformation softwareInformation=new SoftwareInformation();
         softwareInformation.setVersion("0.1");
         softwareInformation.setTitle("实验室设备管理");
-        softwareInformation.setDescription("管理设备的借用和存放");
+        softwareInformation.setDescription("管理设备的借用和存放,该项目是一个示例性项目，用于延时Spring Boot、Spring Security和Mybasits的使用。");
         //System.out.println(softwareInformation);
         return softwareInformation;
     }
