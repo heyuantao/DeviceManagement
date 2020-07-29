@@ -147,9 +147,9 @@ public class DeviceController {
         device.setUpdated(new Date(System.currentTimeMillis()));
         device.setInDate(new Date(System.currentTimeMillis()));
 
-        device.setOwner_id(ownerService.getOwnerByName(deviceRequestDTO.getOwner_name()).getId());
-        device.setType_id(typeService.getTypeByName(deviceRequestDTO.getType_name()).getId());
-        device.setLocation_id(locationService.getLocationByName(deviceRequestDTO.getLocation_name()).getId());
+        device.setOwnerId(ownerService.getOwnerByName(deviceRequestDTO.getOwner_name()).getId());
+        device.setTypeId(typeService.getTypeByName(deviceRequestDTO.getType_name()).getId());
+        device.setLocationId(locationService.getLocationByName(deviceRequestDTO.getLocation_name()).getId());
 
         return device;
     }
@@ -164,13 +164,13 @@ public class DeviceController {
 
         BeanUtils.copyProperties(device,deviceResponseDTO);
 
-        Location location = locationService.getLocationById(device.getLocation_id());
+        Location location = locationService.getLocationById(device.getLocationId());
         deviceResponseDTO.setLocation_name(location.getName());
 
-        Type type = typeService.getTypeById(device.getType_id());
+        Type type = typeService.getTypeById(device.getTypeId());
         deviceResponseDTO.setType_name(type.getName());
 
-        Owner owner = ownerService.getOwnerById(device.getOwner_id());
+        Owner owner = ownerService.getOwnerById(device.getOwnerId());
         deviceResponseDTO.setOwner_name(owner.getName());
         deviceResponseDTO.setOwner_department(owner.getDepartment());
 

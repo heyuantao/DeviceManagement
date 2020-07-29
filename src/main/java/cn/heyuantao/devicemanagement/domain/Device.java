@@ -42,9 +42,12 @@ public class Device {
     private Date inDate;
     private Date updated;
 
-    private Long location_id;
+/*    private Long location_id;
     private Long type_id;
-    private Long owner_id;
+    private Long owner_id;*/
+    private Long locationId;
+    private Long typeId;
+    private Long ownerId;
 
 /*    public Location getLocation(){
         return locationService.getLocationById(location_id);

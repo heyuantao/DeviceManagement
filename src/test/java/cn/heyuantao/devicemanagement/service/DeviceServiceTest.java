@@ -59,9 +59,9 @@ class DeviceServiceTest {
             device.setInDate(new Date(System.currentTimeMillis()));
             device.setUpdated(new Date(System.currentTimeMillis()));
 
-            device.setLocation_id(location.getId());
-            device.setType_id(type.getId());
-            device.setOwner_id(owner.getId());
+            device.setLocationId(location.getId());
+            device.setTypeId(type.getId());
+            device.setOwnerId(owner.getId());
 
             deviceService.addDevice(device);
 
@@ -74,12 +74,14 @@ class DeviceServiceTest {
 
     @Test
     void testUpdateDevice() {
-/*        Map<String,Object> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
         map.put("asset_no","xxxxxxxxxxx");
         List<Device> deviceList= deviceService.selectDevicesByParams(map);
 
         Device theDeviceTobeUpdate = deviceList.get(0);
 
+        System.out.println(theDeviceTobeUpdate);
+/*
         Type newType = typeService.getTypeByName("微型计算机");
 
         theDeviceTobeUpdate.setType_id(newType.getId());

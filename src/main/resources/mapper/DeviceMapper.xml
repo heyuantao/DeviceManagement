@@ -19,7 +19,7 @@
         SET
             name = #{name}, vendor = #{vendor}, sn = #{sn}, vendor = #{assetNo},
             in_date = #{inDate}, updated = #{updated},
-            location_id = #{location.id},type_id = #{type.id},owner_id = #{owner.id}
+            location_id = #{location_id},type_id = #{type_id},owner_id = #{owner_id}
         WHERE id = #{id}
     </update>
 
