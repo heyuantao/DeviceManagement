@@ -72,14 +72,14 @@ public class OwnerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OwnerResponseDTO> retrive(@PathVariable("id") Integer id){
+    public ResponseEntity<OwnerResponseDTO> retrive(@PathVariable("id") Long id){
         //OwnerResponseDTO responseDTO = new OwnerResponseDTO(ownerService.getOwnerById(id));
         OwnerResponseDTO responseDTO = convertToDTO(ownerService.getOwnerById(id));
         return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OwnerResponseDTO> update(@PathVariable("id") Integer id, @Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
+    public ResponseEntity<OwnerResponseDTO> update(@PathVariable("id") Long id, @Validated @RequestBody OwnerRequestDTO ownerRequestDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
@@ -92,7 +92,7 @@ public class OwnerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<HashMap<String,Object>> destroy(@PathVariable("id") Integer id){
+    public ResponseEntity<HashMap<String,Object>> destroy(@PathVariable("id") Long id){
         ownerService.deleteById(id);
         return new ResponseEntity(new HashMap<String,Object>(),HttpStatus.ACCEPTED);
     }

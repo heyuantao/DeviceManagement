@@ -1,7 +1,9 @@
 package cn.heyuantao.devicemanagement.controller;
 
 import cn.heyuantao.devicemanagement.domain.Device;
+import cn.heyuantao.devicemanagement.domain.Location;
 import cn.heyuantao.devicemanagement.domain.Owner;
+import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.dto.DeviceRequestDTO;
 import cn.heyuantao.devicemanagement.dto.DeviceResponseDTO;
 import cn.heyuantao.devicemanagement.dto.TypeResponseDTO;
@@ -81,7 +83,6 @@ public class DeviceController {
         }
 
 
-        //List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return new DeviceResponseDTO(item);}).collect(Collectors.toList());
         List<DeviceResponseDTO> responseDTOs= pageInfo.getList().stream().map((item)-> {return convertToDTO(item);}).collect(Collectors.toList());
 
         CustomItemPagination customItemPagination = new CustomItemPagination(responseDTOs,pageInfo);
@@ -146,9 +147,9 @@ public class DeviceController {
         device.setUpdated(new Date(System.currentTimeMillis()));
         device.setInDate(new Date(System.currentTimeMillis()));
 
-        device.setOwner(ownerService.getOwnerByName(deviceRequestDTO.getOwner__name()));
-        device.setType(typeService.getTypeByName(deviceRequestDTO.getType__name()));
-        device.setLocation(locationService.getLocationByName(deviceRequestDTO.getLocation__name()));
+        device.setOwner_id(ownerService.getOwnerByName(deviceRequestDTO.getOwner_name()).getId());
+        device.setType_id(typeService.getTypeByName(deviceRequestDTO.getType_name()).getId());
+        device.setLocation_id(locationService.getLocationByName(deviceRequestDTO.getLocation_name()).getId());
 
         return device;
     }
@@ -162,10 +163,17 @@ public class DeviceController {
         DeviceResponseDTO deviceResponseDTO = new DeviceResponseDTO();
 
         BeanUtils.copyProperties(device,deviceResponseDTO);
-        deviceResponseDTO.setLocation__name(device.getLocation().getName());
-        deviceResponseDTO.setType__name(device.getType().getName());
-        deviceResponseDTO.setOwner__name(device.getOwner().getName());
-        deviceResponseDTO.setOwner__department(device.getOwner().getDepartment());
+
+        Location location = locationService.getLocationById(device.getLocation_id());
+        deviceResponseDTO.setLocation_name(location.getName());
+
+        Type type = typeService.getTypeById(device.getType_id());
+        deviceResponseDTO.setType_name(type.getName());
+
+        Owner owner = ownerService.getOwnerById(device.getOwner_id());
+        deviceResponseDTO.setOwner_name(owner.getName());
+        deviceResponseDTO.setOwner_department(owner.getDepartment());
+
         return deviceResponseDTO;
     }
 }

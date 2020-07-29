@@ -29,16 +29,12 @@ public class DeviceResponseDTO {
     private Date inDate;
     private Date updated;
 
-    private String location__name;
-    private String type__name;
-    private String owner__name;
-    private String owner__department;
+    /**
+     * 与外键相关的属性
+     */
+    private String location_name;
+    private String type_name;
+    private String owner_name;
+    private String owner_department;
 
-/*    public DeviceResponseDTO(Device device){
-        BeanUtils.copyProperties(device,this);
-        location__name = device.getLocation().getName();
-        type__name = device.getType().getName();
-        owner__name = device.getOwner().getName();
-        owner__department = device.getOwner().getDepartment();
-    }*/
 }

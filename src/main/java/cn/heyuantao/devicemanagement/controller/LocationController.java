@@ -61,7 +61,7 @@ public class LocationController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<LocationResponseDTO> retrive(@PathVariable("id") Integer id){
+    public ResponseEntity<LocationResponseDTO> retrive(@PathVariable("id") Long id){
         Location location = locationService.getLocationById(id);
         return new ResponseEntity(location, HttpStatus.ACCEPTED);
     }
@@ -69,7 +69,7 @@ public class LocationController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<LocationResponseDTO> update(@PathVariable("id") Integer id,
+    public ResponseEntity<LocationResponseDTO> update(@PathVariable("id") Long id,
                                     @Validated @RequestBody LocationRequestDTO locationRequestDTO,
                                     BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -80,7 +80,7 @@ public class LocationController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String delete(@PathVariable("id") Long id){
         locationService.deleteLocationById(id);
         return "";
     }

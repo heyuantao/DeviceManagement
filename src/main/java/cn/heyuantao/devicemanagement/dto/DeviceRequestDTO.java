@@ -45,20 +45,15 @@ public class DeviceRequestDTO {
     @Length(max = 100, message = "设备资产编号过长")
     private String assetNo;
 
-/*    @Null
-    private Date inDate;
-
-    @Null
-    private Date updated;*/
 
     @NotEmpty(message = "设备存放位置不能为空")
-    private String location__name;
+    private String location_name;
 
     @NotEmpty(message = "设备类型不能为空")
-    private String type__name;
+    private String type_name;
 
     @NotEmpty(message = "设备所有人不能为空")
-    private String owner__name;
+    private String owner_name;
 
 /*    public Device convertToDTO(){
         LocationService locationService = new LocationService();

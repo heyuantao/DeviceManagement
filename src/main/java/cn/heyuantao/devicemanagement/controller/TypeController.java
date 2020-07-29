@@ -61,14 +61,14 @@ public class TypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> retrive(@PathVariable("id") Integer id){
+    public ResponseEntity<?> retrive(@PathVariable("id") Long id){
         TypeResponseDTO responseDTO = new TypeResponseDTO(typeService.getTypeById(id));
         return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
-            @PathVariable("id") Integer id,
+            @PathVariable("id") Long id,
             @Validated @RequestBody TypeRequestDTO typeRequestDTO,
             BindingResult bindingResult
     ){
@@ -81,7 +81,7 @@ public class TypeController {
     }
 
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String delete(@PathVariable("id") Long id){
         typeService.deleteById(id);
         return "";
     }
