@@ -3,7 +3,6 @@ server:
 
 debug: on
 
-
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -27,7 +26,7 @@ mybatis:
     map-underscore-to-camel-case: true
     use-generated-keys: true
     use-column-label: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #显示mybatis的SQL语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl  #display sql
   mapper-locations: mapper/*.xml
   type-aliases-package: cn.heyuantao.devicemanagement.domain
 

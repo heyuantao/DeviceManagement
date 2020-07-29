@@ -43,7 +43,7 @@ public class DeviceService {
         }
 
         if(theDevice==null){
-            deviceMapper.addDevice(device);
+            deviceMapper.insert(device);
         }else{
             throw new ServiceParamValidateException("要添加的设备已经存在");
         }
