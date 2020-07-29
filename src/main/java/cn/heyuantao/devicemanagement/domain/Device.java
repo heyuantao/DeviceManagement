@@ -24,12 +24,12 @@ import java.util.Date;
 @Data
 @ToString
 public class Device {
-    @Resource
+/*    @Resource
     LocationService locationService;
     @Resource
     TypeService typeService;
     @Resource
-    OwnerService ownerService;
+    OwnerService ownerService;*/
 
 
     @Id
@@ -45,11 +45,8 @@ public class Device {
     private Long location_id;
     private Long type_id;
     private Long owner_id;
-/*    private Location location;
-    private Type type;
-    private Owner owner;*/
 
-    public Location getLocation(){
+/*    public Location getLocation(){
         return locationService.getLocationById(location_id);
     }
 
@@ -59,5 +56,5 @@ public class Device {
 
     public Owner getOwner(){
         return ownerService.getOwnerById(owner_id);
-    }
+    }*/
 }
