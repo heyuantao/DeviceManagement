@@ -81,12 +81,11 @@ class DeviceServiceTest {
         Device theDeviceTobeUpdate = deviceList.get(0);
 
         System.out.println(theDeviceTobeUpdate);
-/*
+
+
         Type newType = typeService.getTypeByName("微型计算机");
-
-        theDeviceTobeUpdate.setType_id(newType.getId());
-
-        deviceService.updateDeviceById(theDeviceTobeUpdate.getId(),theDeviceTobeUpdate);*/
+        theDeviceTobeUpdate.setTypeId(newType.getId());
+        deviceService.updateDeviceById(theDeviceTobeUpdate.getId(),theDeviceTobeUpdate);
 
     }
 }

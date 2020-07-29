@@ -63,7 +63,7 @@ public class DeviceController {
             HttpServletRequest httpServletRequest,
             @RequestParam(value="name",defaultValue = "") String name,
             @RequestParam(value="sn",defaultValue = "") String sn,
-            @RequestParam(value="asset_no",defaultValue = "") String asset_no,
+            @RequestParam(value="assetNo",defaultValue = "") String asset_no,
             @RequestParam(value="search",defaultValue = "") String search,
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize
@@ -147,9 +147,9 @@ public class DeviceController {
         device.setUpdated(new Date(System.currentTimeMillis()));
         device.setInDate(new Date(System.currentTimeMillis()));
 
-        device.setOwnerId(ownerService.getOwnerByName(deviceRequestDTO.getOwner_name()).getId());
-        device.setTypeId(typeService.getTypeByName(deviceRequestDTO.getType_name()).getId());
-        device.setLocationId(locationService.getLocationByName(deviceRequestDTO.getLocation_name()).getId());
+        device.setOwnerId(ownerService.getOwnerByName(deviceRequestDTO.getOwnerName()).getId());
+        device.setTypeId(typeService.getTypeByName(deviceRequestDTO.getTypeName()).getId());
+        device.setLocationId(locationService.getLocationByName(deviceRequestDTO.getLocationName()).getId());
 
         return device;
     }
@@ -164,15 +164,18 @@ public class DeviceController {
 
         BeanUtils.copyProperties(device,deviceResponseDTO);
 
+        /**
+         * 拷贝级别的变量后设置关联表格中的对象，包含Location,Type,Owner
+         */
         Location location = locationService.getLocationById(device.getLocationId());
-        deviceResponseDTO.setLocation_name(location.getName());
+        deviceResponseDTO.setLocationName(location.getName());
 
         Type type = typeService.getTypeById(device.getTypeId());
-        deviceResponseDTO.setType_name(type.getName());
+        deviceResponseDTO.setTypeName(type.getName());
 
         Owner owner = ownerService.getOwnerById(device.getOwnerId());
-        deviceResponseDTO.setOwner_name(owner.getName());
-        deviceResponseDTO.setOwner_department(owner.getDepartment());
+        deviceResponseDTO.setOwnerName(owner.getName());
+        deviceResponseDTO.setOwnerDepartment(owner.getDepartment());
 
         return deviceResponseDTO;
     }

@@ -42,22 +42,11 @@ public class Device {
     private Date inDate;
     private Date updated;
 
-/*    private Long location_id;
-    private Long type_id;
-    private Long owner_id;*/
+    /**
+     * 与其他表格关联的对象属性
+     */
     private Long locationId;
     private Long typeId;
     private Long ownerId;
 
-/*    public Location getLocation(){
-        return locationService.getLocationById(location_id);
-    }
-
-    public Type getType(){
-        return typeService.getTypeById(type_id);
-    }
-
-    public Owner getOwner(){
-        return ownerService.getOwnerById(owner_id);
-    }*/
 }

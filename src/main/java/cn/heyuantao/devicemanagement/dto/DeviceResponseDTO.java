@@ -32,9 +32,9 @@ public class DeviceResponseDTO {
     /**
      * 与外键相关的属性
      */
-    private String location_name;
-    private String type_name;
-    private String owner_name;
-    private String owner_department;
+    private String locationName;
+    private String typeName;
+    private String ownerName;
+    private String ownerDepartment;
 
 }

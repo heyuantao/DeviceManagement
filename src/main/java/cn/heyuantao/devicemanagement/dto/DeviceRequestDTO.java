@@ -47,27 +47,12 @@ public class DeviceRequestDTO {
 
 
     @NotEmpty(message = "设备存放位置不能为空")
-    private String location_name;
+    private String locationName;
 
     @NotEmpty(message = "设备类型不能为空")
-    private String type_name;
+    private String typeName;
 
     @NotEmpty(message = "设备所有人不能为空")
-    private String owner_name;
+    private String ownerName;
 
-/*    public Device convertToDTO(){
-        LocationService locationService = new LocationService();
-        OwnerService ownerService = new OwnerService();
-        TypeService typeService = new TypeService();
-
-        Device device = new Device();
-        BeanUtils.copyProperties(this,device);
-
-        device.setOwner(ownerService.getOwnerByName(owner__name));
-        device.setType(typeService.getTypeByName(type__name));
-        device.setLocation(locationService.getLocationByName(location__name));
-
-
-        return device;
-    }*/
 }
