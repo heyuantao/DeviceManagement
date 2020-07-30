@@ -2,7 +2,7 @@ package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.event.CrudAction;
-import cn.heyuantao.devicemanagement.event.TypeChangeEvent;
+import cn.heyuantao.devicemanagement.event.TypePoChangeEvent;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.TypeMapper;
 import org.springframework.context.ApplicationEventPublisher;
@@ -104,7 +104,7 @@ public class TypeService{
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long id) {
         Type typeRecord = this.getTypeById(id);
-        applicationEventPublisher.publishEvent(new TypeChangeEvent(this,typeRecord, CrudAction.DELETE));
+        applicationEventPublisher.publishEvent(new TypePoChangeEvent(this,typeRecord, CrudAction.DELETE));
         typeMapper.delete(typeRecord);
     }
 

@@ -9,11 +9,11 @@ import org.springframework.context.ApplicationEvent;
  */
 
 
-public class TypeChangeEvent extends ApplicationEvent {
+public class TypePoChangeEvent extends ApplicationEvent {
     private CrudAction action;
     private Type instance;
 
-    public TypeChangeEvent(Object source, Type instance, CrudAction action) {
+    public TypePoChangeEvent(Object source, Type instance, CrudAction action) {
         super(source);
         this.instance = instance;
         this.action = action;

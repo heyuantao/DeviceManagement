@@ -3,11 +3,9 @@ package cn.heyuantao.devicemanagement.service;
 import cn.heyuantao.devicemanagement.domain.Device;
 import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.event.CrudAction;
-import cn.heyuantao.devicemanagement.event.TypeChangeEvent;
-import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
+import cn.heyuantao.devicemanagement.event.TypePoChangeEvent;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -122,12 +120,10 @@ public class DeviceService {
      * @param event
      */
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
-    void handleTypeChangeEvent(TypeChangeEvent event){
-        System.out.println("################事件发生#############");
+    void handleTypeChangeEvent(TypePoChangeEvent event){
+        System.out.println("级联删除");
         CrudAction action = event.getAction();
         Type instance = event.getInstance();
-        System.out.println(action.getValue());
-        System.out.println(event.getInstance());
         deleteDeviceByTypeId(instance.getId());
     }
 
