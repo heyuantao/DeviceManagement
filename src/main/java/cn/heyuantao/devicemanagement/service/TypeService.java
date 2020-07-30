@@ -1,8 +1,11 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Type;
+import cn.heyuantao.devicemanagement.event.CrudAction;
+import cn.heyuantao.devicemanagement.event.TypeChangeEvent;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.TypeMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -18,6 +21,9 @@ import java.util.Map;
 public class TypeService{
     @Resource
     TypeMapper typeMapper;
+
+    @Resource
+    ApplicationEventPublisher applicationEventPublisher;
 
 
     public List<Type> getTypes() {
@@ -63,6 +69,10 @@ public class TypeService{
         if(oneType==null){
             throw new ServiceParamValidateException("该类型数据不存在");
         }
+        /**
+         * 发送类型创建的信号
+         */
+        applicationEventPublisher.publishEvent(new TypeChangeEvent(this,oneType, CrudAction.GET));
         return oneType;
     }
 

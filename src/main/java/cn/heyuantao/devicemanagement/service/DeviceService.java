@@ -1,10 +1,11 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
-import cn.heyuantao.devicemanagement.dto.DeviceRequestDTO;
+import cn.heyuantao.devicemanagement.event.CrudAction;
+import cn.heyuantao.devicemanagement.event.TypeChangeEvent;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
-import org.springframework.beans.BeanUtils;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
@@ -104,6 +105,17 @@ public class DeviceService {
         deviceMapper.deleteByPrimaryKey(id);
     }
 
+    /**
+     * 处理设备类型编号的事件函数，当前主要处理设备的删除
+     * @param event
+     */
+    @EventListener
+    void handleTypeChangeEvent(TypeChangeEvent event){
+        System.out.println("################事件发生#############");
+        CrudAction action = event.getAction();
+        System.out.println(action.getValue());
+        System.out.println(event.getInstance());
+    }
 /*    public Device updateDeviceById(Long id, Device convertToDO) {
     }*/
 }
