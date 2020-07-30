@@ -6,6 +6,7 @@ import cn.heyuantao.devicemanagement.event.CrudAction;
 import cn.heyuantao.devicemanagement.event.TypePoChangeEvent;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -18,6 +19,7 @@ import java.util.Map;
 /**
  * @author he_yu
  */
+@Slf4j
 @Service
 public class DeviceService {
     @Resource
@@ -121,13 +123,11 @@ public class DeviceService {
      */
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     void handleTypeChangeEvent(TypePoChangeEvent event){
-        System.out.println("级联删除");
+        log.debug("级联删除设备相关的数据");
+        
         CrudAction action = event.getAction();
         Type instance = event.getInstance();
         deleteDeviceByTypeId(instance.getId());
     }
 
-
-/*    public Device updateDeviceById(Long id, Device convertToDO) {
-    }*/
 }
