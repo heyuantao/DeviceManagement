@@ -7,6 +7,7 @@ import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.TypeMapper;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -69,10 +70,7 @@ public class TypeService{
         if(oneType==null){
             throw new ServiceParamValidateException("该类型数据不存在");
         }
-        /**
-         * 发送类型创建的信号
-         */
-        applicationEventPublisher.publishEvent(new TypeChangeEvent(this,oneType, CrudAction.GET));
+
         return oneType;
     }
 
@@ -99,9 +97,14 @@ public class TypeService{
         return typeRecord;
     }
 
-
+    /**
+     *删除类型的记录，同时发送信号，告知引用该该类型的记录去删除
+     * @param id
+     */
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(Long id) {
         Type typeRecord = this.getTypeById(id);
+        applicationEventPublisher.publishEvent(new TypeChangeEvent(this,typeRecord, CrudAction.DELETE));
         typeMapper.delete(typeRecord);
     }
 

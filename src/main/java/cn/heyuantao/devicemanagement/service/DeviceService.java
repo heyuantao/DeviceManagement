@@ -1,12 +1,16 @@
 package cn.heyuantao.devicemanagement.service;
 
 import cn.heyuantao.devicemanagement.domain.Device;
+import cn.heyuantao.devicemanagement.domain.Type;
 import cn.heyuantao.devicemanagement.event.CrudAction;
 import cn.heyuantao.devicemanagement.event.TypeChangeEvent;
+import cn.heyuantao.devicemanagement.exception.ResourceNotFoundException;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.DeviceMapper;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.event.TransactionPhase;
+import org.springframework.transaction.event.TransactionalEventListener;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
@@ -105,17 +109,29 @@ public class DeviceService {
         deviceMapper.deleteByPrimaryKey(id);
     }
 
+    private void deleteDeviceByTypeId(Long id) {
+        Example example = new Example(Device.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("typeId",id);
+        deviceMapper.deleteByExample(example);
+    }
+
+
     /**
      * 处理设备类型编号的事件函数，当前主要处理设备的删除
      * @param event
      */
-    @EventListener
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     void handleTypeChangeEvent(TypeChangeEvent event){
         System.out.println("################事件发生#############");
         CrudAction action = event.getAction();
+        Type instance = event.getInstance();
         System.out.println(action.getValue());
         System.out.println(event.getInstance());
+        deleteDeviceByTypeId(instance.getId());
     }
+
+
 /*    public Device updateDeviceById(Long id, Device convertToDO) {
     }*/
 }
