@@ -124,7 +124,7 @@ public class DeviceService {
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     void handleTypeChangeEvent(TypePoChangeEvent event){
         log.debug("级联删除设备相关的数据");
-        
+
         CrudAction action = event.getAction();
         Type instance = event.getInstance();
         deleteDeviceByTypeId(instance.getId());

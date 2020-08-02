@@ -37,6 +37,9 @@ public class LoginAndRegisterController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    UserController userController;
+
     /**
      * 输入用户名和密码，返回Jwt Token
      * @param authRequestDTO
@@ -76,7 +79,8 @@ public class LoginAndRegisterController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
         User user = customUserDetails.getUser();
-        UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+        //UserResponseDTO userResponseDTO = new UserResponseDTO(user);
+        UserResponseDTO userResponseDTO = userController.convertToDTO(user);
 
         return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
     }

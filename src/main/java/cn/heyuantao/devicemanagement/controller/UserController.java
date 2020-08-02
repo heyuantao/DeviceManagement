@@ -11,6 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -44,7 +45,7 @@ public class UserController {
         List<User> userList=userService.getUsersByParams(params);
         PageInfo<User> pageInfo = new PageInfo<User>(userList);
 
-        List<UserResponseDTO> userResponseDTOs =userList.stream().map((item)->{return new UserResponseDTO(item);}).collect(Collectors.toList());
+        List<UserResponseDTO> userResponseDTOs =userList.stream().map(this::convertToDTO).collect(Collectors.toList());
         CustomItemPagination customItemPagination= new CustomItemPagination(userResponseDTOs,pageInfo);
         return new ResponseEntity(customItemPagination, HttpStatus.ACCEPTED);
     }
@@ -52,29 +53,53 @@ public class UserController {
     //not use create method
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> retrive(@PathVariable("id") Integer id){
-        UserResponseDTO userResponseDTO = new UserResponseDTO(userService.getUsersById(id));
+    public ResponseEntity<UserResponseDTO> retrive(@PathVariable("id") Long id){
+        //UserResponseDTO userResponseDTO = new UserResponseDTO(userService.getUsersById(id));
+        UserResponseDTO userResponseDTO = convertToDTO(userService.getUsersById(id));
         return new ResponseEntity(userResponseDTO,HttpStatus.ACCEPTED);
     }
 
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDTO> update(
-                        @PathVariable("id") Integer id,
+                        @PathVariable("id") Long id,
                         @Validated @RequestBody UserRequestDTO requestDTO,
                         BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
-        User user = userService.updateById(id,requestDTO.convertToDO());
-        UserResponseDTO responseDTO = new UserResponseDTO(user);
+        //User user = userService.updateById(id,requestDTO.convertToDO());
+        User user = userService.updateById(id,convertToDO(requestDTO));
+        //UserResponseDTO responseDTO = new UserResponseDTO(user);
+        UserResponseDTO responseDTO = convertToDTO(user);
         return new ResponseEntity(responseDTO,HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Integer id){
+    public ResponseEntity<String> delete(@PathVariable("id") Long id){
         userService.deleteById(id);
         return new ResponseEntity("",HttpStatus.ACCEPTED);
+    }
+
+
+    /**
+     * 将User的对象转变为UserResponseDTO格式的对象，并准备用户返回数据给前端
+     */
+    public UserResponseDTO convertToDTO(User user){
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        BeanUtils.copyProperties(user,userResponseDTO);
+        return userResponseDTO;
+    }
+
+
+    /**
+     * 将用户输入的数据转变为User对象
+     */
+    public User convertToDO(UserRequestDTO userRequestDTO){
+        User user = new User();
+        BeanUtils.copyProperties(userRequestDTO,user);
+        user.setSuperuser(false);
+        return user;
     }
 }

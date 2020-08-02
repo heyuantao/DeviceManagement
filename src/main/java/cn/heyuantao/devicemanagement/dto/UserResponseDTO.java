@@ -15,12 +15,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Data
 public class UserResponseDTO implements Serializable {
-    private Integer id;
+    private Long id;
     private String name;
     private String email;
     private Boolean superuser;
-
-    public UserResponseDTO(User user){
-        BeanUtils.copyProperties(user,this);
-    }
 }

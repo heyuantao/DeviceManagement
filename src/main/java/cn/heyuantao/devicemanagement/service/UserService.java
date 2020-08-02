@@ -4,6 +4,10 @@ import cn.heyuantao.devicemanagement.domain.Owner;
 import cn.heyuantao.devicemanagement.exception.ServiceParamValidateException;
 import cn.heyuantao.devicemanagement.mapper.UserMapper;
 import cn.heyuantao.devicemanagement.domain.User;
+import org.apache.ibatis.annotations.CacheNamespace;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -16,6 +20,8 @@ import java.util.Map;
 /**
  * @author he_yu
  */
+
+@CacheConfig(cacheNames = "user")
 @Service
 public class UserService {
 
@@ -26,18 +32,12 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
 
-    //private Example example= new Example(User.class);
-
-/*    public UserServiceImpl() {
-        this.example = new Example(User.class);
-    }*/
-
-
+    @Cacheable
     public List<User> getUsers() {
         return userMapper.selectAll();
     }
 
-
+    @CacheEvict(allEntries = true)
     public User addUser(User oneUser) {
         Example example = new Example(User.class);
         example.clear();
@@ -51,14 +51,15 @@ public class UserService {
         return oneUser;
     }
 
-
+    @Cacheable
     public List<User> getUsersByParams(Map<String, Object> params) {
 
         return userMapper.selectByParams(params);
     }
 
 
-    public User getUsersById(Integer id) {
+    @Cacheable
+    public User getUsersById(Long id) {
         User user = userMapper.selectByPrimaryKey(id);
         if(user==null){
             throw new ServiceParamValidateException("该用户数据不存在");
@@ -66,14 +67,14 @@ public class UserService {
         return user;
     }
 
-
-    public void deleteById(Integer id) {
+    @CacheEvict(allEntries = true)
+    public void deleteById(Long id) {
         User user = getUsersById(id);
         userMapper.delete(user);
     }
 
-
-    public User updateById(Integer id, User userData) {
+    @CacheEvict(allEntries = true)
+    public User updateById(Long id, User userData) {
         User user = getUsersById(id);
 
         Example example= new Example(User.class);
@@ -98,6 +99,7 @@ public class UserService {
     }
 
 
+    @Cacheable
     public User getUserByName(String username) {
         Example example=new Example(User.class);
         example.clear();
