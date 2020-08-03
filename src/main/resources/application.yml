@@ -43,7 +43,6 @@ logging:
     com.coding: debug
     com.coding.mapper: debug
 
-custom:
-  cache:
-    expireTime:60
+#custom:
+#  cache-expire-time: 120
 

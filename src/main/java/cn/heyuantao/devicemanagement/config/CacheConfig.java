@@ -36,9 +36,9 @@ import java.util.Arrays;
 public class CacheConfig extends CachingConfigurerSupport {
 
     /**
-     * 设置缓存的超时时间
+     * 设置缓存的超时时间,默认的超时时间为60秒
      */
-    @Value("${custom.cache.expireTime}")
+    @Value("${custom.cache-expire-time:60}")
     private int cacheExpireTime;
 
     /**
