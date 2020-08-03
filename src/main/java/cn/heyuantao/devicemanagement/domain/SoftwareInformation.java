@@ -1,4 +1,4 @@
-package cn.heyuantao.devicemanagement.config;
+package cn.heyuantao.devicemanagement.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

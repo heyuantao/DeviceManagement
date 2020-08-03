@@ -1,7 +1,7 @@
 package cn.heyuantao.devicemanagement.config;
 
+import cn.heyuantao.devicemanagement.domain.SoftwareInformation;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;

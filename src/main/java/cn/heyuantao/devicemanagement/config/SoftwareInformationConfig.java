@@ -1,5 +1,6 @@
 package cn.heyuantao.devicemanagement.config;
 
+import cn.heyuantao.devicemanagement.domain.SoftwareInformation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

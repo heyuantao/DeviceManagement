@@ -52,10 +52,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-/*    @Bean
+    /**
+     * 此处不需要进行PasswordEncode的配置，该配置除了被SpringSecurityConfig使用外还要被UserService模块使用
+     * 并完成原始密码的加密操作
+     */
+    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(11);
-    }*/
+    }
 
     @Bean
     @Override
