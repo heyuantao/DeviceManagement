@@ -16,10 +16,11 @@ spring:
     default-property-inclusion: non_empty
   redis:
     database: 0
-    url: redis://user:@127.0.0.1:6379
+    #url: redis://127.0.0.1:6379
     host: 127.0.0.1
     ssl: false
     timeout: 5000
+
 #  autoconfigure:
 #    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
 
@@ -42,5 +43,7 @@ logging:
     com.coding: debug
     com.coding.mapper: debug
 
-
+custom:
+  cache:
+    expireTime:60
 

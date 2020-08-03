@@ -21,7 +21,7 @@ import java.util.Map;
  * @author he_yu
  */
 
-@CacheConfig(cacheNames = "user")
+@CacheConfig(cacheNames = "UserService")
 @Service
 public class UserService {
 
