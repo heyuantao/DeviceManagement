@@ -1,10 +1,14 @@
 如何部署：
   
-一、在Linux系统上提前安装好Docker，准备启动MySQL
+一、在Linux系统上提前安装好Docker，准备启动MySQL和Redis
 
 ```markdown
 sudo mkdir -p /app/data/db
 docker run -d --name=mysql --restart=always --network=host -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=devicemanagement -v /app/data/db:/var/lib/mysql  mysql:5.6
+```
+
+```markdown
+docker run -d --name redis --restart=always --network=host -v ./config/redis/redis.conf:/etc/redis/redis.conf redis:5.0 redis-server /etc/redis/redis.conf
 ```
 
 二、初始化数据库

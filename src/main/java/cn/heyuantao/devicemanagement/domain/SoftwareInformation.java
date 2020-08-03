@@ -18,4 +18,9 @@ public class SoftwareInformation implements Serializable {
     private String version;
     private String title;
     private String description;
+
+    /**
+     * runStatus is dev or prod
+     */
+    private String runStatus;
 }
