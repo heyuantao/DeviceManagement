@@ -7,7 +7,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author he_yu
- * 系统的启动类，使用了Mybatis的通用Mapper，缓存
+ * 系统的启动类
  */
 
 @tk.mybatis.spring.annotation.MapperScan(basePackages = "cn.heyuantao.devicemanagement.mapper")
