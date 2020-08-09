@@ -15,12 +15,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,7 +36,7 @@ public class UserController {
     private UserService userService;
 
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<CustomItemPagination> list(
             HttpServletRequest request,
@@ -42,6 +45,11 @@ public class UserController {
             @RequestParam(value="search",defaultValue = "") String search,
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
+
+/*        List<GrantedAuthority> authorityList = (List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        for(GrantedAuthority authority:authorityList){
+            System.out.println(authority);
+        }*/
 
         Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
