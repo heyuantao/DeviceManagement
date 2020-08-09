@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -75,6 +76,7 @@ public class TypeController {
         if(bindingResult.hasErrors()){
             throw new RequestParamValidateException(bindingResult);
         }
+
         Type addType = typeService.updateTypeById(id,typeRequestDTO.convertToDO());
         TypeResponseDTO responseDTO = new TypeResponseDTO(addType);
         return new ResponseEntity(responseDTO, HttpStatus.ACCEPTED);

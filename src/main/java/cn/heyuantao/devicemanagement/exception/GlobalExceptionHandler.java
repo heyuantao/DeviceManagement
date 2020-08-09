@@ -2,9 +2,11 @@ package cn.heyuantao.devicemanagement.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import io.jsonwebtoken.ExpiredJwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 /**
  * @author he_yu
  */
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -107,4 +110,18 @@ public class GlobalExceptionHandler {
         ErrorDetails errorDetails = new ErrorDetails("接口权限异常", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
     }
+
+    /**
+     * 处理 PreAuthorize 异常
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException exception,WebRequest request){
+        log.error(exception.getMessage());
+        ErrorDetails errorDetails = new ErrorDetails("该角色用户禁止访问", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
+    }
+
 }
