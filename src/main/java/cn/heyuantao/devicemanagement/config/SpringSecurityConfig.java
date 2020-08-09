@@ -23,11 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author he_yu
+ * 使用 @EnableGlobalMethodSecurity(prePostEnabled = true) 来启用在接口上的权限设置
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
+
 
     @Autowired
     private CustomUserDetailsService userDetailsService;

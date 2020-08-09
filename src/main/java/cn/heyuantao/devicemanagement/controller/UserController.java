@@ -12,6 +12,7 @@ import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -32,11 +33,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
     @Resource
     private UserService userService;
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<CustomItemPagination> list(
             HttpServletRequest request,
@@ -46,10 +51,13 @@ public class UserController {
             @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize",defaultValue = "0") Integer pageSize){
 
-/*        List<GrantedAuthority> authorityList = (List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        List<GrantedAuthority> authorityList = (List<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         for(GrantedAuthority authority:authorityList){
             System.out.println(authority);
-        }*/
+        }
+
+/*        Boolean status = httpServletRequest.isUserInRole("ADMIN");
+        System.out.println("Is in the admin role:"+status);*/
 
         Map<String,Object> params = QueryParamsUtil.getRequestParamMapFromRequestServlet(request);
         PageHelper.startPage(pageNum,pageSize);
