@@ -24,6 +24,27 @@ import java.io.StringWriter;
 public class GlobalExceptionHandler {
 
     /**
+     * 全局异常处理，处理未知的错误
+     * @param exception
+     * @param request
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request){
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        exception.printStackTrace(printWriter);
+        log.error("--------------------Exception Info Begin-------------------------");
+        log.error(stringWriter.toString());
+        log.error("--------------------Exception Info End---------------------------");
+
+        ErrorDetails errorDetails = new ErrorDetails("发现错误", exception.getMessage());
+        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    /**
      * 当指定的对象没有找到时，将会抛出该异常
      * @param exception
      * @param request
@@ -37,18 +58,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    /**
-     * 全局异常处理，处理未知的错误
-     * @param exception
-     * @param request
-     * @return
-     */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request){
-        ErrorDetails errorDetails = new ErrorDetails("发现错误", exception.getMessage());
-        log.error("Unknow exception:"+ exception);
-        return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+
 
 
     /**
