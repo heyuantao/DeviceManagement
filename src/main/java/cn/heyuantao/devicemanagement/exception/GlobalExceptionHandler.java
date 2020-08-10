@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 
 /**
  * @author he_yu
@@ -29,6 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("该信息未找到 !",exception.getMessage());
+
         return new ResponseEntity(errorDetails, HttpStatus.NOT_FOUND);
     }
 
@@ -42,6 +46,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception exception, WebRequest request){
         ErrorDetails errorDetails = new ErrorDetails("发现错误", exception.getMessage());
+        log.error("Unknow exception:"+ exception);
         return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -119,7 +124,14 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException exception,WebRequest request){
-        log.error(exception.getMessage());
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+
+        exception.printStackTrace(printWriter);
+        log.error("--------------------AccessDeniedException Info Begin-------------------------");
+        log.error(stringWriter.toString());
+        log.error("--------------------AccessDeniedException Info End---------------------------");
+
         ErrorDetails errorDetails = new ErrorDetails("该角色用户禁止访问", exception.getMessage());
         return new ResponseEntity(errorDetails, HttpStatus.UNAUTHORIZED);
     }

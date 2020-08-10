@@ -41,7 +41,7 @@ public class UserController {
     private UserService userService;
 
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_OTHER')")
     @GetMapping
     public ResponseEntity<CustomItemPagination> list(
             HttpServletRequest request,

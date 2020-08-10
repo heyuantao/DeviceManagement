@@ -1,7 +1,7 @@
 profile:
   name: dev
 
-debug: on
+debug: true
 
 spring:
   datasource:
@@ -40,8 +40,12 @@ mybatis:
 
 logging:
   level:
-    com.coding: debug
-    com.coding.mapper: debug
+    root: info
+#    org:
+#      springframework:
+#        web:DEBUG:
+#    com.coding: debug
+#    com.coding.mapper: debug
 
 #custom:
 #  cache-expire-time: 120
