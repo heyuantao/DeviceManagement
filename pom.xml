@@ -109,7 +109,7 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <optional>true</optional>
-                <version>1.16.20</version>
+                <version>1.18.0</version>
             </dependency>
 
             <!--JWT utils-->

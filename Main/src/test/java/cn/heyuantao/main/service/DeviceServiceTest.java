@@ -37,7 +37,7 @@ class DeviceServiceTest {
         }
     }
 
-    @Test
+/*    @Test
     void testAddDeviceWithForgienKey(){
 
         try{
@@ -83,5 +83,5 @@ class DeviceServiceTest {
         theDeviceTobeUpdate.setTypeId(newType.getId());
         deviceService.updateDeviceById(theDeviceTobeUpdate.getId(),theDeviceTobeUpdate);
 
-    }
+    }*/
 }

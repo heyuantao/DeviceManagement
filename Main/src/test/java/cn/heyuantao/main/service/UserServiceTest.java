@@ -1,4 +1,4 @@
-package cn.heyuantao.main.service;
+/*package cn.heyuantao.main.service;
 
 import cn.heyuantao.main.domain.User;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,7 @@ class UserServiceTest {
 
     @Resource
     UserService userService;
+
 
     @Test
     void getUsers() {
@@ -39,10 +40,6 @@ class UserServiceTest {
         User createdUser = userService.addUser(oneUser);
         System.out.println(createdUser);
     }
-}
+}*/
 
 
-
-//@MybatisTest
-//@AutoConfigureTestDatabase
-//@ContextConfiguration("classpath:/applicationContext.xml")
